@@ -18,13 +18,13 @@ Finally, open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## License
 
-This site is based on the [Tailwind UI](https://tailwindui.com) site template "Protocol", built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+This site is based on the [Tailwind UI](https://tailwindui.com) site template "Protocol".
 
 It is licensed under the [Tailwind UI license](https://tailwindui.com/license).
 
 ## Learn more
 
-To learn more about the technologies used in this site, see the following resources:
+To learn more about the technologies used, see the following resources:
 
 - [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
 - [Next.js](https://nextjs.org/docs) - the official Next.js documentation
