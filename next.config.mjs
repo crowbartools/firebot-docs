@@ -22,7 +22,7 @@ const nextConfig = {
     },
   },
   output: "export",
-  basePath: "/firebot-docs",
+  basePath: "",
   images: {
     unoptimized: true,
   },
