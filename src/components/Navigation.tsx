@@ -231,14 +231,14 @@ function NavigationGroup({
 
 export const navigation: Array<NavGroup> = [
   {
-    title: 'Getting Started',
+    title: 'Getting started',
     links: [
       { title: 'Introduction', href: '/' },
       { title: 'Quickstart', href: '/quickstart' },
     ],
   },
   {
-    title: 'Basics',
+    title: 'Core concepts',
     links: [
       { title: 'Effects', href: '/effects' },
       { title: 'Commands', href: '/commands' },
@@ -262,17 +262,17 @@ export const navigation: Array<NavGroup> = [
   {
     title: 'Troubleshooting',
     links: [
-      { title: 'FAQ', href: '/troubleshooting' },
+      { title: 'FAQ', href: '/v5/faq' },
     ],
   },
   {
-    title: 'Custom Scripts',
+    title: 'Custom scripts',
     links: [
-      { title: 'Quickstart', href: '/scripts/quickstart' },
+      { title: 'Quickstart', href: '/v5/dev/scripts' },
     ],
   },
   {
-    title: 'API Reference',
+    title: 'API reference',
     links: [
       { title: 'Contacts', href: '/contacts' },
       { title: 'Conversations', href: '/conversations' },
@@ -282,9 +282,9 @@ export const navigation: Array<NavGroup> = [
     ],
   },
   {
-    title: 'Contribute',
+    title: 'Contributing',
     links: [
-      { title: 'Dev Environment Setup', href: '/environment-setup' },
+      { title: 'Dev Environment Setup', href: '/v5/dev/environment-setup' },
     ],
   },
 ]

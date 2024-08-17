@@ -1,0 +1,209 @@
+# Overview
+Firebot allows you to fire off custom logic when an effect is triggered. Custom scripts can also define new effect types, event types, $variables, and much much more. This enables developers to extend Firebot's capabilities beyond the base app. Custom scripts must be written in JavaScript (or compiled to JS via TypeScipt) and are treated as a Node module, so at least a basic understanding of JavaScript will be required. We also have a template starter script written in TypeScript available. **We highly recommend using this**. 
+
+## Template Script
+Want to jump right into it? 
+
+We have a template starter repo built in Typescript [here](https://github.com/crowbartools/firebot-custom-script-starter).
+
+For reference, it uses types that are defined [here](https://github.com/crowbartools/firebot-custom-scripts-types)
+
+**We highly recommend using this for the best developer experience**
+
+## Simple script
+There are only two requirements for a valid bare-bones custom script:
+* a function that takes in **one** argument: 
+  * a *runRequest* object which will contain: buttonId, username, parameters, and modules
+* that function is exported under the name `run` so it's visible to Node (and therefore Firebot).
+
+### Example
+```javascript
+exports.run = (runRequest) => {
+    const logger = runRequest.modules.logger;
+    
+    logger.info("Hello world!");
+}
+
+// this just prevents a popup saying the script might not work for v5 but this is not required
+exports.getScriptManifest = () => ({
+    firebotVersion: "5"
+});
+```
+
+#### runRequest
+Note that the `runRequest` argument will now contain all the properties you might need.
+Currently, `runRequest` will look like this:
+```typescript
+runRequest = {
+    parameters: object | null;   // this will contain any parameters the script has defined 
+    trigger: {
+      type: string; // how the script was triggered. Options: interactive, command, custom_script, api
+      metadata: {
+        username: string;
+        userCommand?: {
+          trigger: string;
+          args: string[];
+        }
+      }
+    },
+    modules: object        // Contains commonly used Node modules. Options: request, spawn, fs, path
+}
+```
+
+## Advanced Uses
+Custom Scripts can also define parameters that allow users to tweak behavior, or callback to tell Firebot to run any effect a button can.
+
+### Parameters
+Defining parameters allow you to write one script that can be dynamically changed by each button it's attached to. Input UI elements for parameters are automatically generated in the Edit Button modal (where you select what script a button should run). Parameters are then sent back to the scripts `run` function whenever the button is pressed.
+
+To define parameters, you must have a function that returns a `Promise` object that resolves with an object containing parameter objects. That function must be exported to node as `getDefaultParameters`.
+
+```javascript
+function getDefaultParameters() {
+    return new Promise((resolve, reject) => {
+        resolve({
+            "name": {
+                "type": "string",
+                "description": "What is your name?"
+            },
+            "shouldWhisper": {
+                "type": "boolean",
+                "description": "Whisper button presser",
+                "default": false
+            }
+        });
+    });
+}
+exports.getDefaultParameters = getDefaultParameters;
+```
+You can access the parameters in your `run` function via the *runRequest* argument.
+
+Assuming your parameters were defined using the example above, you could access them as such:
+```javascript
+function run(runRequest) {
+
+    const name = runRequest.parameters.name;
+    const shouldWhisper = runRequest.parameters.shouldWhisper;
+    
+    // Do something
+}
+```
+ 
+#### Types
+Each parameter must define a *type*. The *type* is what is used to determine what input element to use when generating the UI controls. Here is the list of supported types and their corresponding UI element:
+- string : *text field*
+- password: *text field that hides input*
+- number : *text field limited to numbers only*
+- boolean : *checkbox*
+- enum : *dropdown select list*
+- filepath : *text field with 'choose' button that opens up a file picker*
+- effectlist: *the gui for adding effects just like on buttons or commands*
+
+#### Other things parameters can define
+- description : *This will be used as the text above the UI element. If no description is proved, the parameter name will be used instead.*
+- secondaryDescription: *This is put under the description in slightly muted text. Think of it as a sub title.*
+- default : *The default value to use*
+- showBottomHr : *This will add a horizontal rule below the parameter, giving some extra padding. Good for visually grouping parameters.*
+
+#### Special cases
+- The *enum* paramater type must also define an *options* property that is an array of strings that the user can pick from.
+- The *string* parameter type can optionally include `useTextArea: true` to use a multiline text area instead of a text field.
+- The *filepath* parameter type can optionally include a `fileOptions` object that can be used to modify the file picker. Example:
+```javascript
+fileOptions: {
+    directoryOnly: false, //set this to true if you want the user to only be able to select folders
+    filters: [{name: "Audio", extensions: ["mp3", "ogg", "wav", "flac"]}],
+    title: "Please Select A Sound",
+    buttonLabel: "Select Sound"
+}
+```
+
+### Effects 
+If you want to callback to Firebot to run effects, you must return a `Promise` object and resolve with a response object. This will allow you to run asynchronous code without stalling Firebot.
+
+#### Response Example
+```javascript
+function run(runRequest) {
+  // Return a Promise object
+  return new Promise((resolve, reject) => {
+
+    // Create a response 
+    const response = {
+      success: true,
+      errorMessage: "Failed to run the script!", // If 'success' is false, this message is shown in a Firebot popup.
+      effects: [ // An array of effect objects to run
+          {
+              type: "firebot:chat",
+              message: "Hello chat!",
+              chatter: "Streamer"
+          },
+          {
+              type: "firebot:playsound",
+              volume: 5,
+              file: "C:\some\file\path"
+          }
+      ] 
+    }
+
+    // Resolve Promise with the response object
+    resolve(response);
+  });
+}
+// Export 'run' function so it is visible to Node
+exports.run = run;
+```
+
+#### Building Effect Objects
+Each effect object requires a `type` that tells Firebot what kind of effect the object is. You can see the list of all effect types [here](https://github.com/crowbartools/Firebot/tree/master/backend/effects/builtin).
+
+The rest of the effect object depends on the type of effect. The best way to know what an effect object should look like for a particular effect is to create the effect manually on a command and then view the JSON file for your saved commands.
+
+You can view your board's JSON file by: 
+**Open Firebot** > **Settings** > **Open Root Folder** > **chat** > **commands.json**
+
+For example, if you were to create a "Show Image" effect, you would find this in your JSON: 
+![](https://i.imgur.com/2gELkgf.png)
+
+
+### All Response Object Options
+Here is a response object example using every available field.
+```javascript
+    const response = {
+      success: true,
+      errorMessage: "Failed to run the script!", // If 'success' is false, this message is shown in a Firebot popup.
+      effects: [], // An array of effect objects to run
+      callback: (type) => { } // call back function that gets called when effects or commands are finished running. type will = "effects" or "commands"
+    }
+```
+
+### Script Manifest
+As of v4.5, scripts can now define a manifest. Some of these fields get displayed in the UI.
+```javascript
+exports.getScriptManifest = function() {
+	return {
+		name: "Random Pictures",
+		description: "Selects a random picture from a folder of pictures.",
+		author: "ebiggz",
+		version: "1.4",
+		website: "https://twitter.com/ItsEbiggz",
+        startupOnly: false,
+        firebotVersion: "5"
+	}
+}
+```
+Would show up as:
+
+![](https://i.imgur.com/rlIWMst.png)
+
+## Logging to the Dev Tools Console
+If you need some sort of output in the Dev Tools console you can load the logger into your script like this:
+```javascript
+let logger = runRequest.modules.logger;
+```
+
+And then to output information to your console you can use these:
+```javascript
+logger.debug("Outputs a DEBUG tagged message for the dev tools console!");
+logger.info("Outputs an INFO tagged message for the dev tools console!");
+logger.error("Outputs an ERROR tagged message for the dev tools console!");
+```

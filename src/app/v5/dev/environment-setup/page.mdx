@@ -1,0 +1,71 @@
+# Developers
+We welcome all community developers who would like to help with Firebot. If you'd like to participate we recommend starting with some "Entry Level" bugs or feature requests on the issues page. After a commit or two you'll be invited to the Firebot developer channel where we discuss everything.
+
+## IDE
+We highly recommend you use **Visual Studio Code**, but you are welcome to use whatever IDE you prefer.
+
+
+## Installation
+
+### 1. Prerequisites  
+* [Git](https://git-scm.com/downloads)
+* [Nodejs](https://nodejs.org/en/download/)
+* [Volta](https://docs.volta.sh/guide/getting-started) (Dynamically sets your node/npm version when working in Firebot)
+* [Python](https://www.python.org/downloads/release/python-391/) (3.7, 3.8, or 3.9)
+
+#### **Windows**
+* [Windows Build Tools](https://www.microsoft.com/en-us/download/details.aspx?id=48159)
+
+*OR*
+
+* Install Visual Studio Community with C++ package
+
+#### **Linux**
+You will need libx11-dev libxtst-dev libpng-dev installed  
+For Debian distros use:
+```
+apt install libx11-dev libxtst-dev libpng-dev
+````
+
+#### **macOS**
+* [Xcode](https://developer.apple.com/xcode/download/)
+  * You also need to install the `XCode Command Line Tools` by running `xcode-select --install`. Alternatively, if you already have the full Xcode installed, you can find them under the menu `Xcode -> Open Developer Tool -> More Developer Tools...`.
+
+### 2. Install Global Packages  
+Run from a console/terminal with admin privileges:
+```
+npm install --global --production node-gyp grunt-cli
+```
+
+
+### 3. Clone Repo
+Create a new directory/folder  
+Open the folder/directory in a console/terminal and run:
+```
+git clone https://github.com/crowbartools/Firebot.git .
+```
+
+
+
+### 4. Install Dependencies
+Open the folder/directory of Firebot's repo in a console/terminal with admin privileges and run:
+```
+npm run setup
+```
+
+### 5. Create secrets.json
+Before Firebot will start, a `secrets.json` file will need to be setup. 
+- At the root level of the project, you will find a `secrets.template.json` file. Duplicate it and rename the copy to `secrets.json`.
+- In this file are empty strings for OAuth client and secret keys for Twitch and various 3rd party integrations. The **only needed keys for development are the Twitch ones** (unless you plan to dev features for any of the integrations)
+- To create your own OAuth client for Twitch, you can register a Twitch "application" at: https://dev.twitch.tv/console/apps/create
+  - Name can be anything, ie `FirebotDev`
+  - Set the callback URL to `http://localhost:7472/api/v1/auth/callback`
+- Input your Client ID and Client Secret into the `secrets.json` file.
+
+
+
+### 6. Run Firebot from Dev Environment
+Open the folder/directory of Firebot's repo in a console/terminal and run:
+```
+npm start
+```
