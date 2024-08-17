@@ -21,6 +21,11 @@ const nextConfig = {
       '/**/*': ['./src/app/**/*.mdx'],
     },
   },
+  output: "export",
+  basePath: "/",
+  images: {
+    unoptimized: true,
+  },
 }
 
 export default withSearch(withMDX(nextConfig))
