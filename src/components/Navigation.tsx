@@ -257,6 +257,7 @@ export const navigation: Array<NavGroup> = [
     title: 'Guides',
     links: [
       { title: 'Alert Queues', href: '/guides/alert-queues' },
+      { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
     ],
   },
   {
