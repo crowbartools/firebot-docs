@@ -11,14 +11,8 @@ import { useIsInsideMobileNavigation } from '@/components/MobileNavigation'
 import { useSectionStore } from '@/components/SectionProvider'
 import { Tag } from '@/components/Tag'
 import { remToPx } from '@/lib/remToPx'
-
-interface NavGroup {
-  title: string
-  links: Array<{
-    title: string
-    href: string
-  }>
-}
+import { nav } from '@/navigation'
+import { NavGroup } from '@/types/nav'
 
 function useInitialValue<T>(value: T, condition = true) {
   let initialValue = useRef(value).current
@@ -229,67 +223,6 @@ function NavigationGroup({
   )
 }
 
-export const navigation: Array<NavGroup> = [
-  {
-    title: 'Getting started',
-    links: [
-      { title: 'Introduction', href: '/' },
-      { title: 'Quickstart', href: '/quickstart' },
-    ],
-  },
-  {
-    title: 'Core concepts',
-    links: [
-      { title: 'Effects', href: '/effects' },
-      { title: 'Commands', href: '/commands' },
-      { title: 'Events', href: '/events' },
-      { title: 'Timers', href: '/timers' },
-      { title: 'Channel Rewards', href: '/channel-rewards' },
-      { title: 'Preset Effect Lists', href: '/preset-effect-lists' },
-      { title: 'Hotkeys', href: '/hotkeys' },
-      { title: 'Counters', href: '/counters' },
-      { title: 'Variables', href: '/variables' },
-      { title: 'Effect Queues', href: '/effect-queues' },
-      { title: 'Setups', href: '/setups' },
-    ],
-  },
-  {
-    title: 'Guides',
-    links: [
-      { title: 'Alert Queues', href: '/guides/alert-queues' },
-      { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
-    ],
-  },
-  {
-    title: 'Troubleshooting',
-    links: [
-      { title: 'FAQ', href: '/v5/faq' },
-    ],
-  },
-  {
-    title: 'Custom scripts',
-    links: [
-      { title: 'Quickstart', href: '/v5/dev/scripts' },
-    ],
-  },
-  {
-    title: 'API reference',
-    links: [
-      { title: 'Contacts', href: '/contacts' },
-      { title: 'Conversations', href: '/conversations' },
-      { title: 'Messages', href: '/messages' },
-      { title: 'Groups', href: '/groups' },
-      { title: 'Attachments', href: '/attachments' },
-    ],
-  },
-  {
-    title: 'Contributing',
-    links: [
-      { title: 'Dev Environment Setup', href: '/v5/dev/environment-setup' },
-    ],
-  },
-]
-
 export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   return (
     <nav {...props}>
@@ -297,7 +230,7 @@ export function Navigation(props: React.ComponentPropsWithoutRef<'nav'>) {
         <TopLevelNavItem href="/">API</TopLevelNavItem>
         <TopLevelNavItem href="#">Documentation</TopLevelNavItem>
         <TopLevelNavItem href="#">Support</TopLevelNavItem>
-        {navigation.map((group, groupIndex) => (
+        {nav.map((group, groupIndex) => (
           <NavigationGroup
             key={group.title}
             group={group}
