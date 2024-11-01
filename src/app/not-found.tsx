@@ -15,6 +15,17 @@ export default function NotFound() {
         <p className="mt-2 text-base text-zinc-600 dark:text-zinc-400">
           Sorry, we couldn’t find the page you’re looking for.
         </p>
+        <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+          Much of this web site is still a work-in-progress, and we are working hard to try and get all of the
+          documentation migrated here. In the meantime, our 
+          <a
+            className="ml-2 mr-2 text-nowrap font-medium transition text-amber-500 hover:text-amber-600 dark:text-amber-400 dark:hover:text-amber-500"
+            href="https://github.com/crowbartools/Firebot/wiki"
+          >
+            Github Wiki 
+          </a>
+          contains a vast selection of <i>historical</i> documentation.
+        </p>
         <Button href="/" arrow="right" className="mt-8">
           Back to docs
         </Button>
