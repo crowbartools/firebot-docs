@@ -1,0 +1,88 @@
+# Effects
+The effects available in Firebot represent the *cool* stuff that can happen in response to things like a command or an event. There are a lot of effects available, and even more ways to combine them in unique ways to create a memoriable experience for your viewers.
+
+## Effects List
+Effects are contained within an effects list, and some effects can contain additional effect list(s). Each effects list has an unique ID, and can control features like which [Effect Queue](/effect-queues) to run the effects within. [Preset effect lists](/preset-effect-lists) are bespoke effect lists that can accept custom parameters. These can be very helpful for designing and testing larger collections of effects.
+
+## List of Firebot Effects
+This list contains all of the effects available in Firebot. Note that custom third-party plugins can add additional effects that are not listed here:
+
+| Name | Description | Categories |
+|---|---|---|
+| **Ad Break** | Trigger an ad break. | Common, Moderation, Twitch |
+| **Add Quote** | Adds a quote to the quote database. | Fun |
+| **Activity Feed Alert** | Display an alert in Firebot's activity feed. | Fun |
+| **Announce** | Send an announcement to your chat. | Common, Chat, Twitch |
+| **API Effect** | Pulls info from a pre-selected API. | Fun, Chat, Overlay |
+| **Approve/Reject Channel Reward Redemption** | Approves or rejects a pending Twitch channel reward redemption. | Common, Twitch |
+| **Ban** | Ban or unban a user. | Common, Moderation, Twitch |
+| **Block User** | Block or unblock a user on Twitch. | Common, Twitch |
+| **Cancel Twitch Prediction** | Cancels the currently-active Twitch prediction, and refunds all channel points wagered. | Common, Twitch |
+| **Celebration** | Celebrate with firework overlay effects. | Fun, Overlay |
+| **Chat** | Send a chat message. | Common, Chat, Twitch |
+| **Chat Feed Alert** | Display an alert in Firebot's chat feed. | Common, Chat |
+| **Clear Chat** | Clear all chat messages. | Common, Moderation, Twitch |
+| **Clear Effects** | Remove overlay effects, stop sounds, or clear effect queues. | Common, Overlay |
+| [**Conditional Effects**](/v5/guides/conditional-effects) | Conditionally run effects. | Advanced, Scripting |
+| **Cooldown Command** | Manually add or remove a cooldown for a command. | Common, Advanced, Scripting |
+| **Create Clip** | Creates a clip on Twitch. | Common, Fun, Twitch |
+| **Create Stream Marker** | Create a stream marker in your Twitch VOD. | Common, Twitch |
+| **Create Twitch Poll** | Create a Twitch poll. | Common, Twitch |
+| **Create Twitch Prediction** | Create a Twitch prediction. | Common, Twitch |
+| **Custom Script** | Run a custom JS script. | Advanced, Scripting |
+| **Custom Variable** | Save data to a custom variable that you can then use elsewhere. | Scripting |
+| **Delay** | Pause between effects. | Common, Advanced, Scripting |
+| **Delete Chat Message** | Delete the associated chat message. | Chat, Advanced, Twitch |
+| **Emulate Control** | Emulate keyboard keys or mouse clicks. | Advanced, Fun |
+| **End Twitch Poll** | Ends the currently-active Twitch poll. | Common, Twitch |
+| **Evaluate JavaScript** | Evaluate a JavaScript expression. | Advanced |
+| **Firebot Shoutout** | Display a shoutout graphic for a channel in the overlay. | Common, Fun, Overlay |
+| **HTTP Request** | Send an HTTP request to a given URL. | Advanced, Scripting |
+| **Lock Twitch Prediction** | Locks the currently-active Twitch prediction so that no more predictions can be made. | Common, Twitch |
+| **Log Message** | Adds an entry to the Firebot log. This is useful for debugging. | Advanced, Scripting |
+| **Loop Effects** | Loop an effect list. | Scripting |
+| **Manage Active Chat Users** | Add or remove users from the active chat user lists. | Common, Moderation |
+| **Mark All Activity As Acknowledged** | Marks all Activity as Acknowledged in the Chat page. | Common |
+| **Mod** | Mod or unmod a user. | Common, Moderation, Twitch |
+| **Pause/Resume Effect Queue** | Pauses or resumes an effect queue. Effects sent to a paused queue will run once the queue is resumed. | Scripting |
+| **Play Sound** | Plays a sound effect. | Common |
+| **Play Video** | Plays a local, YouTube, or Twitch video in the overlay. | Common, Overlay, Twitch |
+| **Purge** | Purge a user's chat messages from chat. | Common, Moderation, Twitch |
+| **Raid/Unraid Twitch Channel** | Start or cancel a raid to another Twitch channel. | Common, Twitch |
+| **Random Reddit Image** | Pull a random image from a selected subreddit. | Fun, Chat, Overlay |
+| **Remove User Metadata** | Remove a key from metadata associated to a given user. | Advanced, Scripting |
+| **Reset Timer** | Force a timer to restart its interval. | Common |
+| **Resolve Twitch Prediction** | Resolves the currently-active Twitch prediction by selecting an outcome, and pays out channel points to the prediction winners. | Common, Twitch |
+| **Roll Dice** | Specify an amount of dice to roll in chat. | Fun, Chat |
+| **Run Command** | Runs effects saved for the selected custom command. | Advanced |
+| **Run Effect List** | Run a preset or custom list of effects. | Advanced, Scripting |
+| **Run Program** | Run a program or executable. | Advanced, Scripting |
+| **Run Random Effect** | Run a random effect from a list of effects. | Advanced, Scripting |
+| **Run Sequential Effect** | Run a single effect sequentially from a list of effects. | Advanced, Scripting |
+| **Set Chat Mode** | Sets the chat mode(s) for your Twitch channel. | Common, Twitch |
+| **Set User Metadata** | Save metadata associated to a given user. | Advanced, Scripting |
+| **Show HTML** | Show an HTML snippet in the overlay. | Advanced, Overlay |
+| **Show Image/GIF** | Shows an image in the overlay. | Common, Fun, Overlay |
+| **Show Text** | Shows specified textin the overlay. | Common, Overlay |
+| **Snooze Next Ad Break** | Pushes back the next scheduled mid-roll ad break by 5 minutes. | Common, Moderation, Twitch |
+| **Set Stream Category** | Set the stream category/game. | Common, Moderation, Twitch |
+| **Set Stream Title** | Set the title of the stream. | Common, Moderation, Twitch |
+| **Stop Effect Execution** | Stop the execution of the current effect list. | Scripting |
+| **Switch Statement** | Conditionally run effects based on a value. | Advanced, Scripting |
+| **Take Screenshot** | Takes a screenshoit of the selected screen. | Fun |
+| **Text-To-Speech** | Have Firebot read out some text. | Fun |
+| **Timeout** | Timeout a user. | Common, Moderation, Twitch |
+| **Toggle Command** | Toggle a command's active status. | Common |
+| **Toggle Connection** | Toggle connection to Twitch and any linked integrations. | Advanced |
+| **Toggle Event** | Toggle an event's active status. | Common |
+| **Toggle Event Set** | Toggle an event sets active status. | Common |
+| **Toggle Scheduled Effect List** | Toggle a scheduled effect list's enabled status. | Common |
+| **Toggle Timer** | Toggle a timer's active status. | Common |
+| **Twitch Shoutout** | Send a Twitch shoutout to another channel. | Common, Twitch |
+| **Update Channel Reward** | Update settings for a channel reward. | Advanced, Twitch |
+| **Update Counter** | Update a counter's value. | Common, Advanced |
+| **Update Currency** | Update a viewer's currency. | Common, Fun |
+| **Update Viewer Rank** | Update a viewers rank within a given rank ladder. | Common |
+| **Update Viewer Roles** | Add, remove, or clear users from a custom role. | Advanced |
+| **VIP** | Add or remove the VIP role of a user. | Common, Moderation, Twitch |
+| **Write To File** | Write or delete some text in a file. | Advanced |
