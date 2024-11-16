@@ -21,7 +21,7 @@ import {
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react'
 import clsx from 'clsx'
 
-import { navigation } from '@/components/Navigation'
+import { nav } from '@/navigation'
 import { type Result } from '@/mdx/search.mjs'
 
 type EmptyObject = Record<string, never>
@@ -175,7 +175,7 @@ function SearchResult({
 }) {
   let id = useId()
 
-  let sectionTitle = navigation.find((section) =>
+  let sectionTitle = nav.find((section) =>
     section.links.find((link) => link.href === result.url.split('#')[0]),
   )?.title
   let hierarchy = [sectionTitle, result.pageTitle].filter(
