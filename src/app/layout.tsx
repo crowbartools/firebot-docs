@@ -8,6 +8,7 @@ import { type Section } from '@/components/SectionProvider'
 import '@/styles/tailwind.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://docs.firebot.app'),
   title: {
     template: '%s - Firebot Docs',
     default: 'Firebot Docs',
