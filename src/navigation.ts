@@ -31,13 +31,13 @@ export const nav: Array<NavGroup> = [
       { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
       { title: 'Time Variables', href: '/v5/guides/time-variable' },
       { title: 'Custom Variables', href: '/v5/guides/custom-variables' },
+      { title: 'Manual Restore', href: '/v5/guides/manual-restore' },
     ],
   },
   {
     title: 'Troubleshooting',
     links: [
       { title: 'FAQ', href: '/v5/faq' },
-      { title: 'Manual Restore', href: '/v5/guides/manual-restore' },
     ],
   },
   {
