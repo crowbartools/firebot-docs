@@ -30,12 +30,14 @@ export const nav: Array<NavGroup> = [
       { title: 'Alert Queues', href: '/guides/alert-queues' },
       { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
       { title: 'Conditional Effects', href: '/v5/guides/time-variables' },
-      { title: 'Conditional Effects', href: '/v5/guides/manual-restore' },
     ],
   },
   {
     title: 'Troubleshooting',
-    links: [{ title: 'FAQ', href: '/v5/faq' }],
+    links: [
+      { title: 'FAQ', href: '/v5/faq' },
+      { title: 'Manual Restore', href: '/v5/guides/manual-restore' },
+    ],
   },
   {
     title: 'Custom scripts',
