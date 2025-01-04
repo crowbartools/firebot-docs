@@ -1,6 +1,6 @@
 # Counters API
 
-## `Get /counters`
+## `GET /counters`
 
 #### Description:
 
@@ -10,30 +10,28 @@ Fetches all available counters.
 
 ```
 GET /counters
-
 ```
 
 #### Example Response:
 
 ```json
 [
-{
-"id": "counter1",
-"name": "Counter 1",
-"value": 10
-},
-{
-"id": "counter2",
-"name": "Counter 2",
-"value": 15
-}
+  {
+    "id": "counter1",
+    "name": "Counter 1",
+    "value": 10
+  },
+  {
+    "id": "counter2",
+    "name": "Counter 2",
+    "value": 15
+  }
 ]
-
 ```
 
-----------
+---
 
-## `Get /counters/:counterId`
+## `GET /counters/:counterId`
 
 #### Description:
 
@@ -47,23 +45,21 @@ Fetches a specific counter by its `counterId`.
 
 ```
 GET /counters/counter1
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": "counter1",
-"name": "Counter 1",
-"value": 10
+  "id": "counter1",
+  "name": "Counter 1",
+  "value": 10
 }
-
 ```
 
-----------
+---
 
-## `Post /counters/:counterId`
+## `POST /counters/:counterId`
 
 #### Description:
 
@@ -82,18 +78,16 @@ Updates the value of an existing counter. Optionally, you can override the curre
 
 ```json
 {
-"value": 20,
-"override": true
+  "value": 20,
+  "override": true
 }
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"oldValue": 10,
-"newValue": 20
+  "oldValue": 10,
+  "newValue": 20
 }
-
 ```

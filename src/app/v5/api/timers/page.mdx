@@ -1,6 +1,6 @@
 # Timers API
 
-## `Get /timers`
+## `GET /timers`
 
 #### Description:
 
@@ -10,30 +10,28 @@ Fetches all available timers.
 
 ```
 GET /timers
-
 ```
 
 #### Example Response:
 
 ```json
 [
-{
-"id": "timer1",
-"name": "Timer 1",
-"active": true
-},
-{
-"id": "timer2",
-"name": "Timer 2",
-"active": false
-}
+  {
+    "id": "timer1",
+    "name": "Timer 1",
+    "active": true
+  },
+  {
+    "id": "timer2",
+    "name": "Timer 2",
+    "active": false
+  }
 ]
-
 ```
 
-----------
+---
 
-## `Get /timers/:timerId`
+## `GET /timers/:timerId`
 
 #### Description:
 
@@ -47,23 +45,21 @@ Fetches a specific timer by its `timerId`.
 
 ```
 GET /timers/timer1
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": "timer1",
-"name": "Timer 1",
-"active": true
+  "id": "timer1",
+  "name": "Timer 1",
+  "active": true
 }
-
 ```
 
-----------
+---
 
-## `Post /timers/:timerId/:action`
+## `POST /timers/:timerId/:action`
 
 #### Description:
 
@@ -82,32 +78,28 @@ Performs an action on the specified timer.
 
 ```
 POST /timers/timer1/enable
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"status": "success",
-"message": "Timer enabled"
+  "status": "success",
+  "message": "Timer enabled"
 }
-
 ```
 
 #### Example Request:
 
 ```
 POST /timers/timer1/clear
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"status": "success",
-"message": "Timer interval cleared"
+  "status": "success",
+  "message": "Timer interval cleared"
 }
-
 ```

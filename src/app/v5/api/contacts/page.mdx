@@ -1,88 +1,91 @@
 ## Table Of Contents
+
 - [Overview](#overview)
 - [Rest Endpoints](#endpoints)
-   * Auth
-     * [**/auth** `GET`](#get-auth)
-     * [**/auth/callback2** `GET`](#get-authcallback2)
-     * [**/auth/tokencallback** `GET`](#get-authtokencallback)
-   * Status
-     * [**/status** `GET`](#get-status)
-   * Effects
-     * [**/effects** `GET`](#get-effects)
-     * [**/effects** `POST`](#post-effects)
-     * [**/effects/preset** `GET`](#get-effectspreset)
-     * [**/effects/:effectId** `GET`](#get-effectseffectid)
-     * [**/effects/preset/:presetListId** `GET`](#get-effectspresetpresetlistid)
-     * [**/effects/preset/:presetListId** `POST`](#post-effectspresetpresetlistid)
-     * [**/effects/preset/:presetListId/run** `GET`](#get-effectspresetpresetlistidrun)
-     * [**/effects/preset/:presetListId/run** `POST`](#post-effectspresetpresetlistidrun)
-   * Fonts
-     * [**/fonts** `GET`](#get-fonts)
-     * [**/fonts/:name** `GET`](#get-fontsname)
-   * Custom-variables
-     * [**/custom-variables** `GET`](#get-custom-variables)
-     * [**/custom-variables/:variableName** `GET`](#get-custom-variablesvariablename)
-     * [**/custom-variables/:variableName** `POST`](#post-custom-variablesvariablename)
-   * Variables
-     * [**/variables** `GET`](#get-variables)
-   * Viewers
-     * [**/viewers** `GET`](#get-viewers)
-     * [**/viewers/export** `GET`](#get-viewersexport)
-     * [**/viewers/:userId** `GET`](#get-viewersuserid)
-     * [**/viewers/:userId/metadata/:metadataKey** `POST`](#post-viewersuseridmetadatametadatakey)
-     * [**/viewers/:userId/metadata/:metadataKey** `PUT`](#put-viewersuseridmetadatametadatakey)
-     * [**/viewers/:userId/metadata/:metadataKey** `DELETE`](#delete-viewersuseridmetadatametadatakey)
-     * [**/viewers/:userId/currency** `GET`](#get-viewersuseridcurrency)
-     * [**/viewers/:userId/currency/:currencyId** `GET`](#get-viewersuseridcurrencycurrencyid)
-     * [**/viewers/:userId/currency/:currencyId** `POST`](#post-viewersuseridcurrencycurrencyid)
-     * [**/viewers/:userId/customRoles** `GET`](#get-viewersuseridcustomroles)
-     * [**/viewers/:userId/customRoles/:customRoleId** `POST`](#post-viewersuseridcustomrolescustomroleid)
-     * [**/viewers/:userId/customRoles/:customRoleId** `DELETE`](#delete-viewersuseridcustomrolescustomroleid)
-   * CustomRoles
-     * [**/customRoles** `GET`](#get-customroles)
-     * [**/customRoles/:customRoleId** `GET`](#get-customrolescustomroleid)
-     * [**/customRoles/:customRoleId/clear** `GET`](#get-customrolescustomroleidclear)
-     * [**/customRoles/:customRoleId/viewer/:userId** `POST`](#post-customrolescustomroleidvieweruserid)
-     * [**/customRoles/:customRoleId/viewer/:userId** `DELETE`](#delete-customrolescustomroleidvieweruserid)
-   * Currency
-     * [**/currency** `GET`](#get-currency)
-     * [**/currency/:currencyName** `GET`](#get-currencycurrencyname)
-     * [**/currency/:currencyName/top** `GET`](#get-currencycurrencynametop)
-   * Quotes
-     * [**/quotes** `GET`](#get-quotes)
-     * [**/quotes** `POST`](#post-quotes)
-     * [**/quotes/:quoteId** `GET`](#get-quotesquoteid)
-     * [**/quotes/:quoteId** `PUT`](#put-quotesquoteid)
-     * [**/quotes/:quoteId** `PATCH`](#patch-quotesquoteid)
-     * [**/quotes/:quoteId** `DELETE`](#delete-quotesquoteid)
-   * Counters
-     * [**/counters** `GET`](#get-counters)
-     * [**/counters/:counterId** `GET`](#get-counterscounterid)
-     * [**/counters/:counterId** `POST`](#post-counterscounterid)
-   * Timers
-     * [**/timers** `GET`](#get-timers)
-     * [**/timers/:timerId** `GET`](#get-timerstimerid)
-     * [**/timers/:timerId/:action** `GET`](#get-timerstimeridaction)
-   * Queues
-     * [**/queues** `GET`](#get-queues)
-     * [**/queues/:queueId** `GET`](#get-queuesqueueid)
-     * [**/queues/:queueId/pause** `GET`](#get-queuesqueueidpause)
-     * [**/queues/:queueId/pause** `POST`](#post-queuesqueueidpause)
-     * [**/queues/:queueId/resume** `GET`](#get-queuesqueueidresume)
-     * [**/queues/:queueId/resume** `POST`](#post-queuesqueueidresume)
-     * [**/queues/:queueId/toggle** `GET`](#get-queuesqueueidtoggle)
-     * [**/queues/:queueId/toggle** `POST`](#post-queuesqueueidtoggle)
-     * [**/queues/:queueId/clear** `GET`](#get-queuesqueueidclear)
-     * [**/queues/:queueId/clear** `POST`](#post-queuesqueueidclear)
+  - Auth
+    - [**/auth** `GET`](#get-auth)
+    - [**/auth/callback2** `GET`](#get-authcallback2)
+    - [**/auth/tokencallback** `GET`](#get-authtokencallback)
+  - Status
+    - [**/status** `GET`](#get-status)
+  - Effects
+    - [**/effects** `GET`](#get-effects)
+    - [**/effects** `POST`](#post-effects)
+    - [**/effects/preset** `GET`](#get-effectspreset)
+    - [**/effects/:effectId** `GET`](#get-effectseffectid)
+    - [**/effects/preset/:presetListId** `GET`](#get-effectspresetpresetlistid)
+    - [**/effects/preset/:presetListId** `POST`](#post-effectspresetpresetlistid)
+    - [**/effects/preset/:presetListId/run** `GET`](#get-effectspresetpresetlistidrun)
+    - [**/effects/preset/:presetListId/run** `POST`](#post-effectspresetpresetlistidrun)
+  - Fonts
+    - [**/fonts** `GET`](#get-fonts)
+    - [**/fonts/:name** `GET`](#get-fontsname)
+  - Custom-variables
+    - [**/custom-variables** `GET`](#get-custom-variables)
+    - [**/custom-variables/:variableName** `GET`](#get-custom-variablesvariablename)
+    - [**/custom-variables/:variableName** `POST`](#post-custom-variablesvariablename)
+  - Variables
+    - [**/variables** `GET`](#get-variables)
+  - Viewers
+    - [**/viewers** `GET`](#get-viewers)
+    - [**/viewers/export** `GET`](#get-viewersexport)
+    - [**/viewers/:userId** `GET`](#get-viewersuserid)
+    - [**/viewers/:userId/metadata/:metadataKey** `POST`](#post-viewersuseridmetadatametadatakey)
+    - [**/viewers/:userId/metadata/:metadataKey** `PUT`](#put-viewersuseridmetadatametadatakey)
+    - [**/viewers/:userId/metadata/:metadataKey** `DELETE`](#delete-viewersuseridmetadatametadatakey)
+    - [**/viewers/:userId/currency** `GET`](#get-viewersuseridcurrency)
+    - [**/viewers/:userId/currency/:currencyId** `GET`](#get-viewersuseridcurrencycurrencyid)
+    - [**/viewers/:userId/currency/:currencyId** `POST`](#post-viewersuseridcurrencycurrencyid)
+    - [**/viewers/:userId/customRoles** `GET`](#get-viewersuseridcustomroles)
+    - [**/viewers/:userId/customRoles/:customRoleId** `POST`](#post-viewersuseridcustomrolescustomroleid)
+    - [**/viewers/:userId/customRoles/:customRoleId** `DELETE`](#delete-viewersuseridcustomrolescustomroleid)
+  - CustomRoles
+    - [**/customRoles** `GET`](#get-customroles)
+    - [**/customRoles/:customRoleId** `GET`](#get-customrolescustomroleid)
+    - [**/customRoles/:customRoleId/clear** `GET`](#get-customrolescustomroleidclear)
+    - [**/customRoles/:customRoleId/viewer/:userId** `POST`](#post-customrolescustomroleidvieweruserid)
+    - [**/customRoles/:customRoleId/viewer/:userId** `DELETE`](#delete-customrolescustomroleidvieweruserid)
+  - Currency
+    - [**/currency** `GET`](#get-currency)
+    - [**/currency/:currencyName** `GET`](#get-currencycurrencyname)
+    - [**/currency/:currencyName/top** `GET`](#get-currencycurrencynametop)
+  - Quotes
+    - [**/quotes** `GET`](#get-quotes)
+    - [**/quotes** `POST`](#post-quotes)
+    - [**/quotes/:quoteId** `GET`](#get-quotesquoteid)
+    - [**/quotes/:quoteId** `PUT`](#put-quotesquoteid)
+    - [**/quotes/:quoteId** `PATCH`](#patch-quotesquoteid)
+    - [**/quotes/:quoteId** `DELETE`](#delete-quotesquoteid)
+  - Counters
+    - [**/counters** `GET`](#get-counters)
+    - [**/counters/:counterId** `GET`](#get-counterscounterid)
+    - [**/counters/:counterId** `POST`](#post-counterscounterid)
+  - Timers
+    - [**/timers** `GET`](#get-timers)
+    - [**/timers/:timerId** `GET`](#get-timerstimerid)
+    - [**/timers/:timerId/:action** `GET`](#get-timerstimeridaction)
+  - Queues
+    - [**/queues** `GET`](#get-queues)
+    - [**/queues/:queueId** `GET`](#get-queuesqueueid)
+    - [**/queues/:queueId/pause** `GET`](#get-queuesqueueidpause)
+    - [**/queues/:queueId/pause** `POST`](#post-queuesqueueidpause)
+    - [**/queues/:queueId/resume** `GET`](#get-queuesqueueidresume)
+    - [**/queues/:queueId/resume** `POST`](#post-queuesqueueidresume)
+    - [**/queues/:queueId/toggle** `GET`](#get-queuesqueueidtoggle)
+    - [**/queues/:queueId/toggle** `POST`](#post-queuesqueueidtoggle)
+    - [**/queues/:queueId/clear** `GET`](#get-queuesqueueidclear)
+    - [**/queues/:queueId/clear** `POST`](#post-queuesqueueidclear)
 - [WebSocket Endpoint](#websocket-endpoint)
- 
-## Overview
-Firebot hosts a local API that developers can use to get data from Firebot or tell it to run effects.
-* The API is hosted on port **7472**. All endpoints have the root **http://localhost:7472/api/v1**
-* All responses are in JSON.
-* Don't forget that Firebot must be running for the API to be available.
 
-## Rest Endpoints 
+## Overview
+
+Firebot hosts a local API that developers can use to get data from Firebot or tell it to run effects.
+
+- The API is hosted on port **7472**. All endpoints have the root **http://localhost:7472/api/v1**
+- All responses are in JSON.
+- Don't forget that Firebot must be running for the API to be available.
+
+## Rest Endpoints
 
 ## Authentication
 
@@ -100,7 +103,6 @@ Redirects the user to the authorization URI of the specified authentication prov
 
 ```
 GET /auth?providerId=google
-
 ```
 
 #### Example Response (Redirect):
@@ -110,7 +112,6 @@ This will redirect the user to the authorization URI of the specified provider (
 ```http
 HTTP/1.1 302 Found
 Location: https://accounts.google.com/o/oauth2/auth?client_id=...&redirect_uri=...&response_type=code&scope=...
-
 ```
 
 ### `GET /auth/callback2`
@@ -128,7 +129,6 @@ for an access token.
 
 ```
 GET /auth/callback2?state=google&code=authorizationCodeHere
-
 ```
 
 #### Example Response (Redirect):
@@ -138,7 +138,6 @@ Upon success, redirects to the login success page.
 ```http
 HTTP/1.1 302 Found
 Location: /loginsuccess?provider=google
-
 ```
 
 #### Example Response (Error):
@@ -147,18 +146,16 @@ If the `state` parameter is invalid or missing, returns an error response.
 
 ```json
 {
-"error": "Invalid provider id in state"
+  "error": "Invalid provider id in state"
 }
-
 ```
 
 If the authentication fails (e.g., invalid token exchange or an OAuth error), the response will be:
 
 ```json
 {
-"error": "Authentication failed"
+  "error": "Authentication failed"
 }
-
 ```
 
 ## Status
@@ -173,11 +170,10 @@ Fetches the current status of the application's connections, specifically the ch
 
 ```json
 {
-"connections": {
-"chat": true
+  "connections": {
+    "chat": true
+  }
 }
-}
-
 ```
 
 ## Effects
@@ -197,26 +193,24 @@ provided.
 
 ```
 GET /effects?trigger=someTriggerType
-
 ```
 
 #### Example Response (JSON):
 
 ```json
 [
-{
-"id": "effect1",
-"name": "Effect 1",
-"description": "Description of effect 1",
-"triggers": ["someTriggerType"]
-},
-{
-"id": "effect2",
-"name": "Effect 2",
-"description": "Description of effect 2"
-}
+  {
+    "id": "effect1",
+    "name": "Effect 1",
+    "description": "Description of effect 1",
+    "triggers": ["someTriggerType"]
+  },
+  {
+    "id": "effect2",
+    "name": "Effect 2",
+    "description": "Description of effect 2"
+  }
 ]
-
 ```
 
 ### `GET /effects/:effectId`
@@ -233,29 +227,26 @@ Fetches the details of a specific effect by its `effectId`.
 
 ```
 GET /effects/effect1
-
 ```
 
 #### Example Response (JSON):
 
 ```json
 {
-"id": "effect1",
-"name": "Effect 1",
-"description": "Description of effect 1",
-"triggers": ["someTriggerType"]
+  "id": "effect1",
+  "name": "Effect 1",
+  "description": "Description of effect 1",
+  "triggers": ["someTriggerType"]
 }
-
 ```
 
 #### Example Response (Error):
 
 ```json
 {
-"status": "error",
-"message": "Cannot find effect 'effect1'"
+  "status": "error",
+  "message": "Cannot find effect 'effect1'"
 }
-
 ```
 
 ### `POST /effects`
@@ -268,34 +259,28 @@ Triggers one or more effects with optional trigger data. Requires a request body
 
 ```json
 {
-"effects": [
-{ "id": "effect1" },
-{ "id": "effect2" }
-],
-"triggerData": {
-"username": "API Call"
+  "effects": [{ "id": "effect1" }, { "id": "effect2" }],
+  "triggerData": {
+    "username": "API Call"
+  }
 }
-}
-
 ```
 
 #### Example Response (Success):
 
 ```json
 {
-"status": "success"
+  "status": "success"
 }
-
 ```
 
 #### Example Response (Error):
 
 ```json
 {
-"status": "error",
-"message": "No effects provided."
+  "status": "error",
+  "message": "No effects provided."
 }
-
 ```
 
 ### `GET /effects/preset`
@@ -308,18 +293,17 @@ Fetches a list of all preset effect lists, including their IDs and associated ar
 
 ```json
 [
-{
-"id": "preset1",
-"name": "Preset 1",
-"args": ["arg1", "arg2"]
-},
-{
-"id": "preset2",
-"name": "Preset 2",
-"args": ["arg1"]
-}
+  {
+    "id": "preset1",
+    "name": "Preset 1",
+    "args": ["arg1", "arg2"]
+  },
+  {
+    "id": "preset2",
+    "name": "Preset 2",
+    "args": ["arg1"]
+  }
 ]
-
 ```
 
 ### `GET /effects/preset/:presetListId`
@@ -336,26 +320,23 @@ Runs the specified preset effect list synchronously (i.e., waits for the effects
 
 ```
 GET /effects/preset/preset1
-
 ```
 
 #### Example Response (Success):
 
 ```json
 {
-"status": "success"
+  "status": "success"
 }
-
 ```
 
 #### Example Response (Error):
 
 ```json
 {
-"status": "error",
-"message": "Cannot find preset effect list 'preset1'"
+  "status": "error",
+  "message": "Cannot find preset effect list 'preset1'"
 }
-
 ```
 
 ### `POST /effects/preset/:presetListId`
@@ -372,29 +353,26 @@ Runs the specified preset effect list synchronously with optional arguments and 
 
 ```json
 {
-"username": "testuser",
-"args": { "arg1": "value1", "arg2": "value2" }
+  "username": "testuser",
+  "args": { "arg1": "value1", "arg2": "value2" }
 }
-
 ```
 
 #### Example Response (Success):
 
 ```json
 {
-"status": "success"
+  "status": "success"
 }
-
 ```
 
 #### Example Response (Error):
 
 ```json
 {
-"status": "error",
-"message": "Cannot find preset effect list 'preset1'"
+  "status": "error",
+  "message": "Cannot find preset effect list 'preset1'"
 }
-
 ```
 
 ### `GET /effects/preset/:presetListId/run`
@@ -411,26 +389,23 @@ Triggers the specified preset effect list asynchronously (i.e., doesn't wait for
 
 ```
 GET /effects/preset/preset1/run
-
 ```
 
 #### Example Response (Success):
 
 ```json
 {
-"status": "success"
+  "status": "success"
 }
-
 ```
 
 #### Example Response (Error):
 
 ```json
 {
-"status": "error",
-"message": "Cannot find preset effect list 'preset1'"
+  "status": "error",
+  "message": "Cannot find preset effect list 'preset1'"
 }
-
 ```
 
 ### `POST /effects/preset/:presetListId/run`
@@ -447,29 +422,26 @@ Triggers the specified preset effect list asynchronously with optional arguments
 
 ```json
 {
-"username": "testuser",
-"args": { "arg1": "value1", "arg2": "value2" }
+  "username": "testuser",
+  "args": { "arg1": "value1", "arg2": "value2" }
 }
-
 ```
 
 #### Example Response (Success):
 
 ```json
 {
-"status": "success"
+  "status": "success"
 }
-
 ```
 
 #### Example Response (Error):
 
 ```json
 {
-"status": "error",
-"message": "Cannot find preset effect list 'preset1'"
+  "status": "error",
+  "message": "Cannot find preset effect list 'preset1'"
 }
-
 ```
 
 ## Fonts
@@ -484,16 +456,15 @@ Fetches a list of all installed fonts, including their names and formats.
 
 ```json
 [
-{
-"name": "Arial",
-"format": "TrueType"
-},
-{
-"name": "Helvetica",
-"format": "OpenType"
-}
+  {
+    "name": "Arial",
+    "format": "TrueType"
+  },
+  {
+    "name": "Helvetica",
+    "format": "OpenType"
+  }
 ]
-
 ```
 
 ### `GET /fonts/:name`
@@ -510,7 +481,6 @@ Fetches the font file for a specific font by its name. Returns the font file if 
 
 ```
 GET /fonts/Arial
-
 ```
 
 #### Example Response (File):
@@ -524,10 +494,9 @@ If the font is not found:
 
 ```json
 {
-"status": "error",
-"message": "/fonts/Arial not found"
+  "status": "error",
+  "message": "/fonts/Arial not found"
 }
-
 ```
 
 ## Custom Variables
@@ -535,75 +504,86 @@ If the font is not found:
 ### `GET /custom-variables`
 
 #### Description:
+
 Fetches all custom variables in the system.
 
 #### Example Response (JSON):
+
 ```json
 [
-{
-"name": "var1",
-"data": "some data",
-"ttl": 3600
-},
-{
-"name": "var2",
-"data": "more data",
-"ttl": 0
-}
+  {
+    "name": "var1",
+    "data": "some data",
+    "ttl": 3600
+  },
+  {
+    "name": "var2",
+    "data": "more data",
+    "ttl": 0
+  }
 ]
 ```
 
 ### `GET /custom-variables/:variableName`
 
 #### Description:
+
 Fetches the value of a specific custom variable by its `variableName`.
 
 #### URL Parameters:
+
 - `variableName` `string`: The name of the custom variable to retrieve.
 
 #### Example Request (URL):
+
 ```
 GET /custom-variables/var1
 ```
 
 #### Example Response (JSON):
+
 ```json
 {
-"name": "var1",
-"data": "some data",
-"ttl": 3600
+  "name": "var1",
+  "data": "some data",
+  "ttl": 3600
 }
 ```
 
 ### `POST /custom-variables/:variableName`
 
 #### Description:
+
 Sets a custom variable by its `variableName`. The request body should contain the data and optional TTL (time-to-live)
 for the variable.
 
 #### URL Parameters:
+
 - `variableName` `string`: The name of the custom variable to set.
 
 #### Request Body (JSON):
+
 ```json
 {
-"data": "new value",
-"ttl": 3600
+  "data": "new value",
+  "ttl": 3600
 }
 ```
 
 #### Example Response (Success):
+
 ```json
 {
-"status": "success"
+  "status": "success"
 }
 ```
 
 #### Example Response (Error):
+
 ```json
 {
-"status": "error",
-"message": "No data provided"
+  "status": "error",
+  "message": "No data provided"
 }
 ```
 
@@ -612,73 +592,68 @@ for the variable.
 ### `GET /variables`
 
 #### Description:
+
 Fetches a list of all replace variables, sorted by their `handle` value.
 
 #### Example Response (JSON):
+
 ```json
 [
-{
+  {
     "definition": {
-        "handle": "example_variable_name",
-        "aliases": [
-            "alias1",
-            "alias2"
-        ],
-        "usage": "Example usage description",
-        "description": "Example variable definition description",
-        "examples": [
-            {
-                "usage": "example usage 1",
-                "description": "Example description 1"
-            },
-            {
-                "usage": "example usage 2",
-                "description": "Example description 2"
-            }
-        ],
-        "categories": [
-            "common",
-            "trigger based",
-            "user based",
-            "text",
-            "numbers",
-            "advanced",
-            "obs",
-            "integrations"
-        ],
-        "triggers": {
-            "command": true,
-            "custom_script": true,
-            "startup_script": false,
-            "api": true,
-            "event": [
-                "event1",
-                "event2"
-            ],
-            "hotkey": false,
-            "timer": true,
-            "counter": false,
-            "preset": true,
-            "quick_action": false,
-            "manual": true
+      "handle": "example_variable_name",
+      "aliases": ["alias1", "alias2"],
+      "usage": "Example usage description",
+      "description": "Example variable definition description",
+      "examples": [
+        {
+          "usage": "example usage 1",
+          "description": "Example description 1"
         },
-        "possibleDataOutput": [
-            "null",
-            "bool",
-            "number",
-            "text",
-            "array",
-            "object",
-            "ALL"
-        ],
-        "hidden": false,
-        "spoof": true
+        {
+          "usage": "example usage 2",
+          "description": "Example description 2"
+        }
+      ],
+      "categories": [
+        "common",
+        "trigger based",
+        "user based",
+        "text",
+        "numbers",
+        "advanced",
+        "obs",
+        "integrations"
+      ],
+      "triggers": {
+        "command": true,
+        "custom_script": true,
+        "startup_script": false,
+        "api": true,
+        "event": ["event1", "event2"],
+        "hotkey": false,
+        "timer": true,
+        "counter": false,
+        "preset": true,
+        "quick_action": false,
+        "manual": true
+      },
+      "possibleDataOutput": [
+        "null",
+        "bool",
+        "number",
+        "text",
+        "array",
+        "object",
+        "ALL"
+      ],
+      "hidden": false,
+      "spoof": true
     },
     "handle": "ALL"
-},
+  }
 ]
 ```
-
 
 ## Custom Roles API
 
@@ -692,21 +667,20 @@ Fetches a list of all custom roles with the associated viewers.
 
 ```json
 [
-{
-"id": "role1",
-"name": "Moderator",
-"viewers": ["viewer1", "viewer2"]
-},
-{
-"id": "role2",
-"name": "VIP",
-"viewers": ["viewer3"]
-}
+  {
+    "id": "role1",
+    "name": "Moderator",
+    "viewers": ["viewer1", "viewer2"]
+  },
+  {
+    "id": "role2",
+    "name": "VIP",
+    "viewers": ["viewer3"]
+  }
 ]
-
 ```
 
-----------
+---
 
 ### `GET /customRoles/:customRoleId`
 
@@ -718,24 +692,22 @@ Fetches a specific custom role by its ID. Returns role details and the list of v
 
 ```json
 {
-"id": "role1",
-"name": "Moderator",
-"viewers": ["viewer1", "viewer2"]
+  "id": "role1",
+  "name": "Moderator",
+  "viewers": ["viewer1", "viewer2"]
 }
-
 ```
 
 #### Example Error Response (if the role does not exist):
 
 ```json
 {
-"status": "error",
-"message": "Custom role 'role1' not found"
+  "status": "error",
+  "message": "Custom role 'role1' not found"
 }
-
 ```
 
-----------
+---
 
 ### `POST /customRoles/:customRoleId/viewer/:userId`
 
@@ -756,30 +728,27 @@ Adds a user to a custom role. You can specify the user by either `userId` or `us
 
 ```
 POST /customRoles/role1/viewer/viewer1?username=true
-
 ```
 
 #### Example Success Response:
 
 ```json
 {
-"status": "success",
-"message": "Viewer added to custom role"
+  "status": "success",
+  "message": "Viewer added to custom role"
 }
-
 ```
 
 #### Example Error Response (if user or custom role does not exist):
 
 ```json
 {
-"status": "error",
-"message": "Specified viewer does not exist"
+  "status": "error",
+  "message": "Specified viewer does not exist"
 }
-
 ```
 
-----------
+---
 
 ### `DELETE /customRoles/:customRoleId/viewer/:userId`
 
@@ -800,30 +769,27 @@ Removes a user from a custom role. You can specify the user by either `userId` o
 
 ```
 DELETE /customRoles/role1/viewer/viewer1?username=true
-
 ```
 
 #### Example Success Response:
 
 ```json
 {
-"status": "success",
-"message": "Viewer removed from custom role"
+  "status": "success",
+  "message": "Viewer removed from custom role"
 }
-
 ```
 
 #### Example Error Response (if user or custom role does not exist):
 
 ```json
 {
-"status": "error",
-"message": "Specified viewer does not exist"
+  "status": "error",
+  "message": "Specified viewer does not exist"
 }
-
 ```
 
-----------
+---
 
 ### `DELETE /customRoles/:customRoleId/clear`
 
@@ -839,29 +805,25 @@ Removes all viewers from a custom role.
 
 ```
 DELETE /customRoles/role1/clear
-
 ```
 
 #### Example Success Response:
 
 ```json
 {
-"status": "success",
-"message": "All viewers removed from the custom role"
+  "status": "success",
+  "message": "All viewers removed from the custom role"
 }
-
 ```
 
 #### Example Error Response (if custom role does not exist):
 
 ```json
 {
-"status": "error",
-"message": "Specified custom role does not exist"
+  "status": "error",
+  "message": "Specified custom role does not exist"
 }
-
 ```
-
 
 ## Currency API
 
@@ -878,34 +840,31 @@ Fetches currency data for a specific currency or all currencies if no currency n
 
 ```
 GET /currencies/coin
-
 ```
 
 #### Example Response (for a specific currency):
 
 ```json
-  {
-    "d073da00-a726-11e9-a874-7de9c8544807": {
-      "id": "d073da00-a726-11e9-a874-7de9c8544807",
-      "name": "coin",
-      "active": true,
-      "payout": 5,
-      "interval": 5,
-      "limit": 1000000,
-      "transfer": "Allow",
-      "bonus": {},
-      "offline": 5,
-      "$$hashKey": "object:35427"
-    }
+{
+  "d073da00-a726-11e9-a874-7de9c8544807": {
+    "id": "d073da00-a726-11e9-a874-7de9c8544807",
+    "name": "coin",
+    "active": true,
+    "payout": 5,
+    "interval": 5,
+    "limit": 1000000,
+    "transfer": "Allow",
+    "bonus": {},
+    "offline": 5,
+    "$$hashKey": "object:35427"
   }
-
+}
 ```
 
 #### Example Request (for all currencies):
 
 ```
 GET /currencies
-
 ```
 
 #### Example Response (for all currencies):
@@ -941,10 +900,9 @@ GET /currencies
     }
   }
 ]
-
 ```
 
-----------
+---
 
 ### `GET /currencies/:currencyName/topHolders`
 
@@ -969,7 +927,7 @@ GET /currencies/pups/topHolders?count=2
 
 ```json
 [
-{
+  {
     "username": "fluffypanda",
     "displayName": "FluffyPanda",
     "currency": {
@@ -977,8 +935,8 @@ GET /currencies/pups/topHolders?count=2
       "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
     },
     "_id": "90448736"
-},
-{
+  },
+  {
     "username": "sparklenova",
     "displayName": "SparkleNova",
     "currency": {
@@ -986,23 +944,21 @@ GET /currencies/pups/topHolders?count=2
       "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
     },
     "_id": "90448726"
-}
+  }
 ]
-
 ```
 
 #### Example Request (default 10 top holders):
 
 ```
 GET /currencies/coin/topHolders
-
 ```
 
 #### Example Response (default top 10 holders):
 
 ```json
 [
-{
+  {
     "username": "fluffypanda",
     "displayName": "FluffyPanda",
     "currency": {
@@ -1010,8 +966,8 @@ GET /currencies/coin/topHolders
       "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
     },
     "_id": "90448736"
-},
-{
+  },
+  {
     "username": "sparklenova",
     "displayName": "SparkleNova",
     "currency": {
@@ -1019,12 +975,10 @@ GET /currencies/coin/topHolders
       "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
     },
     "_id": "90448726"
-},
-// More users...
+  }
+  // More users...
 ]
-
 ```
-
 
 ## Quotes API
 
@@ -1038,34 +992,32 @@ Fetches all available quotes.
 
 ```
 GET /quotes
-
 ```
 
 #### Example Response:
 
 ```json
 [
-{
-"id": 1,
-"text": "This is a sample quote.",
-"originator": "John Doe",
-"creator": "Jane Smith",
-"game": "Game Name",
-"createdAt": "2024-12-14T00:00:00Z"
-},
-{
-"id": 2,
-"text": "Another quote here.",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Another Game",
-"createdAt": "2024-12-13T00:00:00Z"
-}
+  {
+    "id": 1,
+    "text": "This is a sample quote.",
+    "originator": "John Doe",
+    "creator": "Jane Smith",
+    "game": "Game Name",
+    "createdAt": "2024-12-14T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "text": "Another quote here.",
+    "originator": "Alice",
+    "creator": "Bob",
+    "game": "Another Game",
+    "createdAt": "2024-12-13T00:00:00Z"
+  }
 ]
-
 ```
 
-----------
+---
 
 ### `GET /quotes/:quoteId`
 
@@ -1081,24 +1033,22 @@ Fetches a specific quote by its `quoteId`.
 
 ```
 GET /quotes/1
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": 1,
-"text": "This is a sample quote.",
-"originator": "John Doe",
-"creator": "Jane Smith",
-"game": "Game Name",
-"createdAt": "2024-12-14T00:00:00Z"
+  "id": 1,
+  "text": "This is a sample quote.",
+  "originator": "John Doe",
+  "creator": "Jane Smith",
+  "game": "Game Name",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
-----------
+---
 
 ### `POST /quotes`
 
@@ -1117,29 +1067,27 @@ Creates a new quote.
 
 ```json
 {
-"text": "This is a new quote.",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game"
+  "text": "This is a new quote.",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game"
 }
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": 3,
-"text": "This is a new quote.",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game",
-"createdAt": "2024-12-14T00:00:00Z"
+  "id": 3,
+  "text": "This is a new quote.",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
-----------
+---
 
 ### `PUT /quotes/:quoteId`
 
@@ -1164,30 +1112,28 @@ otherwise, it will be updated.
 
 ```json
 {
-"text": "Updated quote content",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game",
-"createdAt": "2024-12-14T00:00:00Z"
+  "text": "Updated quote content",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": 1,
-"text": "Updated quote content",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game",
-"createdAt": "2024-12-14T00:00:00Z"
+  "id": 1,
+  "text": "Updated quote content",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
-----------
+---
 
 ### `PATCH /quotes/:quoteId`
 
@@ -1214,27 +1160,25 @@ Any of the following fields can be included:
 
 ```json
 {
-"text": "Partially updated quote content",
-"originator": "Alice"
+  "text": "Partially updated quote content",
+  "originator": "Alice"
 }
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": 1,
-"text": "Partially updated quote content",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game",
-"createdAt": "2024-12-14T00:00:00Z"
+  "id": 1,
+  "text": "Partially updated quote content",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
-----------
+---
 
 ### `DELETE /quotes/:quoteId`
 
@@ -1257,7 +1201,6 @@ DELETE /quotes/1
 
 ```
 HTTP Status 204 No Content
-
 ```
 
 ## Counters API
@@ -1272,28 +1215,26 @@ Fetches all available counters.
 
 ```
 GET /counters
-
 ```
 
 #### Example Response:
 
 ```json
 [
-{
-"id": "counter1",
-"name": "Counter 1",
-"value": 10
-},
-{
-"id": "counter2",
-"name": "Counter 2",
-"value": 15
-}
+  {
+    "id": "counter1",
+    "name": "Counter 1",
+    "value": 10
+  },
+  {
+    "id": "counter2",
+    "name": "Counter 2",
+    "value": 15
+  }
 ]
-
 ```
 
-----------
+---
 
 ### `GET /counters/:counterId`
 
@@ -1309,21 +1250,19 @@ Fetches a specific counter by its `counterId`.
 
 ```
 GET /counters/counter1
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": "counter1",
-"name": "Counter 1",
-"value": 10
+  "id": "counter1",
+  "name": "Counter 1",
+  "value": 10
 }
-
 ```
 
-----------
+---
 
 ### `POST /counters/:counterId`
 
@@ -1344,22 +1283,19 @@ Updates the value of an existing counter. Optionally, you can override the curre
 
 ```json
 {
-"value": 20,
-"override": true
+  "value": 20,
+  "override": true
 }
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"oldValue": 10,
-"newValue": 20
+  "oldValue": 10,
+  "newValue": 20
 }
-
 ```
-
 
 ## Timers API
 
@@ -1373,28 +1309,26 @@ Fetches all available timers.
 
 ```
 GET /timers
-
 ```
 
 #### Example Response:
 
 ```json
 [
-{
-"id": "timer1",
-"name": "Timer 1",
-"active": true
-},
-{
-"id": "timer2",
-"name": "Timer 2",
-"active": false
-}
+  {
+    "id": "timer1",
+    "name": "Timer 1",
+    "active": true
+  },
+  {
+    "id": "timer2",
+    "name": "Timer 2",
+    "active": false
+  }
 ]
-
 ```
 
-----------
+---
 
 ### `GET /timers/:timerId`
 
@@ -1410,21 +1344,19 @@ Fetches a specific timer by its `timerId`.
 
 ```
 GET /timers/timer1
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": "timer1",
-"name": "Timer 1",
-"active": true
+  "id": "timer1",
+  "name": "Timer 1",
+  "active": true
 }
-
 ```
 
-----------
+---
 
 ### `POST /timers/:timerId/:action`
 
@@ -1445,34 +1377,30 @@ Performs an action on the specified timer.
 
 ```
 POST /timers/timer1/enable
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"status": "success",
-"message": "Timer enabled"
+  "status": "success",
+  "message": "Timer enabled"
 }
-
 ```
 
 #### Example Request:
 
 ```
 POST /timers/timer1/clear
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"status": "success",
-"message": "Timer interval cleared"
+  "status": "success",
+  "message": "Timer interval cleared"
 }
-
 ```
 
 ## Effect Queue API
@@ -1480,26 +1408,29 @@ POST /timers/timer1/clear
 ### `GET /queues`
 
 #### Description:
+
 Fetches all available effect queues.
 
 #### Example Request:
+
 ```
 GET /queues
 ```
 
 #### Example Response:
+
 ```json
 [
-{
-"id": "queue1",
-"name": "Queue 1",
-"status": "active"
-},
-{
-"id": "queue2",
-"name": "Queue 2",
-"status": "paused"
-}
+  {
+    "id": "queue1",
+    "name": "Queue 1",
+    "status": "active"
+  },
+  {
+    "id": "queue2",
+    "name": "Queue 2",
+    "status": "paused"
+  }
 ]
 ```
 
@@ -1508,22 +1439,26 @@ GET /queues
 ### `GET /queues/:queueId`
 
 #### Description:
+
 Fetches a specific effect queue by its `queueId`.
 
 #### Request Parameters:
+
 - `queueId`: The unique identifier of the queue.
 
 #### Example Request:
+
 ```
 GET /queues/queue1
 ```
 
 #### Example Response:
+
 ```json
 {
-"id": "queue1",
-"name": "Queue 1",
-"status": "active"
+  "id": "queue1",
+  "name": "Queue 1",
+  "status": "active"
 }
 ```
 
@@ -1532,22 +1467,26 @@ GET /queues/queue1
 ### `POST /queues/:queueId/pause`
 
 #### Description:
+
 Pauses the specified effect queue.
 
 #### Request Parameters:
+
 - `queueId`: The unique identifier of the queue to be paused.
 
 #### Example Request:
+
 ```
 POST /queues/queue1/pause
 ```
 
 #### Example Response:
+
 ```json
 {
-"id": "queue1",
-"name": "Queue 1",
-"status": "paused"
+  "id": "queue1",
+  "name": "Queue 1",
+  "status": "paused"
 }
 ```
 
@@ -1556,22 +1495,26 @@ POST /queues/queue1/pause
 ### `POST /queues/:queueId/resume`
 
 #### Description:
+
 Resumes the specified effect queue.
 
 #### Request Parameters:
+
 - `queueId`: The unique identifier of the queue to be resumed.
 
 #### Example Request:
+
 ```
 POST /queues/queue1/resume
 ```
 
 #### Example Response:
+
 ```json
 {
-"id": "queue1",
-"name": "Queue 1",
-"status": "active"
+  "id": "queue1",
+  "name": "Queue 1",
+  "status": "active"
 }
 ```
 
@@ -1580,22 +1523,26 @@ POST /queues/queue1/resume
 ### `POST /queues/:queueId/toggle`
 
 #### Description:
+
 Toggles the status of the specified effect queue (pauses if active, resumes if paused).
 
 #### Request Parameters:
+
 - `queueId`: The unique identifier of the queue to be toggled.
 
 #### Example Request:
+
 ```
 POST /queues/queue1/toggle
 ```
 
 #### Example Response:
+
 ```json
 {
-"id": "queue1",
-"name": "Queue 1",
-"status": "paused"
+  "id": "queue1",
+  "name": "Queue 1",
+  "status": "paused"
 }
 ```
 
@@ -1604,34 +1551,42 @@ POST /queues/queue1/toggle
 ### `POST /queues/:queueId/clear`
 
 #### Description:
+
 Clears the specified effect queue (removes the queue).
 
 #### Request Parameters:
+
 - `queueId`: The unique identifier of the queue to be cleared.
 
 #### Example Request:
+
 ```
 POST /queues/queue1/clear
 ```
 
 #### Example Response:
+
 ```json
 {
-"id": "queue1",
-"name": "Queue 1",
-"status": "removed"
+  "id": "queue1",
+  "name": "Queue 1",
+  "status": "removed"
 }
 ```
+
 ## WebSocket Endpoint
+
 Firebot hosts a local Websocket API that developers can use to get data from Firebot.
-* The API is hosted on port **7472**. All endpoints have the root **ws://localhost:7472/api/v1**
-* All responses are in JSON.
-* Don't forget that Firebot must be running for the API to be available.
+
+- The API is hosted on port **7472**. All endpoints have the root **ws://localhost:7472/api/v1**
+- All responses are in JSON.
+- Don't forget that Firebot must be running for the API to be available.
+
 ```json
 {
-    "type": "invoke",
-    "id": 0,
-    "name": "subscribe-events",
-    "data": []
+  "type": "invoke",
+  "id": 0,
+  "name": "subscribe-events",
+  "data": []
 }
 ```

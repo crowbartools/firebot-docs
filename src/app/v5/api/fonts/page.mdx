@@ -1,6 +1,6 @@
 # Fonts
 
-## `Get /fonts`
+## `GET /fonts`
 
 #### Description:
 
@@ -10,19 +10,18 @@ Fetches a list of all installed fonts, including their names and formats.
 
 ```json
 [
-{
-"name": "Arial",
-"format": "TrueType"
-},
-{
-"name": "Helvetica",
-"format": "OpenType"
-}
+  {
+    "name": "Arial",
+    "format": "TrueType"
+  },
+  {
+    "name": "Helvetica",
+    "format": "OpenType"
+  }
 ]
-
 ```
 
-## `Get /fonts/:name`
+## `GET /fonts/:name`
 
 #### Description:
 
@@ -36,7 +35,6 @@ Fetches the font file for a specific font by its name. Returns the font file if 
 
 ```
 GET /fonts/Arial
-
 ```
 
 #### Example Response (File):
@@ -50,8 +48,7 @@ If the font is not found:
 
 ```json
 {
-"status": "error",
-"message": "/fonts/Arial not found"
+  "status": "error",
+  "message": "/fonts/Arial not found"
 }
-
 ```

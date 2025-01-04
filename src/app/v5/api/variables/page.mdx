@@ -1,71 +1,67 @@
 # Variables
 
-## `Get /variables`
+## `GET /variables`
 
 #### Description:
+
 Fetches a list of all replace variables, sorted by their `handle` value.
 
-#### Example Response (JSON):
+#### Example Response:
+
 ```json
 [
-{
+  {
     "definition": {
-        "handle": "example_variable_name",
-        "aliases": [
-            "alias1",
-            "alias2"
-        ],
-        "usage": "Example usage description",
-        "description": "Example variable definition description",
-        "examples": [
-            {
-                "usage": "example usage 1",
-                "description": "Example description 1"
-            },
-            {
-                "usage": "example usage 2",
-                "description": "Example description 2"
-            }
-        ],
-        "categories": [
-            "common",
-            "trigger based",
-            "user based",
-            "text",
-            "numbers",
-            "advanced",
-            "obs",
-            "integrations"
-        ],
-        "triggers": {
-            "command": true,
-            "custom_script": true,
-            "startup_script": false,
-            "api": true,
-            "event": [
-                "event1",
-                "event2"
-            ],
-            "hotkey": false,
-            "timer": true,
-            "counter": false,
-            "preset": true,
-            "quick_action": false,
-            "manual": true
+      "handle": "example_variable_name",
+      "aliases": ["alias1", "alias2"],
+      "usage": "Example usage description",
+      "description": "Example variable definition description",
+      "examples": [
+        {
+          "usage": "example usage 1",
+          "description": "Example description 1"
         },
-        "possibleDataOutput": [
-            "null",
-            "bool",
-            "number",
-            "text",
-            "array",
-            "object",
-            "ALL"
-        ],
-        "hidden": false,
-        "spoof": true
+        {
+          "usage": "example usage 2",
+          "description": "Example description 2"
+        }
+      ],
+      "categories": [
+        "common",
+        "trigger based",
+        "user based",
+        "text",
+        "numbers",
+        "advanced",
+        "obs",
+        "integrations"
+      ],
+      "triggers": {
+        "command": true,
+        "custom_script": true,
+        "startup_script": false,
+        "api": true,
+        "event": ["event1", "event2"],
+        "hotkey": false,
+        "timer": true,
+        "counter": false,
+        "preset": true,
+        "quick_action": false,
+        "manual": true
+      },
+      "possibleDataOutput": [
+        "null",
+        "bool",
+        "number",
+        "text",
+        "array",
+        "object",
+        "ALL"
+      ],
+      "hidden": false,
+      "spoof": true
     },
     "handle": "ALL"
-},
+  }
 ]
 ```

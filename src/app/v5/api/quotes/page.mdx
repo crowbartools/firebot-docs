@@ -1,6 +1,6 @@
 # Quotes API
 
-## `Get /quotes`
+## `GET /quotes`
 
 #### Description:
 
@@ -10,36 +10,34 @@ Fetches all available quotes.
 
 ```
 GET /quotes
-
 ```
 
 #### Example Response:
 
 ```json
 [
-{
-"id": 1,
-"text": "This is a sample quote.",
-"originator": "John Doe",
-"creator": "Jane Smith",
-"game": "Game Name",
-"createdAt": "2024-12-14T00:00:00Z"
-},
-{
-"id": 2,
-"text": "Another quote here.",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Another Game",
-"createdAt": "2024-12-13T00:00:00Z"
-}
+  {
+    "id": 1,
+    "text": "This is a sample quote.",
+    "originator": "John Doe",
+    "creator": "Jane Smith",
+    "game": "Game Name",
+    "createdAt": "2024-12-14T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "text": "Another quote here.",
+    "originator": "Alice",
+    "creator": "Bob",
+    "game": "Another Game",
+    "createdAt": "2024-12-13T00:00:00Z"
+  }
 ]
-
 ```
 
-----------
+---
 
-## `Get /quotes/:quoteId`
+## `GET /quotes/:quoteId`
 
 #### Description:
 
@@ -53,26 +51,24 @@ Fetches a specific quote by its `quoteId`.
 
 ```
 GET /quotes/1
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": 1,
-"text": "This is a sample quote.",
-"originator": "John Doe",
-"creator": "Jane Smith",
-"game": "Game Name",
-"createdAt": "2024-12-14T00:00:00Z"
+  "id": 1,
+  "text": "This is a sample quote.",
+  "originator": "John Doe",
+  "creator": "Jane Smith",
+  "game": "Game Name",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
-----------
+---
 
-## `Post /quotes`
+## `POST /quotes`
 
 #### Description:
 
@@ -89,29 +85,27 @@ Creates a new quote.
 
 ```json
 {
-"text": "This is a new quote.",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game"
+  "text": "This is a new quote.",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game"
 }
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": 3,
-"text": "This is a new quote.",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game",
-"createdAt": "2024-12-14T00:00:00Z"
+  "id": 3,
+  "text": "This is a new quote.",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
-----------
+---
 
 ### `PUT /quotes/:quoteId`
 
@@ -136,30 +130,28 @@ otherwise, it will be updated.
 
 ```json
 {
-"text": "Updated quote content",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game",
-"createdAt": "2024-12-14T00:00:00Z"
+  "text": "Updated quote content",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": 1,
-"text": "Updated quote content",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game",
-"createdAt": "2024-12-14T00:00:00Z"
+  "id": 1,
+  "text": "Updated quote content",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
-----------
+---
 
 ### `PATCH /quotes/:quoteId`
 
@@ -186,27 +178,25 @@ Any of the following fields can be included:
 
 ```json
 {
-"text": "Partially updated quote content",
-"originator": "Alice"
+  "text": "Partially updated quote content",
+  "originator": "Alice"
 }
-
 ```
 
 #### Example Response:
 
 ```json
 {
-"id": 1,
-"text": "Partially updated quote content",
-"originator": "Alice",
-"creator": "Bob",
-"game": "Sample Game",
-"createdAt": "2024-12-14T00:00:00Z"
+  "id": 1,
+  "text": "Partially updated quote content",
+  "originator": "Alice",
+  "creator": "Bob",
+  "game": "Sample Game",
+  "createdAt": "2024-12-14T00:00:00Z"
 }
-
 ```
 
-----------
+---
 
 ### `DELETE /quotes/:quoteId`
 
@@ -222,12 +212,10 @@ Deletes a specific quote by its `quoteId`.
 
 ```
 DELETE /quotes/1
-
 ```
 
 #### Example Response:
 
 ```
 HTTP Status 204 No Content
-
 ```

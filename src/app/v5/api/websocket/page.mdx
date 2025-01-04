@@ -1,13 +1,16 @@
 # WebSocket Endpoint
+
 Firebot hosts a local Websocket API that developers can use to get data from Firebot.
-* The API is hosted on port **7472**. All endpoints have the root **ws://localhost:7472/api/v1**
-* All responses are in JSON.
-* Don't forget that Firebot must be running for the API to be available.
+
+- The API is hosted on port **7472**. All endpoints have the root **ws://localhost:7472**
+- All responses are in JSON.
+- Don't forget that Firebot must be running for the API to be available.
+
 ```json
 {
-    "type": "invoke",
-    "id": 0,
-    "name": "subscribe-events",
-    "data": []
+  "type": "invoke",
+  "id": 0,
+  "name": "subscribe-events",
+  "data": []
 }
 ```
