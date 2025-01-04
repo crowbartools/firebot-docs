@@ -1,215 +1,238 @@
 # Viewers
 
 ## **GET** `/viewers`
-- **Description**: Retrieves a list of all users with their usernames and IDs.
-- **Response**:
-```json
-  [
-    {
-      "id": "1000638563",
-      "username": "ebiggz",
-      "displayName": "ebiggz"
-    },
-    {
-      "id": "1000678901",
-      "username": "johnsmith92",
-      "displayName": "johnsmith92"
-    }
-  ]
 
+#### Description:
+
+Retrieves a list of all users with their usernames and IDs.
+
+#### Example Response:
+
+Retrieves a list of all users with their usernames and IDs.
+
+```json
+[
+  {
+    "id": "1000638563",
+    "username": "ebiggz",
+    "displayName": "ebiggz"
+  },
+  {
+    "id": "1000678901",
+    "username": "johnsmith92",
+    "displayName": "johnsmith92"
+  }
+]
 ```
 
-----------
+---
 
 ## **GET** `/viewers/export`
 
--   **Description**: Exports all user data as JSON, including expanded user currency information.
--   **Response**:
-    
-  ```json
-    [
-      {
-        "id": "1000638593",
-        "username": "ebiggz",
-        "displayName": "ebiggz",
-        "currency": {
-          "d073da00-a726-11e9-a874-7de9c8544807": {
-            "id": "d073da00-a726-11e9-a874-7de9c8544807",
-            "name": "points",
-            "amount": 150
-          },
-          "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
-            "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
-            "name": "coins",
-            "amount": 130
-          }
-        }
-      },
-      {
-        "id": "1000678901",
-        "username": "johnsmith92",
-        "displayName": "johnsmith92",
-        "currency": {
-          "d073da00-a726-11e9-a874-7de9c8544807": {
-            "id": "d073da00-a726-11e9-a874-7de9c8544807",
-            "name": "points",
-            "amount": 150
-          },
-          "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
-            "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
-            "name": "coins",
-            "amount": 130
-          }
-        }
-      }
-    ]
- ```
-    
+#### Description:
 
-----------
+Exports all user data as JSON, including expanded user currency information.
+
+#### Example Response:
+
+```json
+[
+  {
+    "id": "1000638593",
+    "username": "ebiggz",
+    "displayName": "ebiggz",
+    "currency": {
+      "d073da00-a726-11e9-a874-7de9c8544807": {
+        "id": "d073da00-a726-11e9-a874-7de9c8544807",
+        "name": "points",
+        "amount": 150
+      },
+      "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
+        "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
+        "name": "coins",
+        "amount": 130
+      }
+    }
+  },
+  {
+    "id": "1000678901",
+    "username": "johnsmith92",
+    "displayName": "johnsmith92",
+    "currency": {
+      "d073da00-a726-11e9-a874-7de9c8544807": {
+        "id": "d073da00-a726-11e9-a874-7de9c8544807",
+        "name": "points",
+        "amount": 150
+      },
+      "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
+        "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
+        "name": "coins",
+        "amount": 130
+      }
+    }
+  }
+]
+```
+
+---
 
 ## **GET** `/viewers/:userId`
 
--   **Description**: Retrieves metadata for a specific user based on `userId` (or `username` if specified).
--   **Response**:
-    
-```json
-    {
-      "id": "1000638593",
-      "username": "sapherydesing",
-      "displayName": "sapherydesing",
-      "customRoles": ["coolPeople", "partyPeople"]
-    }
-```
-    
+#### Description:
 
-----------
+Retrieves metadata for a specific user based on `userId` (or `username` if specified).
+
+#### Example Response:
+
+```json
+{
+  "id": "1000638593",
+  "username": "sapherydesing",
+  "displayName": "sapherydesing",
+  "customRoles": ["coolPeople", "partyPeople"]
+}
+```
+
+---
 
 ## **POST** `/viewers/:userId/metadata/:metadataKey`
 
 ## **PUT** `/viewers/:userId/metadata/:metadataKey`
 
--   **Description**: Updates the value of a metadata key for a specific user.
--   **Response**:
-    
-```json
-    {
-      "status": "success",
-      "message": "Metadata updated successfully"
-    }
-```
-    
+#### Description:
 
-----------
+Updates the value of a metadata key for a specific user.
+
+#### Example Response:
+
+```json
+{
+  "status": "success",
+  "message": "Metadata updated successfully"
+}
+```
+
+---
 
 ## **DELETE** `/viewers/:userId/metadata/:metadataKey`
 
--   **Description**: Removes a metadata key for a specific user.
--   **Response**:
-    
-```json
-    {
-      "status": "success",
-      "message": "Metadata key removed successfully"
-    }
-```
-    
+#### Description:
 
-----------
+Removes a metadata key for a specific user.
+
+#### Example Response:
+
+```json
+{
+  "status": "success",
+  "message": "Metadata key removed successfully"
+}
+```
+
+---
 
 ## **GET** `/viewers/:userId/currency`
 
--   **Description**: Retrieves the list of currencies associated with a specific user.
--   **Response**:
-    
-```json
-    {
-          "d073da00-a726-11e9-a874-7de9c8544807": {
-            "id": "d073da00-a726-11e9-a874-7de9c8544807",
-            "name": "points",
-            "amount": 150
-          },
-          "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
-            "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
-            "name": "coins",
-            "amount": 130
-          }
-    }
-```
-    
+#### Description:
 
-----------
+Retrieves the list of currencies associated with a specific user.
+
+#### Example Response:
+
+```json
+{
+  "d073da00-a726-11e9-a874-7de9c8544807": {
+    "id": "d073da00-a726-11e9-a874-7de9c8544807",
+    "name": "points",
+    "amount": 150
+  },
+  "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
+    "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
+    "name": "coins",
+    "amount": 130
+  }
+}
+```
+
+---
 
 ## **GET** `/viewers/:userId/currency/:currencyId`
 
--   **Description**: Retrieves details for a specific currency associated with a user.
--   **Response**:
-    
-```json
-          {
-            "id": "d073da00-a726-11e9-a874-7de9c8544807",
-            "name": "points",
-            "amount": 150
-          }
-```
-    
+#### Description:
 
-----------
+Retrieves details for a specific currency associated with a user.
+
+#### Example Response:
+
+```json
+{
+  "id": "d073da00-a726-11e9-a874-7de9c8544807",
+  "name": "points",
+  "amount": 150
+}
+```
+
+---
 
 ## **POST** `/viewers/:userId/currency/:currencyId`
 
--   **Description**: Adjusts the amount of a specific currency for the user.
--   **Response**:
-    
-```json
-    {
-      "status": "success",
-      "message": "Currency updated successfully"
-    }
-```
-    
+#### Description:
 
-----------
+Adjusts the amount of a specific currency for the user.
+
+#### Example Response:
+
+```json
+{
+  "status": "success",
+  "message": "Currency updated successfully"
+}
+```
+
+---
 
 ## **GET** `/viewers/:userId/customRoles`
 
--   **Description**: Retrieves a list of custom roles associated with a specific user.
--   **Response**:
-    
-```json
-    [
-	    "coolPeople",
-		"partyPeople"
-	]
-```
-    
+#### Description:
 
-----------
+Retrieves a list of custom roles associated with a specific user.
+
+#### Example Response:
+
+```json
+["coolPeople", "partyPeople"]
+```
+
+---
 
 ## **POST** `/viewers/:userId/customRoles/:customRoleId`
 
--   **Description**: Adds a user to a custom role.
--   **Response**:
-    
-```json
-    {
-      "status": "success",
-      "message": "User added to custom role"
-    }
-```
-    
+#### Description:
 
-----------
+Adds a user to a custom role.
+
+#### Example Response (JSON):
+
+```json
+{
+  "status": "success",
+  "message": "User added to custom role"
+}
+```
+
+---
 
 ## **DELETE** `/viewers/:userId/customRoles/:customRoleId`
 
--   **Description**: Removes a user from a custom role.
--   **Response**:
+#### Description:
+
+Removes a user from a custom role.
+
+#### Example Response:
 
 ```json
-    {
-      "status": "success",
-      "message": "User removed from custom role"
-    }
- ```
-    
+{
+  "status": "success",
+  "message": "User removed from custom role"
+}
+```

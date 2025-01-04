@@ -1,6 +1,6 @@
 # Custom Roles API
 
-## `Get /customRoles`
+## `GET /customRoles`
 
 #### Description:
 
@@ -10,23 +10,22 @@ Fetches a list of all custom roles with the associated viewers.
 
 ```json
 [
-{
-"id": "role1",
-"name": "Moderator",
-"viewers": ["viewer1", "viewer2"]
-},
-{
-"id": "role2",
-"name": "VIP",
-"viewers": ["viewer3"]
-}
+  {
+    "id": "role1",
+    "name": "Moderator",
+    "viewers": ["viewer1", "viewer2"]
+  },
+  {
+    "id": "role2",
+    "name": "VIP",
+    "viewers": ["viewer3"]
+  }
 ]
-
 ```
 
-----------
+---
 
-## `Get /customRoles/:customRoleId`
+## `GET /customRoles/:customRoleId`
 
 #### Description:
 
@@ -36,26 +35,24 @@ Fetches a specific custom role by its ID. Returns role details and the list of v
 
 ```json
 {
-"id": "role1",
-"name": "Moderator",
-"viewers": ["viewer1", "viewer2"]
+  "id": "role1",
+  "name": "Moderator",
+  "viewers": ["viewer1", "viewer2"]
 }
-
 ```
 
 #### Example Error Response (if the role does not exist):
 
 ```json
 {
-"status": "error",
-"message": "Custom role 'role1' not found"
+  "status": "error",
+  "message": "Custom role 'role1' not found"
 }
-
 ```
 
-----------
+---
 
-## `Post /customRoles/:customRoleId/viewer/:userId`
+## `POST /customRoles/:customRoleId/viewer/:userId`
 
 #### Description:
 
@@ -74,30 +71,27 @@ Adds a user to a custom role. You can specify the user by either `userId` or `us
 
 ```
 POST /customRoles/role1/viewer/viewer1?username=true
-
 ```
 
 #### Example Success Response:
 
 ```json
 {
-"status": "success",
-"message": "Viewer added to custom role"
+  "status": "success",
+  "message": "Viewer added to custom role"
 }
-
 ```
 
 #### Example Error Response (if user or custom role does not exist):
 
 ```json
 {
-"status": "error",
-"message": "Specified viewer does not exist"
+  "status": "error",
+  "message": "Specified viewer does not exist"
 }
-
 ```
 
-----------
+---
 
 ### `DELETE /customRoles/:customRoleId/viewer/:userId`
 
@@ -118,30 +112,27 @@ Removes a user from a custom role. You can specify the user by either `userId` o
 
 ```
 DELETE /customRoles/role1/viewer/viewer1?username=true
-
 ```
 
 #### Example Success Response:
 
 ```json
 {
-"status": "success",
-"message": "Viewer removed from custom role"
+  "status": "success",
+  "message": "Viewer removed from custom role"
 }
-
 ```
 
 #### Example Error Response (if user or custom role does not exist):
 
 ```json
 {
-"status": "error",
-"message": "Specified viewer does not exist"
+  "status": "error",
+  "message": "Specified viewer does not exist"
 }
-
 ```
 
-----------
+---
 
 ### `DELETE /customRoles/:customRoleId/clear`
 
@@ -157,25 +148,22 @@ Removes all viewers from a custom role.
 
 ```
 DELETE /customRoles/role1/clear
-
 ```
 
 #### Example Success Response:
 
 ```json
 {
-"status": "success",
-"message": "All viewers removed from the custom role"
+  "status": "success",
+  "message": "All viewers removed from the custom role"
 }
-
 ```
 
 #### Example Error Response (if custom role does not exist):
 
 ```json
 {
-"status": "error",
-"message": "Specified custom role does not exist"
+  "status": "error",
+  "message": "Specified custom role does not exist"
 }
-
 ```

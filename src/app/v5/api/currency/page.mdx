@@ -1,6 +1,6 @@
 # Currency API
 
-## `Get /currencies/:currencyName?`
+## `GET /currencies/:currencyName?`
 
 #### Description:
 
@@ -13,34 +13,31 @@ Fetches currency data for a specific currency or all currencies if no currency n
 
 ```
 GET /currencies/coin
-
 ```
 
 #### Example Response (for a specific currency):
 
 ```json
-  {
-    "d073da00-a726-11e9-a874-7de9c8544807": {
-      "id": "d073da00-a726-11e9-a874-7de9c8544807",
-      "name": "coin",
-      "active": true,
-      "payout": 5,
-      "interval": 5,
-      "limit": 1000000,
-      "transfer": "Allow",
-      "bonus": {},
-      "offline": 5,
-      "$$hashKey": "object:35427"
-    }
+{
+  "d073da00-a726-11e9-a874-7de9c8544807": {
+    "id": "d073da00-a726-11e9-a874-7de9c8544807",
+    "name": "coin",
+    "active": true,
+    "payout": 5,
+    "interval": 5,
+    "limit": 1000000,
+    "transfer": "Allow",
+    "bonus": {},
+    "offline": 5,
+    "$$hashKey": "object:35427"
   }
-
+}
 ```
 
 #### Example Request (for all currencies):
 
 ```
 GET /currencies
-
 ```
 
 #### Example Response (for all currencies):
@@ -76,12 +73,11 @@ GET /currencies
     }
   }
 ]
-
 ```
 
-----------
+---
 
-## `Get /currencies/:currencyName/topHolders`
+## `GET /currencies/:currencyName/topHolders`
 
 #### Description:
 
@@ -97,14 +93,13 @@ Fetches the top holders of a specific currency. By default, it will return the t
 
 ```
 GET /currencies/pups/topHolders?count=2
-
 ```
 
 #### Example Response:
 
 ```json
 [
-{
+  {
     "username": "fluffypanda",
     "displayName": "FluffyPanda",
     "currency": {
@@ -112,8 +107,8 @@ GET /currencies/pups/topHolders?count=2
       "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
     },
     "_id": "90448736"
-},
-{
+  },
+  {
     "username": "sparklenova",
     "displayName": "SparkleNova",
     "currency": {
@@ -121,23 +116,21 @@ GET /currencies/pups/topHolders?count=2
       "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
     },
     "_id": "90448726"
-}
+  }
 ]
-
 ```
 
 #### Example Request (default 10 top holders):
 
 ```
 GET /currencies/coin/topHolders
-
 ```
 
 #### Example Response (default top 10 holders):
 
 ```json
 [
-{
+  {
     "username": "fluffypanda",
     "displayName": "FluffyPanda",
     "currency": {
@@ -145,8 +138,8 @@ GET /currencies/coin/topHolders
       "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
     },
     "_id": "90448736"
-},
-{
+  },
+  {
     "username": "sparklenova",
     "displayName": "SparkleNova",
     "currency": {
@@ -154,8 +147,7 @@ GET /currencies/coin/topHolders
       "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
     },
     "_id": "90448726"
-},
-// More users...
+  }
+  // More users...
 ]
-
 ```
