@@ -29,7 +29,7 @@ export const nav: Array<NavGroup> = [
     links: [
       { title: 'Alert Queues', href: '/guides/alert-queues' },
       { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
-      { title: 'Time Variables', href: '/v5/guides/time-variables' },
+      { title: 'Time Variables', href: '/v5/guides/time-variable' },
       { title: 'Custom Variables', href: '/v5/guides/custom-variables' },
     ],
   },
