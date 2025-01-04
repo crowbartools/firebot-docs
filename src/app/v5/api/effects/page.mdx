@@ -1,0 +1,291 @@
+# Effects
+
+## `Get /effects`
+
+#### Description:
+
+Fetches all available effect definitions. Optionally, filters them by trigger type if the `trigger` query parameter is
+provided.
+
+#### Query Parameters:
+
+- `trigger` `string: optional`: The type of trigger to filter the effects by.
+
+#### Example Request (URL):
+
+```
+GET /effects?trigger=someTriggerType
+
+```
+
+#### Example Response (JSON):
+
+```json
+[
+{
+"id": "effect1",
+"name": "Effect 1",
+"description": "Description of effect 1",
+"triggers": ["someTriggerType"]
+},
+{
+"id": "effect2",
+"name": "Effect 2",
+"description": "Description of effect 2"
+}
+]
+
+```
+
+## `Get /effects/:effectId`
+
+#### Description:
+
+Fetches the details of a specific effect by its `effectId`.
+
+#### URL Parameters:
+
+- `effectId` `string`: The ID of the effect to fetch.
+
+#### Example Request (URL):
+
+```
+GET /effects/effect1
+
+```
+
+#### Example Response (JSON):
+
+```json
+{
+"id": "effect1",
+"name": "Effect 1",
+"description": "Description of effect 1",
+"triggers": ["someTriggerType"]
+}
+
+```
+
+#### Example Response (Error):
+
+```json
+{
+"status": "error",
+"message": "Cannot find effect 'effect1'"
+}
+
+```
+
+## `Post /effects`
+
+#### Description:
+
+Triggers one or more effects with optional trigger data. Requires a request body containing an array of effects to run.
+
+#### Request Body (JSON):
+
+```json
+{
+"effects": [
+{ "id": "effect1" },
+{ "id": "effect2" }
+],
+"triggerData": {
+"username": "API Call"
+}
+}
+
+```
+
+#### Example Response (Success):
+
+```json
+{
+"status": "success"
+}
+
+```
+
+#### Example Response (Error):
+
+```json
+{
+"status": "error",
+"message": "No effects provided."
+}
+
+```
+
+## `Get /effects/preset`
+
+#### Description:
+
+Fetches a list of all preset effect lists, including their IDs and associated arguments.
+
+#### Example Response (JSON):
+
+```json
+[
+{
+"id": "preset1",
+"name": "Preset 1",
+"args": ["arg1", "arg2"]
+},
+{
+"id": "preset2",
+"name": "Preset 2",
+"args": ["arg1"]
+}
+]
+
+```
+
+## `Get /effects/preset/:presetListId`
+
+#### Description:
+
+Runs the specified preset effect list synchronously (i.e., waits for the effects to complete before responding).
+
+#### URL Parameters:
+
+- `presetListId` `string`: The ID of the preset effect list to run.
+
+#### Example Request (URL):
+
+```
+GET /effects/preset/preset1
+
+```
+
+#### Example Response (Success):
+
+```json
+{
+"status": "success"
+}
+
+```
+
+#### Example Response (Error):
+
+```json
+{
+"status": "error",
+"message": "Cannot find preset effect list 'preset1'"
+}
+
+```
+
+## `Post /effects/preset/:presetListId`
+
+#### Description:
+
+Runs the specified preset effect list synchronously with optional arguments and username.
+
+#### URL Parameters:
+
+- `presetListId` `string`: The ID of the preset effect list to run.
+
+#### Request Body (JSON):
+
+```json
+{
+"username": "testuser",
+"args": { "arg1": "value1", "arg2": "value2" }
+}
+
+```
+
+#### Example Response (Success):
+
+```json
+{
+"status": "success"
+}
+
+```
+
+#### Example Response (Error):
+
+```json
+{
+"status": "error",
+"message": "Cannot find preset effect list 'preset1'"
+}
+
+```
+
+## `Get /effects/preset/:presetListId/run`
+
+#### Description:
+
+Triggers the specified preset effect list asynchronously (i.e., doesn't wait for the effects to complete).
+
+#### URL Parameters:
+
+- `presetListId` `string`: The ID of the preset effect list to run.
+
+#### Example Request (URL):
+
+```
+GET /effects/preset/preset1/run
+
+```
+
+#### Example Response (Success):
+
+```json
+{
+"status": "success"
+}
+
+```
+
+#### Example Response (Error):
+
+```json
+{
+"status": "error",
+"message": "Cannot find preset effect list 'preset1'"
+}
+
+```
+
+## `Post /effects/preset/:presetListId/run`
+
+#### Description:
+
+Triggers the specified preset effect list asynchronously with optional arguments and username.
+
+#### URL Parameters:
+
+- `presetListId` `string`: The ID of the preset effect list to run.
+
+#### Request Body (JSON):
+
+```json
+{
+"username": "testuser",
+"args": { "arg1": "value1", "arg2": "value2" }
+}
+
+```
+
+#### Example Response (Success):
+
+```json
+{
+"status": "success"
+}
+
+```
+
+#### Example Response (Error):
+
+```json
+{
+"status": "error",
+"message": "Cannot find preset effect list 'preset1'"
+}
+
+```

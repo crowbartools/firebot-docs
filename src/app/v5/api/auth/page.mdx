@@ -1,0 +1,76 @@
+# Authentication
+
+## `GET /auth`
+
+#### Description:
+
+Redirects the user to the authorization URI of the specified authentication provider.
+
+#### Query Parameters:
+
+- `providerId` `string`: The ID of the authentication provider.
+
+#### Example Request (URL):
+
+```
+GET /auth?providerId=google
+
+```
+
+#### Example Response (Redirect):
+
+This will redirect the user to the authorization URI of the specified provider (e.g., Google OAuth2 authorization page).
+
+```http
+HTTP/1.1 302 Found
+Location: https://accounts.google.com/o/oauth2/auth?client_id=...&redirect_uri=...&response_type=code&scope=...
+
+```
+
+## `GET /auth/callback2`
+
+#### Description:
+
+Callback endpoint for authentication providers after user authorization. It exchanges the authorization code or token
+for an access token.
+
+#### Query Parameters:
+
+- `state` `string`: The provider ID passed in the initial authentication request, used to identify the provider.
+
+#### Example Request (URL):
+
+```
+GET /auth/callback2?state=google&code=authorizationCodeHere
+
+```
+
+#### Example Response (Redirect):
+
+Upon success, redirects to the login success page.
+
+```http
+HTTP/1.1 302 Found
+Location: /loginsuccess?provider=google
+
+```
+
+#### Example Response (Error):
+
+If the `state` parameter is invalid or missing, returns an error response.
+
+```json
+{
+"error": "Invalid provider id in state"
+}
+
+```
+
+If the authentication fails (e.g., invalid token exchange or an OAuth error), the response will be:
+
+```json
+{
+"error": "Authentication failed"
+}
+
+```

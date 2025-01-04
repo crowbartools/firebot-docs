@@ -1,0 +1,57 @@
+# Fonts
+
+## `Get /fonts`
+
+#### Description:
+
+Fetches a list of all installed fonts, including their names and formats.
+
+#### Example Response (JSON):
+
+```json
+[
+{
+"name": "Arial",
+"format": "TrueType"
+},
+{
+"name": "Helvetica",
+"format": "OpenType"
+}
+]
+
+```
+
+## `Get /fonts/:name`
+
+#### Description:
+
+Fetches the font file for a specific font by its name. Returns the font file if it exists on the server.
+
+#### URL Parameters:
+
+- `name` `string`: The name of the font to fetch.
+
+#### Example Request (URL):
+
+```
+GET /fonts/Arial
+
+```
+
+#### Example Response (File):
+
+The server will send the font file (e.g., `.ttf` or `.otf`) in response. This will be handled by the browser, which may
+download or render the font depending on its capabilities.
+
+#### Example Response (Error):
+
+If the font is not found:
+
+```json
+{
+"status": "error",
+"message": "/fonts/Arial not found"
+}
+
+```

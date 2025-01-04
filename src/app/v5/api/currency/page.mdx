@@ -1,0 +1,161 @@
+# Currency API
+
+## `Get /currencies/:currencyName?`
+
+#### Description:
+
+Fetches currency data for a specific currency or all currencies if no currency name is provided.
+
+- If `currencyName` is specified, it will return data for the specified currency.
+- If `currencyName` is not provided, it will return a list of all currencies.
+
+#### Example Request (for a specific currency):
+
+```
+GET /currencies/coin
+
+```
+
+#### Example Response (for a specific currency):
+
+```json
+  {
+    "d073da00-a726-11e9-a874-7de9c8544807": {
+      "id": "d073da00-a726-11e9-a874-7de9c8544807",
+      "name": "coin",
+      "active": true,
+      "payout": 5,
+      "interval": 5,
+      "limit": 1000000,
+      "transfer": "Allow",
+      "bonus": {},
+      "offline": 5,
+      "$$hashKey": "object:35427"
+    }
+  }
+
+```
+
+#### Example Request (for all currencies):
+
+```
+GET /currencies
+
+```
+
+#### Example Response (for all currencies):
+
+```json
+[
+  {
+    "d073da00-a726-11e9-a874-7de9c8544807": {
+      "id": "d073da00-a726-11e9-a874-7de9c8544807",
+      "name": "coin",
+      "active": true,
+      "payout": 5,
+      "interval": 5,
+      "limit": 1000000,
+      "transfer": "Allow",
+      "bonus": {},
+      "offline": 5,
+      "$$hashKey": "object:35427"
+    }
+  },
+  {
+    "d073da00-a726-11e9-a874-7de9c8544807": {
+      "id": "d073da00-a726-11e9-a874-7de9c8544807",
+      "name": "pups",
+      "active": true,
+      "payout": 5,
+      "interval": 5,
+      "limit": 1000000,
+      "transfer": "Allow",
+      "bonus": {},
+      "offline": 5,
+      "$$hashKey": "object:35427"
+    }
+  }
+]
+
+```
+
+----------
+
+## `Get /currencies/:currencyName/topHolders`
+
+#### Description:
+
+Fetches the top holders of a specific currency. By default, it will return the top 10 holders, but you can specify a
+`count` query parameter to change the number of top holders returned.
+
+#### Request Parameters:
+
+- `currencyName`: The name of the currency (e.g., "coin", "pups").
+- `count`: (Optional) The number of top holders to return. If not specified, defaults to 10.
+
+#### Example Request (with `count` query parameter):
+
+```
+GET /currencies/pups/topHolders?count=2
+
+```
+
+#### Example Response:
+
+```json
+[
+{
+    "username": "fluffypanda",
+    "displayName": "FluffyPanda",
+    "currency": {
+      "d073da00-a726-11e9-a874-7de9c8544807": 281272,
+      "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
+    },
+    "_id": "90448736"
+},
+{
+    "username": "sparklenova",
+    "displayName": "SparkleNova",
+    "currency": {
+      "d073da00-a726-11e9-a874-7de9c8544807": 281272,
+      "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
+    },
+    "_id": "90448726"
+}
+]
+
+```
+
+#### Example Request (default 10 top holders):
+
+```
+GET /currencies/coin/topHolders
+
+```
+
+#### Example Response (default top 10 holders):
+
+```json
+[
+{
+    "username": "fluffypanda",
+    "displayName": "FluffyPanda",
+    "currency": {
+      "d073da00-a726-11e9-a874-7de9c8544807": 281272,
+      "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
+    },
+    "_id": "90448736"
+},
+{
+    "username": "sparklenova",
+    "displayName": "SparkleNova",
+    "currency": {
+      "d073da00-a726-11e9-a874-7de9c8544807": 281272,
+      "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
+    },
+    "_id": "90448726"
+},
+// More users...
+]
+
+```

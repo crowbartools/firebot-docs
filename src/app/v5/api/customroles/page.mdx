@@ -1,0 +1,181 @@
+# Custom Roles API
+
+## `Get /customRoles`
+
+#### Description:
+
+Fetches a list of all custom roles with the associated viewers.
+
+#### Example Response (JSON):
+
+```json
+[
+{
+"id": "role1",
+"name": "Moderator",
+"viewers": ["viewer1", "viewer2"]
+},
+{
+"id": "role2",
+"name": "VIP",
+"viewers": ["viewer3"]
+}
+]
+
+```
+
+----------
+
+## `Get /customRoles/:customRoleId`
+
+#### Description:
+
+Fetches a specific custom role by its ID. Returns role details and the list of viewers associated with it.
+
+#### Example Response (JSON):
+
+```json
+{
+"id": "role1",
+"name": "Moderator",
+"viewers": ["viewer1", "viewer2"]
+}
+
+```
+
+#### Example Error Response (if the role does not exist):
+
+```json
+{
+"status": "error",
+"message": "Custom role 'role1' not found"
+}
+
+```
+
+----------
+
+## `Post /customRoles/:customRoleId/viewer/:userId`
+
+#### Description:
+
+Adds a user to a custom role. You can specify the user by either `userId` or `username` via query parameter.
+
+#### Request Parameters:
+
+- `customRoleId`: The ID of the custom role to which the user is being added.
+- `userId`: The ID of the viewer to be added to the role.
+
+#### Query Parameter:
+
+- `username`: Set to "true" if the user should be found by `username` instead of `userId`.
+
+#### Example Request (URL):
+
+```
+POST /customRoles/role1/viewer/viewer1?username=true
+
+```
+
+#### Example Success Response:
+
+```json
+{
+"status": "success",
+"message": "Viewer added to custom role"
+}
+
+```
+
+#### Example Error Response (if user or custom role does not exist):
+
+```json
+{
+"status": "error",
+"message": "Specified viewer does not exist"
+}
+
+```
+
+----------
+
+### `DELETE /customRoles/:customRoleId/viewer/:userId`
+
+#### Description:
+
+Removes a user from a custom role. You can specify the user by either `userId` or `username` via query parameter.
+
+#### Request Parameters:
+
+- `customRoleId`: The ID of the custom role to which the user is being removed from.
+- `userId`: The ID of the viewer to be removed from the role.
+
+#### Query Parameter:
+
+- `username`: Set to "true" if the user should be found by `username` instead of `userId`.
+
+#### Example Request (URL):
+
+```
+DELETE /customRoles/role1/viewer/viewer1?username=true
+
+```
+
+#### Example Success Response:
+
+```json
+{
+"status": "success",
+"message": "Viewer removed from custom role"
+}
+
+```
+
+#### Example Error Response (if user or custom role does not exist):
+
+```json
+{
+"status": "error",
+"message": "Specified viewer does not exist"
+}
+
+```
+
+----------
+
+### `DELETE /customRoles/:customRoleId/clear`
+
+#### Description:
+
+Removes all viewers from a custom role.
+
+#### Request Parameters:
+
+- `customRoleId`: The ID of the custom role from which all viewers are being removed.
+
+#### Example Request (URL):
+
+```
+DELETE /customRoles/role1/clear
+
+```
+
+#### Example Success Response:
+
+```json
+{
+"status": "success",
+"message": "All viewers removed from the custom role"
+}
+
+```
+
+#### Example Error Response (if custom role does not exist):
+
+```json
+{
+"status": "error",
+"message": "Specified custom role does not exist"
+}
+
+```

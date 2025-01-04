@@ -1,0 +1,147 @@
+# Effect Queue API
+
+## `Get /queues`
+
+#### Description:
+Fetches all available effect queues.
+
+#### Example Request:
+```
+GET /queues
+```
+
+#### Example Response:
+```json
+[
+{
+"id": "queue1",
+"name": "Queue 1",
+"status": "active"
+},
+{
+"id": "queue2",
+"name": "Queue 2",
+"status": "paused"
+}
+]
+```
+
+---
+
+## `Get /queues/:queueId`
+
+#### Description:
+Fetches a specific effect queue by its `queueId`.
+
+#### Request Parameters:
+- `queueId`: The unique identifier of the queue.
+
+#### Example Request:
+```
+GET /queues/queue1
+```
+
+#### Example Response:
+```json
+{
+"id": "queue1",
+"name": "Queue 1",
+"status": "active"
+}
+```
+
+---
+
+## `Post /queues/:queueId/pause`
+
+#### Description:
+Pauses the specified effect queue.
+
+#### Request Parameters:
+- `queueId`: The unique identifier of the queue to be paused.
+
+#### Example Request:
+```
+POST /queues/queue1/pause
+```
+
+#### Example Response:
+```json
+{
+"id": "queue1",
+"name": "Queue 1",
+"status": "paused"
+}
+```
+
+---
+
+## `Post /queues/:queueId/resume`
+
+#### Description:
+Resumes the specified effect queue.
+
+#### Request Parameters:
+- `queueId`: The unique identifier of the queue to be resumed.
+
+#### Example Request:
+```
+POST /queues/queue1/resume
+```
+
+#### Example Response:
+```json
+{
+"id": "queue1",
+"name": "Queue 1",
+"status": "active"
+}
+```
+
+---
+
+## `Post /queues/:queueId/toggle`
+
+#### Description:
+Toggles the status of the specified effect queue (pauses if active, resumes if paused).
+
+#### Request Parameters:
+- `queueId`: The unique identifier of the queue to be toggled.
+
+#### Example Request:
+```
+POST /queues/queue1/toggle
+```
+
+#### Example Response:
+```json
+{
+"id": "queue1",
+"name": "Queue 1",
+"status": "paused"
+}
+```
+
+---
+
+## `Post /queues/:queueId/clear`
+
+#### Description:
+Clears the specified effect queue (removes the queue).
+
+#### Request Parameters:
+- `queueId`: The unique identifier of the queue to be cleared.
+
+#### Example Request:
+```
+POST /queues/queue1/clear
+```
+
+#### Example Response:
+```json
+{
+"id": "queue1",
+"name": "Queue 1",
+"status": "removed"
+}
+```

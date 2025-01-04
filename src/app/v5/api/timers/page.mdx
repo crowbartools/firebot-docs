@@ -1,0 +1,113 @@
+# Timers API
+
+## `Get /timers`
+
+#### Description:
+
+Fetches all available timers.
+
+#### Example Request:
+
+```
+GET /timers
+
+```
+
+#### Example Response:
+
+```json
+[
+{
+"id": "timer1",
+"name": "Timer 1",
+"active": true
+},
+{
+"id": "timer2",
+"name": "Timer 2",
+"active": false
+}
+]
+
+```
+
+----------
+
+## `Get /timers/:timerId`
+
+#### Description:
+
+Fetches a specific timer by its `timerId`.
+
+#### Request Parameters:
+
+- `timerId`: The unique identifier of the timer.
+
+#### Example Request:
+
+```
+GET /timers/timer1
+
+```
+
+#### Example Response:
+
+```json
+{
+"id": "timer1",
+"name": "Timer 1",
+"active": true
+}
+
+```
+
+----------
+
+## `Post /timers/:timerId/:action`
+
+#### Description:
+
+Performs an action on the specified timer.
+
+#### Request Parameters:
+
+- `timerId`: The unique identifier of the timer to be modified.
+- `action`: The action to perform on the timer. Can be one of the following:
+- `enable`: Enables the timer.
+- `disable`: Disables the timer.
+- `toggle`: Toggles the active state of the timer.
+- `clear`: Clears the timer's interval.
+
+#### Example Request:
+
+```
+POST /timers/timer1/enable
+
+```
+
+#### Example Response:
+
+```json
+{
+"status": "success",
+"message": "Timer enabled"
+}
+
+```
+
+#### Example Request:
+
+```
+POST /timers/timer1/clear
+
+```
+
+#### Example Response:
+
+```json
+{
+"status": "success",
+"message": "Timer interval cleared"
+}
+
+```

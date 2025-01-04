@@ -1,0 +1,76 @@
+# Custom Variables
+
+## `GET /custom-variables`
+
+#### Description:
+Fetches all custom variables in the system.
+
+#### Example Response (JSON):
+```json
+[
+    {
+        "name": "var1",
+        "data": "some data",
+        "ttl": 3600
+    },
+    {
+        "name": "var2",
+        "data": "more data",
+        "ttl": 0
+    }
+]
+```
+
+## `GET /custom-variables/:variableName`
+
+#### Description:
+Fetches the value of a specific custom variable by its `variableName`.
+
+#### URL Parameters:
+- `variableName` `string`: The name of the custom variable to retrieve.
+
+#### Example Request (URL):
+```
+GET /custom-variables/var1
+```
+
+#### Example Response (JSON):
+```json
+{
+    "name": "var1",
+    "data": "some data",
+    "ttl": 3600
+}
+```
+
+## `POST /custom-variables/:variableName`
+
+#### Description:
+Sets a custom variable by its `variableName`. The request body should contain the data and optional TTL (time-to-live)
+for the variable.
+
+#### URL Parameters:
+- `variableName` `string`: The name of the custom variable to set.
+
+#### Request Body (JSON):
+```json
+{
+    "data": "new value",
+    "ttl": 3600
+}
+```
+
+#### Example Response (Success):
+```json
+{
+    "status": "success"
+}
+```
+
+#### Example Response (Error):
+```json
+{
+    "status": "error",
+    "message": "No data provided"
+}
+```

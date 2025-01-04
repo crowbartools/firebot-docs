@@ -1,0 +1,99 @@
+# Counters API
+
+## `Get /counters`
+
+#### Description:
+
+Fetches all available counters.
+
+#### Example Request:
+
+```
+GET /counters
+
+```
+
+#### Example Response:
+
+```json
+[
+{
+"id": "counter1",
+"name": "Counter 1",
+"value": 10
+},
+{
+"id": "counter2",
+"name": "Counter 2",
+"value": 15
+}
+]
+
+```
+
+----------
+
+## `Get /counters/:counterId`
+
+#### Description:
+
+Fetches a specific counter by its `counterId`.
+
+#### Request Parameters:
+
+- `counterId`: The unique identifier of the counter.
+
+#### Example Request:
+
+```
+GET /counters/counter1
+
+```
+
+#### Example Response:
+
+```json
+{
+"id": "counter1",
+"name": "Counter 1",
+"value": 10
+}
+
+```
+
+----------
+
+## `Post /counters/:counterId`
+
+#### Description:
+
+Updates the value of an existing counter. Optionally, you can override the current value.
+
+#### Request Parameters:
+
+- `counterId`: The unique identifier of the counter to be updated.
+
+#### Request Body:
+
+- `value`: The new value to set for the counter (required).
+- `override`: A boolean indicating whether to override the counter's current value (optional, defaults to `false`).
+
+#### Example Request:
+
+```json
+{
+"value": 20,
+"override": true
+}
+
+```
+
+#### Example Response:
+
+```json
+{
+"oldValue": 10,
+"newValue": 20
+}
+
+```

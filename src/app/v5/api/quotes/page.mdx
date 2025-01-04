@@ -1,0 +1,233 @@
+# Quotes API
+
+## `Get /quotes`
+
+#### Description:
+
+Fetches all available quotes.
+
+#### Example Request:
+
+```
+GET /quotes
+
+```
+
+#### Example Response:
+
+```json
+[
+{
+"id": 1,
+"text": "This is a sample quote.",
+"originator": "John Doe",
+"creator": "Jane Smith",
+"game": "Game Name",
+"createdAt": "2024-12-14T00:00:00Z"
+},
+{
+"id": 2,
+"text": "Another quote here.",
+"originator": "Alice",
+"creator": "Bob",
+"game": "Another Game",
+"createdAt": "2024-12-13T00:00:00Z"
+}
+]
+
+```
+
+----------
+
+## `Get /quotes/:quoteId`
+
+#### Description:
+
+Fetches a specific quote by its `quoteId`.
+
+#### Request Parameters:
+
+- `quoteId`: The unique identifier of the quote.
+
+#### Example Request:
+
+```
+GET /quotes/1
+
+```
+
+#### Example Response:
+
+```json
+{
+"id": 1,
+"text": "This is a sample quote.",
+"originator": "John Doe",
+"creator": "Jane Smith",
+"game": "Game Name",
+"createdAt": "2024-12-14T00:00:00Z"
+}
+
+```
+
+----------
+
+## `Post /quotes`
+
+#### Description:
+
+Creates a new quote.
+
+#### Request Body:
+
+- `text`: The text content of the quote (required).
+- `originator`: The person who originated the quote (required).
+- `creator`: The creator of the quote (required).
+- `game`: The game context (optional).
+
+#### Example Request:
+
+```json
+{
+"text": "This is a new quote.",
+"originator": "Alice",
+"creator": "Bob",
+"game": "Sample Game"
+}
+
+```
+
+#### Example Response:
+
+```json
+{
+"id": 3,
+"text": "This is a new quote.",
+"originator": "Alice",
+"creator": "Bob",
+"game": "Sample Game",
+"createdAt": "2024-12-14T00:00:00Z"
+}
+
+```
+
+----------
+
+### `PUT /quotes/:quoteId`
+
+#### Description:
+
+Creates or updates a specific quote. If a quote with the provided `quoteId` does not exist, it will be created;
+otherwise, it will be updated.
+
+#### Request Parameters:
+
+- `quoteId`: The unique identifier of the quote to be updated or created.
+
+#### Request Body:
+
+- `text`: The text content of the quote (required).
+- `originator`: The person who originated the quote (required).
+- `creator`: The creator of the quote (required).
+- `game`: The game context (optional).
+- `createdAt`: The creation date (optional).
+
+#### Example Request:
+
+```json
+{
+"text": "Updated quote content",
+"originator": "Alice",
+"creator": "Bob",
+"game": "Sample Game",
+"createdAt": "2024-12-14T00:00:00Z"
+}
+
+```
+
+#### Example Response:
+
+```json
+{
+"id": 1,
+"text": "Updated quote content",
+"originator": "Alice",
+"creator": "Bob",
+"game": "Sample Game",
+"createdAt": "2024-12-14T00:00:00Z"
+}
+
+```
+
+----------
+
+### `PATCH /quotes/:quoteId`
+
+#### Description:
+
+Partially updates an existing quote. You can update specific fields such as `text`, `originator`, `creator`, `game`, or
+`createdAt`.
+
+#### Request Parameters:
+
+- `quoteId`: The unique identifier of the quote to be updated.
+
+#### Request Body:
+
+Any of the following fields can be included:
+
+- `text`: The text content of the quote.
+- `originator`: The person who originated the quote.
+- `creator`: The creator of the quote.
+- `game`: The game context.
+- `createdAt`: The creation date.
+
+#### Example Request:
+
+```json
+{
+"text": "Partially updated quote content",
+"originator": "Alice"
+}
+
+```
+
+#### Example Response:
+
+```json
+{
+"id": 1,
+"text": "Partially updated quote content",
+"originator": "Alice",
+"creator": "Bob",
+"game": "Sample Game",
+"createdAt": "2024-12-14T00:00:00Z"
+}
+
+```
+
+----------
+
+### `DELETE /quotes/:quoteId`
+
+#### Description:
+
+Deletes a specific quote by its `quoteId`.
+
+#### Request Parameters:
+
+- `quoteId`: The unique identifier of the quote to be deleted.
+
+#### Example Request:
+
+```
+DELETE /quotes/1
+
+```
+
+#### Example Response:
+
+```
+HTTP Status 204 No Content
+
+```
