@@ -47,7 +47,7 @@ export const nav: Array<NavGroup> = [
   {
     title: 'API reference',
     links: [
-      { title: 'Contacts', href: '/contacts' },
+      { title: 'Contacts', href: '/v5/api/contacts' },
       { title: 'Conversations', href: '/conversations' },
       { title: 'Messages', href: '/messages' },
       { title: 'Groups', href: '/groups' },
