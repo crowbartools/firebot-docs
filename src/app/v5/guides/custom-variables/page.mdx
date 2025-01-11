@@ -1,40 +1,76 @@
-## **Custom Variable Effects**
+# **Custom Variable Effects**
 
-An extremely useful effect for creating effects that are adaptable to your stream and personalized to you is the custom variable effect. You can find it by looking for “custom” in the “Select New Effect” box that comes up when you select "Add New Effect" in any effects list. Alternatively, you can find it by looking through the “ALL”, “Advanced”, and “Scripting” tabs. In brief it is a way that we can save data in the form of text for Firebot to use at a later time. In order to use it in a command you will need to switch from simple mode to advanced mode so that you can search through effects. If you are familiar with any form of coding this is essentially the same as saving a variable in any language that you might use. One important point (for people who know code) is that you cannot save a Custom Variable as a constant, it is always possible to overwrite a Custom Variable. 
+The Custom Variable effect allows you to store data for use in Firebot later. This is useful for creating dynamic, personalized effects for your stream.  {{ className: 'lead' }}
 
-When you select Conditional Effect it will bring up the Add New Effect interface for Custom Variables. 
+You can find it in the “Select New Effect” box when adding a new effect. It’s listed under the “ALL,” “Advanced,” and “Scripting” tabs. Custom Variables function similarly to variables in programming but can always be overwritten (they cannot be made constant).  {{ className: 'lead' }}
 
-**Variable Name**
-At the top you will see "Variable Name" and an input box with "Enter name".  This is where you write down what you want to call your new variable. Try to avoid using spaces in the name as this can cause issues trying to refer to it later. It's also a good idea to make sure the name makes it obvious what the variable is used for. For example if you wanted to save a random viewer for use in a giveaway later you could save the variable name as "randomViewer". This name explains exactly what the variable contains so it's easier for you to figure out what it's used for if you look at it again later. It's also written using Camel Case, where the first letter of each word is capitalized except for the first word and no spaces are used. This maintains readability of the variable name but avoids using any spaces that could be an issue when trying to call on the variable later. There is also a little blue "$vars" button in the input box, if you click on this it will show you all the standard variables that Firebot already has built in, and that can be used here. 
+By leveraging Custom Variables, you can make your stream more interactive and tailor effects to your viewers. For more advanced logic, check out the [Conditional Effects guide](/v5/guides/conditional-effects). {{ className: 'lead' }}
 
-**Variable Data**
-Next we see "Variable Data" with an input box with "Enter text/data". This is where we enter the data that we want to save for later use. We can also use the built in variables here by clicking on the `$vars` button in this input box. Any data that can be saved in the form of text can saved here. 
+## **Configuring a Custom Variable**
 
-**Property Path**
-Next we have the "Property Path (Optional)" section with another input box containing "Enter path". This can be safely ignored by the vast majority of Firebot users. This is only for use when accessing data in an object or an array. The following explanation for this section can be skipped unless you want to build much more complex effects and already have a reasonable understanding of how to use Firebot. You can move onto the "Duration" section below to skip the explanation for the property path.
+### **Variable Name**
+This is where you name your variable. Use a descriptive name without spaces (e.g., `randomViewer`) to avoid issues and make the variable's purpose clear. A common practice is using CamelCase, where each word starts with a capital letter except the first (e.g., `contestWinner`).
 
-An array is a collection of data stored in this format: `["this", "is", "an", "array"]`. An object is a collection of data saved to key:value pairs in this format: `{"this":"is", "an":"object"}`. You can save multiple objects to an array: `[{"this":"is", "an":"object"}, {"this":"is", "aDifferent":"object"}]`. A key difference between arrays and objects is that arrays use indexing to find the correct datapoint and start at 0. So the indexing for `["this", "is", "an", "array"]` would be [0, 1, 2, 3]. Whereas objects find values using the keys. So for `{"this":"is", "an":"object"}` "this" is used to find "is" and "an" is used to find "object". 
+### **Variable Data**
+Here, input the data you want to save. This can be any type of data, including Firebot's built-in variables accessed via the `$vars` button.
 
-So, lets say we have saved `["this", "is", "an", "array"]` as a variable, we'll call it "array1". Later to access a specific index in the array we could call on the variable, with the index in a square bracket. So we would call `$$array1[1]` to get to the data "is". 
+### **Property Path (Optional)**
+This is used for accessing or modifying specific parts of complex data structures like arrays or objects. Most users can skip this section, but here’s a quick overview:
 
-If we had `{"this":"is", "an":"object"}` saved to a variable called "object1" we can access the data using a key value pair instead of an index and we use dot notation to access it: `$$object1.this` to get the data "is". 
+- **Array Example:** `["apple", "banana", "cherry"]`  
+  Access "banana" with `$$myArray[1]`.
 
-Finally if we had `[{"this":"is1", "an":"object1"}, {"this":"is2", "aDifferent":"object2"}]` saved as an array of objects called "objectArray" we can combine both of these to reach the desired piece of information. So we would write `$$objectArray[0].this` to access "is1". Worth noting that the data doesn't have to be different for each object, I wrote it that way so that it was easy to understand where the path was leading. You could easily have an array like this: `[{"this":"is", "an":"object"}, {"this":"is", "an":"object"}]`. You would still be able to reach any piece of data that you wanted due to array indexing. Generally speaking this level of access to the data in a variable isn't needed, and most people using Firebot would be better off saving the data as individual Custom Variables rather than using arrays or objects in a variable. 
+- **Object Example:** `{"fruit":"apple", "color":"red"}`  
+  Access "apple" with `$$myObject.fruit`.
 
-The Property Path section of the Custom Variable effect means that we do not need to overwrite the entire variable to change one piece of data in a variable that already exists. If we look at our objectArray variable, `[{"this":"is1", "an":"object1"}, {"this":"is2", "aDifferent":"object2"}]`, and we just wanted to change "is1" to something else, lets say "isn't" then we could use a new Custom Variable effect, keep the variable name the same (objectArray) type "isn't" into the Variable Data, and then for the Property Path we would use the index for the item in the array we want to reach, in this case "0" and then dot notation for the key we want to use, in this case "this". So in the property path we would write `0.this`, and the effect would only overwrite "is1" to "isn't" meaning our Custom Variable would now look like this: `[{"this":"isn't", "an":"object1"}, {"this":"is2", "aDifferent":"object2"}]`.
+- **Array of Objects Example:**  
+  `[{"fruit":"apple"}, {"fruit":"banana"}]`  
+  Access "apple" with `$$myArray[0].fruit`.
 
-**Duration**
-The last input box we have is in the "Duration (Optional) section and contains a zero (0). This is used to tell Firebot how long to hold onto a variable for in seconds. Again, this is generally unnecessary for most applications and keeping this at 0 will tell Firebot to hold onto the variable until you next close Firebot. There is an option in the Settings > Advanced menu called "Persist Custom Variables" that will allow Firebot to hold onto variables forever, but unless you know enough about variables that reading this guide is pointless it is not recommended to switch that on. To use the duration setting simply enter the number of seconds you want Firebot to hold onto the variable for before deleting it. For example enter "90" for a duration of one minute and thirty seconds. This can be useful if you want something to last only a set period of time, for example if you have a competition where viewers have a limited amount of time to guess the correct answer to a question. You can set the answer to disappear after 90 seconds. 
+You can use the Property Path field to update a specific part of the variable without overwriting the entire structure.
 
-**Custom Variable Inspector**
-Finally at the very bottom of the Custom Variable effect UI we have a light grey box containing the words "Custom Variable Inspector" in blue. If you click on this it will bring up a new window containing all of the variables currently active. You can also click a checkbox to show expired variables where their duration ran out. This will show you the name of each variable, the data contained in each variable, when or if it has a duration that will expire and what actions have been taken on that variable, such as "set" which means that the entire variable was set using a custom variable effect. 
+<Note type="info">
+    **Example**: To change the color of a fruit from red to yellow in `{"fruit":"apple", "color":"red"}`, set `Variable Name` to your object’s name, `Variable Data` to `yellow`, and `Property Path` to `color`.
+</Note>
 
-## How to use a Custom Variable
-As mentioned previously Custom Variables are essentially a means to tell Firebot to save some text for use in a later effect. This has *many* use cases, such as saving a name for later, saving the answer to a question, saving a message from a viewer, saving the time something occurred, etc...
+### **Duration (Optional)**
+Set how long Firebot should retain the variable (in seconds). By default (`0`), variables persist until Firebot is closed. Enable **Settings > Advanced > Persist Custom Variables** to retain them across sessions.
 
-To access this data we have two methods, the first is to use the built in variable `$customVariable[name]`. So if we had saved the name of a contest winner to a variable called "contestWinner" we would be able to write out `$customVariable[contestWinner]` into any text box and Firebot would replace this with the data saved to that variable, in this case the winner of a contest. The other methods works in exactly the same manner, but is a little easier to type out, we use two `$` symbols instead of one to tell Firebot that this is a custom variable rather than a built in variable, so for our contest winner we would write `$$contestWinner` and this would have exactly the same effect. 
+<Note type="info">
+    **Example**: Set `90` to store a variable for 1 minute and 30 seconds, useful for timed events like competitions.
+</Note>
 
-**Example Usage**
-Let's start with the aforementioned contest winner for a simple example. Lets say we start a contest for chat members, the first person to write the correct answer in chat to a riddle wins a prize, and we want to save the persons name for later. We could turn on a chat event (found in the events tab) that looks at each message sent in chat. We could use a conditional effect (more on those here: https://docs.firebot.app/v5/guides/conditional-effects) to see if the chat message matches the correct answer. If it does we could use a "Toggle Event" effect to turn off the chat event so it no longer looks at each chat message and a Custom Variable effect to save the event winners name. We would save the name of the variable as something like "contestWinner" the Custom Variable data would be `$user` because `$user` is a built in variable for Firebot and is the username of the person who triggered the effect it contains. Again, you can access built in Firebot variables using the `$vars` button that you can find in most input boxes. 
+## **Using a Custom Variable**
 
-Later we could then use `$$contestWinner` anywhere that we wanted to use the winner's username. For example we could also trigger a Chat Effect containing something like "Congratulations to `$$contestWinner` for correctly guessing the answer, they win today's prize of a castle in the sky!"
+Custom Variables are placeholders for text data that you can reuse in other effects. Examples include saving usernames, answers, timestamps, or messages.
+
+### **Accessing a Custom Variable**
+You can access a Custom Variable in any effect by using one of the following replace variables:
+- `$customVariable[variableName]`
+- `$$variableName` (shortcut)
+
+<Note type="info">
+    **Example**: If you save a contest winner’s name as `contestWinner`, you can use `$$contestWinner` in any effect to display the name.
+</Note>
+
+### Example: Chat Contest
+
+**Premise**: Let's say we start a contest for chat members and the first person to write the correct answer in chat to a riddle wins a prize, and we want to save the persons name for later.
+
+1. **Save the Winner:**  
+   Set up a chat event to check messages. Use a **Conditional Effect** (More on those [here](/v5/guides/conditional-effects)) to detect the correct answer.<br />When triggered:
+   - Turn off the chat event with a **Toggle Event** effect.
+   - Save the winner’s username using a **Custom Variable**. Set:
+     - `Variable Name`: `contestWinner`
+     - `Variable Data`: `$user` (Firebot’s built-in variable for the triggering user’s name)
+
+2. **Announce the Winner:**  
+   Use a **Chat Effect** with:  
+   `"Congratulations to $$contestWinner for guessing correctly! You win today's prize!"`
+
+---
+
+## **Custom Variable Inspector**
+
+The Custom Variable Inspector is a useful tool for viewer and debugging your variables. You can access it under the “Tools” menu in Firebot.
+
