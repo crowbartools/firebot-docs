@@ -1,267 +1,267 @@
+export const metadata = {
+  title: 'Effects',
+  description: 'This page documents the effects API endpoints.',
+}
+
 # Effects
 
-## `GET /effects`
-
-#### Description:
-
-Fetches all available effect definitions. Optionally, filters them by trigger type if the `trigger` query parameter is
-provided.
-
-#### Query Parameters:
-
-- `trigger` `string: optional`: The type of trigger to filter the effects by.
-
-#### Example Request (URL):
-
-```
-GET /effects?trigger=someTriggerType
-```
-
-#### Example Response (JSON):
-
-```json
-[
-  {
-    "id": "effect1",
-    "name": "Effect 1",
-    "description": "Description of effect 1",
-    "triggers": ["someTriggerType"]
-  },
-  {
-    "id": "effect2",
-    "name": "Effect 2",
-    "description": "Description of effect 2"
-  }
-]
-```
-
-## `GET /effects/:effectId`
-
-#### Description:
-
-Fetches the details of a specific effect by its `effectId`.
-
-#### URL Parameters:
-
-- `effectId` `string`: The ID of the effect to fetch.
-
-#### Example Request (URL):
-
-```
-GET /effects/effect1
-```
-
-#### Example Response (JSON):
-
-```json
-{
-  "id": "effect1",
-  "name": "Effect 1",
-  "description": "Description of effect 1",
-  "triggers": ["someTriggerType"]
-}
-```
-
-#### Example Response (Error):
-
-```json
-{
-  "status": "error",
-  "message": "Cannot find effect 'effect1'"
-}
-```
-
-## `POST /effects`
-
-#### Description:
-
-Triggers one or more effects with optional trigger data. Requires a request body containing an array of effects to run.
-
-#### Request Body (JSON):
-
-```json
-{
-  "effects": [{ "id": "effect1" }, { "id": "effect2" }],
-  "triggerData": {
-    "username": "API Call"
-  }
-}
-```
-
-#### Example Response (Success):
-
-```json
-{
-  "status": "success"
-}
-```
-
-#### Example Response (Error):
-
-```json
-{
-  "status": "error",
-  "message": "No effects provided."
-}
-```
-
-## `GET /effects/preset`
-
-#### Description:
-
-Fetches a list of all preset effect lists, including their IDs and associated arguments.
-
-#### Example Response (JSON):
-
-```json
-[
-  {
-    "id": "preset1",
-    "name": "Preset 1",
-    "args": ["arg1", "arg2"]
-  },
-  {
-    "id": "preset2",
-    "name": "Preset 2",
-    "args": ["arg1"]
-  }
-]
-```
-
-## `GET /effects/preset/:presetListId`
-
-#### Description:
-
-Runs the specified preset effect list synchronously (i.e., waits for the effects to complete before responding).
-
-#### URL Parameters:
-
-- `presetListId` `string`: The ID of the preset effect list to run.
-
-#### Example Request (URL):
-
-```
-GET /effects/preset/preset1
-```
-
-#### Example Response (Success):
-
-```json
-{
-  "status": "success"
-}
-```
-
-#### Example Response (Error):
-
-```json
-{
-  "status": "error",
-  "message": "Cannot find preset effect list 'preset1'"
-}
-```
-
-## `POST /effects/preset/:presetListId`
-
-#### Description:
-
-Runs the specified preset effect list synchronously with optional arguments and username.
-
-#### URL Parameters:
-
-- `presetListId` `string`: The ID of the preset effect list to run.
-
-#### Request Body (JSON):
-
-```json
-{
-  "username": "testuser",
-  "args": { "arg1": "value1", "arg2": "value2" }
-}
-```
-
-#### Example Response (Success):
-
-```json
-{
-  "status": "success"
-}
-```
-
-#### Example Response (Error):
-
-```json
-{
-  "status": "error",
-  "message": "Cannot find preset effect list 'preset1'"
-}
-```
-
-## `GET /effects/preset/:presetListId/run`
-
-#### Description:
-
-Triggers the specified preset effect list asynchronously (i.e., doesn't wait for the effects to complete).
-
-#### URL Parameters:
-
-- `presetListId` `string`: The ID of the preset effect list to run.
-
-#### Example Request (URL):
-
-```
-GET /effects/preset/preset1/run
-```
-
-#### Example Response (Success):
-
-```json
-{
-  "status": "success"
-}
-```
-
-#### Example Response (Error):
-
-```json
-{
-  "status": "error",
-  "message": "Cannot find preset effect list 'preset1'"
-}
-```
-
-## `POST /effects/preset/:presetListId/run`
-
-#### Description:
-
-Triggers the specified preset effect list asynchronously with optional arguments and username.
-
-#### URL Parameters:
-
-- `presetListId` `string`: The ID of the preset effect list to run.
-
-#### Request Body (JSON):
-
-```json
-{
-  "username": "testuser",
-  "args": { "arg1": "value1", "arg2": "value2" }
-}
-```
-
-#### Example Response (Success):
-
-```json
-{
-  "status": "success"
-}
-```
-
-#### Example Response (Error):
-
-```json
-{
-  "status": "error",
-  "message": "Cannot find preset effect list 'preset1'"
-}
-```
+## List all effects {{ tag: 'GET', label: '/effects' }}
+
+<Row>
+  <Col>
+    Fetches all available effect definitions. Optionally, filters them by trigger type if the `trigger` query parameter is
+    provided.
+
+    ### Optional query parameters
+
+    <Properties>
+      <Property name="trigger" type="string">
+        The type of trigger to filter the effects by.
+      </Property>
+    </Properties>
+  </Col>
+
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/effects">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/effects
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "effect1",
+        "name": "Effect 1",
+        "description": "Description of effect 1",
+        "triggers": ["someTriggerType"]
+      },
+      {
+        "id": "effect2",
+        "name": "Effect 2",
+        "description": "Description of effect 2"
+      }
+    ]
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Retrieve an effect {{ tag: 'GET', label: '/effects/:effectId' }}
+<Row>
+  <Col>
+    Retrieves the details of a specific effect by its `effectId`.
+
+    ### URL parameters
+
+    <Properties>
+      <Property name="effectId" type="string">
+        The ID of the effect to retrieve.
+      </Property>
+    </Properties>
+  </Col>
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/effects/:effectId">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/effects/someEffectId
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": "someEffectId",
+      "name": "Effect 1",
+      "description": "Description of effect 1",
+      "triggers": ["someTriggerType"]
+    }
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Trigger effects {{ tag: 'POST', label: '/effects' }}
+
+<Row>
+  <Col>
+    Triggers one or more effects with optional trigger data. Requires a request body containing an array of effects to run.
+
+    ### Body properties (JSON)
+    <Properties>
+      <Property name="effects" type="array">
+        An array of effects to run. Each effect is an object with an `id` property and any additional properties required by the effect.
+      </Property>
+      <Property name="triggerData" type="object">
+        Optional data to pass to the effect triggers. This can be any key-value pairs that the effect triggers may use.
+      </Property>
+    </Properties>
+  </Col>
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/effects">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/effects \
+      -H "Content-Type: application/json" \
+      -d '{"effects": [{"id": "effect1"}, {"id": "effect2"}], "triggerData": {"username": "API Call"}}'
+    ```
+    </CodeGroup>
+
+    <CodeGroup title="Response">
+    ```json {{ title: 'Success' }}
+    {
+      "status": "success"
+    }
+    ```
+    ```json {{ title: 'Error' }}
+    {
+      "status": "error",
+      "message": "No effects provided."
+    }
+    ```
+    </CodeGroup>
+  </Col>
+</Row>
+
+---
+
+## List preset effect lists {{ tag: 'GET', label: '/effects/preset' }}
+
+<Row>
+  <Col>
+    Lists all preset effect lists, including their IDs and associated arguments.
+  </Col>
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/effects/preset">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/effects/preset
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "preset1",
+        "name": "Preset 1",
+        "args": ["arg1", "arg2"]
+      },
+      {
+        "id": "preset2",
+        "name": "Preset 2",
+        "args": ["arg1"]
+      }
+    ]
+    ```
+
+  </Col>
+</Row>
+
+---
+
+## Trigger preset effect list {{ tag: 'POST', label: '/effects/preset/:presetListId' }}
+
+<Row>
+  <Col>
+    Triggers a preset effect list synchronously (i.e., waits for the effects to complete before responding) with optional arguments and username.
+
+    If you want to trigger the preset list asynchronously (i.e., doesn't wait for the effects to complete), append `/run` to the URL.
+
+    ### URL parameters
+    <Properties>
+      <Property name="presetListId" type="string">
+        The ID of the preset effect list to trigger.
+      </Property>
+    </Properties>
+
+    ### Body properties (JSON)
+    <Properties>
+      <Property name="username" type="string">
+        The username to associate with the effect list.
+      </Property>
+      <Property name="args" type="object">
+        Optional arguments to pass to the preset effect list.
+      </Property>
+    </Properties>
+  </Col>
+  <Col sticky>
+    <CodeGroup title="Request (sync)" tag="POST" label="/effects/preset/:presetListId">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/effects/preset/somePresetId \
+      -H "Content-Type: application/json" \
+      -d '{"username": "testuser", "args": {"arg1": "value1", "arg2": "value2"}}'
+    ```
+    </CodeGroup>
+
+    <CodeGroup title="Request (async)" tag="POST" label="/effects/preset/:presetListId/run">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/effects/preset/somePresetId/run \
+      -H "Content-Type: application/json" \
+      -d '{"username": "testuser", "args": {"arg1": "value1", "arg2": "value2"}}'
+    ```
+    </CodeGroup>
+
+
+    <CodeGroup title="Response">
+    ```json {{ title: 'Success' }}
+    {
+      "status": "success"
+    }
+    ```
+    ```json {{ title: 'Error' }}
+    {
+      "status": "error",
+      "message": "Cannot find preset effect list 'somePresetId'"
+    }
+    ```
+    </CodeGroup>
+  </Col>
+</Row>
+
+---
+
+## Trigger preset effect list {{ tag: 'GET', label: '/effects/preset/:presetListId' }}
+
+<Row>
+  <Col>
+    Triggers a preset effect list synchronously (i.e., waits for the effects to complete before responding)
+
+    If you want to trigger the preset list asynchronously (i.e., doesn't wait for the effects to complete), append `/run` to the URL.
+
+    ### URL parameters
+    <Properties>
+      <Property name="presetListId" type="string">
+        The ID of the preset effect list to trigger.
+      </Property>
+    </Properties>
+  </Col>
+  <Col sticky>
+    <CodeGroup title="Request (Sync)" tag="GET" label="/effects/preset/:presetListId">
+    ```bash {{ title: 'cURL' }}
+    curl GET http://localhost:7472/api/v1/effects/preset/somePresetId 
+    ```
+    </CodeGroup>
+
+    <CodeGroup title="Request (Async)" tag="GET" label="/effects/preset/:presetListId/run">
+    ```bash {{ title: 'cURL' }}
+    curl GET http://localhost:7472/api/v1/effects/preset/somePresetId/run
+    ```
+    </CodeGroup>
+
+
+    <CodeGroup title="Response">
+    ```json {{ title: 'Success' }}
+    {
+      "status": "success"
+    }
+    ```
+    ```json {{ title: 'Error' }}
+    {
+      "status": "error",
+      "message": "Cannot find preset effect list 'somePresetId'"
+    }
+    ```
+    </CodeGroup>
+  </Col>
+</Row>

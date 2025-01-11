@@ -1,17 +1,34 @@
+export const metadata = {
+  title: 'Status',
+  description:
+    'This page documents the status API endpoints.',
+}
+
 # Status
 
-## `GET /status`
+## Current status {{ tag: 'GET', label: '/status' }}
 
-#### Description:
+<Row>
+  <Col>
 
-Fetches the current status of the application's connections, specifically the chat connection status.
+    Fetches the current status of the application's connections, specifically the chat connection status.
 
-#### Example Response (JSON):
+  </Col>
+  <Col sticky>
 
-```json
-{
-  "connections": {
-    "chat": true
+    <CodeGroup title="Request" tag="GET" label="/status">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/status 
+    ```
+    </CodeGroup>
+  
+
+  ```json {{ title: 'Response' }}
+  {
+    "connections": {
+      "chat": true
+    }
   }
-}
-```
+  ```
+  </Col>
+</Row>

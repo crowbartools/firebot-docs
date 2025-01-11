@@ -1,70 +1,97 @@
+export const metadata = {
+  title: 'Authentication',
+  description:
+    'This page documents the authentication endpoints of the API.',
+}
+
 # Authentication
 
-## `GET /auth`
+## Trigger auth provider flow {{ tag: 'GET', label: '/auth' }}
 
-#### Description:
+<Row>
+  <Col>
 
-Redirects the user to the authorization URI of the specified authentication provider.
+    Redirects the user to the authorization URI of the specified authentication provider. (e.g., Google OAuth2 authorization page).
 
-#### Query Parameters:
+    ### Optional Query Params
 
-- `providerId` `string`: The ID of the authentication provider.
+    <Properties>
+      <Property name="providerId" type="string">
+        The ID of the authentication provider.
+      </Property>
+    </Properties>
 
-#### Example Request (URL):
+  </Col>
 
-```
-GET /auth?providerId=google
-```
+  <Col sticky>
 
-#### Example Response (Redirect):
+    <CodeGroup title="Request" tag="GET" label="/auth">
 
-This will redirect the user to the authorization URI of the specified provider (e.g., Google OAuth2 authorization page).
+    ```bash {{ title: 'cURL' }}
+    curl -G http://localhost:7472/api/v1/auth \
+      -d providerId=google 
+    ```
+    </CodeGroup>
 
-```http
-HTTP/1.1 302 Found
-Location: https://accounts.google.com/o/oauth2/auth?client_id=...&redirect_uri=...&response_type=code&scope=...
-```
+    
+    ```http {{ title: 'Response' }}
+    HTTP/1.1 302 Found
+    Location: https://accounts.google.com/o/oauth2/auth?client_id=...&redirect_uri=...&response_type=code&scope=...
+    ```
 
-## `GET /auth/callback2`
+  </Col>
+</Row>
 
-#### Description:
+---
 
-Callback endpoint for authentication providers after user authorization. It exchanges the authorization code or token
-for an access token.
+## Callback endpoint {{ tag: 'GET', label: '/auth/callback2' }}
 
-#### Query Parameters:
+<Row>
+  <Col>
 
-- `state` `string`: The provider ID passed in the initial authentication request, used to identify the provider.
+    Callback endpoint for authentication providers after user authorization. It exchanges the authorization code or token
+  for an access token.
 
-#### Example Request (URL):
+    ### Optional Query Params
 
-```
-GET /auth/callback2?state=google&code=authorizationCodeHere
-```
+    <Properties>
+      <Property name="state" type="string">
+        The provider ID passed in the initial authentication request, used to identify the provider.
+      </Property>
+    </Properties>
 
-#### Example Response (Redirect):
+  </Col>
 
-Upon success, redirects to the login success page.
+  <Col sticky>
 
-```http
-HTTP/1.1 302 Found
-Location: /loginsuccess?provider=google
-```
+    <CodeGroup title="Request" tag="GET" label="/auth/callback2">
 
-#### Example Response (Error):
+    ```bash {{ title: 'cURL' }}
+    curl -G http://localhost:7472/api/v1/auth/callback2 \
+      -d state=google \
+      -d code=authorizationCodeHere
+    ```
+    </CodeGroup>
 
-If the `state` parameter is invalid or missing, returns an error response.
+    <CodeGroup title="Response" tag="GET" label="/auth/callback2">
 
-```json
-{
-  "error": "Invalid provider id in state"
-}
-```
+    ```http {{ title: 'Success (Redirect)' }}
+    HTTP/1.1 302 Found
+    Location: https://accounts.google.com/o/oauth2/auth?client_id=...&redirect_uri=...&response_type=code&scope=...
+    ```
 
-If the authentication fails (e.g., invalid token exchange or an OAuth error), the response will be:
+    ```json {{ title: 'Error (Invalid State)' }}
+    {
+      "error": "Invalid provider id in state"
+    }
+    ```
 
-```json
-{
-  "error": "Authentication failed"
-}
-```
+    ```json {{ title: 'Error (Auth Failed)' }}
+    {
+      "error": "Authentication failed"
+    }
+    ```
+
+    </CodeGroup>
+  </Col>
+</Row>
