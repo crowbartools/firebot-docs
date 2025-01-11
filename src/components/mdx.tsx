@@ -42,41 +42,38 @@ function InfoIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-export function Note({
-  children,
-  type,
-}: {
-  children: React.ReactNode
-  type?: 'success' | 'warning'
-}) {
-  const typeColors = {
-    success: {
-      container:
-        'border-emerald-500/20 bg-emerald-50/50 text-emerald-900 dark:border-emerald-500/30 dark:bg-emerald-500/5 dark:text-emerald-200 dark:[--tw-prose-links-hover:theme(colors.emerald.300)] dark:[--tw-prose-links:theme(colors.white)]',
-      icon: 'fill-emerald-500 stroke-white dark:fill-emerald-200/20 dark:stroke-emerald-200',
-    },
-    warning: {
-      container:
-        'border-amber-500/20 bg-amber-50/50 text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/5 dark:text-amber-200 dark:[--tw-prose-links-hover:theme(colors.amber.300)] dark:[--tw-prose-links:theme(colors.white)]',
-      icon: 'fill-amber-500 stroke-white dark:fill-amber-200/20 dark:stroke-amber-200',
-    },
-  }
+export function Note({ children, type }: { children: React.ReactNode; type?: 'success' | 'warning' | 'danger' | 'info' }) {
+    const typeColors = {
+        success: {
+            container:
+                'border-emerald-500/20 bg-emerald-50/50 text-emerald-900 dark:border-emerald-500/30 dark:bg-emerald-500/5 dark:text-emerald-200 dark:[--tw-prose-links-hover:theme(colors.emerald.300)] dark:[--tw-prose-links:theme(colors.white)]',
+            icon: 'fill-emerald-500 stroke-white dark:fill-emerald-200/20 dark:stroke-emerald-200',
+        },
+        warning: {
+            container:
+                'border-amber-500/20 bg-amber-50/50 text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/5 dark:text-amber-200 dark:[--tw-prose-links-hover:theme(colors.amber.300)] dark:[--tw-prose-links:theme(colors.white)]',
+            icon: 'fill-amber-500 stroke-white dark:fill-amber-200/20 dark:stroke-amber-200',
+        },
+        danger: {
+            container:
+                'border-red-500/20 bg-red-50/50 text-red-900 dark:border-red-500/30 dark:bg-red-500/5 dark:text-red-200 dark:[--tw-prose-links-hover:theme(colors.red.300)] dark:[--tw-prose-links:theme(colors.white)]',
+            icon: 'fill-red-500 stroke-white dark:fill-red-200/20 dark:stroke-red-200',
+        },
+        info: {
+            container:
+                'border-blue-500/20 bg-blue-50/50 text-blue-900 dark:border-blue-500/30 dark:bg-blue-500/5 dark:text-blue-200 dark:[--tw-prose-links-hover:theme(colors.blue.300)] dark:[--tw-prose-links:theme(colors.white)]',
+            icon: 'fill-blue-500 stroke-white dark:fill-blue-200/20 dark:stroke-blue-200',
+        },
+    }
 
-  const colors = typeColors[type ?? 'success']
+    const colors = typeColors[type ?? 'success']
 
-  return (
-    <div
-      className={clsx(
-        'my-6 flex gap-2.5 rounded-2xl border p-4 leading-6',
-        colors.container,
-      )}
-    >
-      <InfoIcon className={clsx('mt-1 h-4 w-4 flex-none', colors.icon)} />
-      <div className="[&>:first-child]:mt-0 [&>:last-child]:mb-0">
-        {children}
-      </div>
-    </div>
-  )
+    return (
+        <div className={clsx('my-6 flex gap-2.5 rounded-2xl border p-4 leading-6', colors.container)}>
+            <InfoIcon className={clsx('mt-1 h-4 w-4 flex-none', colors.icon)} />
+            <div className="[&>:first-child]:mt-0 [&>:last-child]:mb-0">{children}</div>
+        </div>
+    )
 }
 
 export function Row({ children }: { children: React.ReactNode }) {
