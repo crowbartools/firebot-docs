@@ -1,47 +1,238 @@
+export const metadata = {
+  title: 'Viewers',
+  description: 'Documentation for viewer API endpoints.',
+}
+
 # Viewers
 
-## **GET** `/viewers`
-
-#### Description:
-
-Retrieves a list of all users with their usernames and IDs.
-
-#### Example Response:
-
-Retrieves a list of all users with their usernames and IDs.
-
-```json
-[
-  {
-    "id": "1000638563",
-    "username": "ebiggz",
-    "displayName": "ebiggz"
-  },
-  {
-    "id": "1000678901",
-    "username": "johnsmith92",
-    "displayName": "johnsmith92"
-  }
-]
-```
+The Viewers API provides endpoints for managing viewer metadata, currency, and custom roles.
 
 ---
 
-## **GET** `/viewers/export`
+## List all viewers  {{ tag: 'GET', label: '/viewers' }}
 
-#### Description:
+<Row>
+  <Col>
+    Retrieves a list of all users with their usernames and IDs.
+  </Col>
 
-Exports all user data as JSON, including expanded user currency information.
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/viewers">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/viewers
+    ```
+    </CodeGroup>
 
-#### Example Response:
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "1000638563",
+        "username": "ebiggz",
+        "displayName": "ebiggz"
+      },
+      {
+        "id": "1000678901",
+        "username": "johnsmith92",
+        "displayName": "johnsmith92"
+      }
+    ]
+    ```
+  </Col>
+</Row>
 
-```json
-[
-  {
-    "id": "1000638593",
-    "username": "ebiggz",
-    "displayName": "ebiggz",
-    "currency": {
+---
+
+## Export all viewers  {{ tag: 'GET', label: '/viewers/export' }}
+
+<Row>
+  <Col>
+    Exports all user data as JSON, including expanded user currency information.
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/viewers/export">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/viewers/export
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "1000638593",
+        "username": "ebiggz",
+        "displayName": "ebiggz",
+        "currency": {
+          "d073da00-a726-11e9-a874-7de9c8544807": {
+            "id": "d073da00-a726-11e9-a874-7de9c8544807",
+            "name": "points",
+            "amount": 150
+          },
+          "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
+            "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
+            "name": "coins",
+            "amount": 130
+          }
+        }
+      },
+      {
+        "id": "1000678901",
+        "username": "johnsmith92",
+        "displayName": "johnsmith92",
+        "currency": {
+          "d073da00-a726-11e9-a874-7de9c8544807": {
+            "id": "d073da00-a726-11e9-a874-7de9c8544807",
+            "name": "points",
+            "amount": 150
+          },
+          "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
+            "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
+            "name": "coins",
+            "amount": 130
+          }
+        }
+      }
+    ]
+    ```
+  </Col>
+</Row>
+
+---
+
+## Retrieve a viewer  {{ tag: 'GET', label: '/viewers/:userIdOrName' }}
+
+<Row>
+  <Col>
+    Retrieves metadata for a specific user based on `userId` (or `username` if specified).
+
+    ### URL Parameters
+    <Properties>
+      <Property name="userIdOrName" type="string" required>
+        The user ID or username of the viewer to retrieve.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/viewers/:userIdOrName">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/viewers/1000638593
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": "1000638593",
+      "username": "sapherydesing",
+      "displayName": "sapherydesing",
+      "customRoles": ["coolPeople", "partyPeople"]
+    }
+    ```
+  </Col>
+</Row>
+
+---
+
+## Update viewer metadata  {{ tag: 'POST', label: '/viewers/:userId/metadata/:metadataKey' }}
+
+<Row>
+  <Col>
+    Updates the value of a metadata key for a specific user.
+
+    ### URL Parameters
+    <Properties>
+      <Property name="userId" type="string" required>
+        The user ID of the viewer to update.
+      </Property>
+      <Property name="metadataKey" type="string" required>
+        The metadata key to update.
+      </Property>
+    </Properties>
+
+    ### Body Parameters
+    <Properties>
+      <Property name="data" type="string" required>
+        The new value for the metadata key.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/viewers/:userId/metadata/:metadataKey">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/viewers/1000638593/metadata/someKey -d '{"data": "someValue"}'
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "status": "success",
+      "message": "Metadata updated successfully"
+    }
+    ```
+  </Col>
+</Row>
+
+---
+
+## Delete viewer metadata  {{ tag: 'DELETE', label: '/viewers/:userId/metadata/:metadataKey' }}
+
+<Row>
+  <Col>
+    Removes a metadata key for a specific user.
+
+    ### URL Parameters
+    <Properties>
+      <Property name="userId" type="string" required>
+        The user ID of the viewer to update.
+      </Property>
+      <Property name="metadataKey" type="string" required>
+        The metadata key to remove.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="DELETE" label="/viewers/:userId/metadata/:metadataKey">
+    ```bash {{ title: 'cURL' }}
+    curl -X DELETE http://localhost:7472/api/v1/viewers/1000638593/metadata/someKey
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "status": "success",
+      "message": "Metadata key removed successfully"
+    }
+    ```
+  </Col>
+</Row>
+
+---
+
+## Retrieve viewer currencies  {{ tag: 'GET', label: '/viewers/:userId/currency' }}
+
+<Row>
+  <Col>
+    Retrieves the list of currencies associated with a specific user.
+
+    ### URL Parameters
+    <Properties>
+      <Property name="userId" type="string" required>
+        The user ID of the viewer to retrieve currency for.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/viewers/:userId/currency">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/viewers/1000638593/currency
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
       "d073da00-a726-11e9-a874-7de9c8544807": {
         "id": "d073da00-a726-11e9-a874-7de9c8544807",
         "name": "points",
@@ -53,186 +244,183 @@ Exports all user data as JSON, including expanded user currency information.
         "amount": 130
       }
     }
-  },
-  {
-    "id": "1000678901",
-    "username": "johnsmith92",
-    "displayName": "johnsmith92",
-    "currency": {
-      "d073da00-a726-11e9-a874-7de9c8544807": {
-        "id": "d073da00-a726-11e9-a874-7de9c8544807",
-        "name": "points",
-        "amount": 150
-      },
-      "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
-        "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
-        "name": "coins",
-        "amount": 130
-      }
+    ```
+  </Col>
+</Row>
+
+---
+
+## Retrieve viewer currency  {{ tag: 'GET', label: '/viewers/:userId/currency/:currencyId' }}
+
+<Row>
+  <Col>
+    Retrieves details for a specific currency associated with a user.
+
+    ### URL Parameters
+    <Properties>
+      <Property name="userId" type="string" required>
+        The user ID of the viewer to retrieve currency for.
+      </Property>
+      <Property name="currencyId" type="string" required>
+        The currency ID to retrieve.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/viewers/:userId/currency/:currencyId">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/viewers/1000638593/currency/d073da00-a726-11e9-a874-7de9c8544807
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": "d073da00-a726-11e9-a874-7de9c8544807",
+      "name": "points",
+      "amount": 150
     }
-  }
-]
-```
+    ```
+  </Col>
+</Row>
 
 ---
 
-## **GET** `/viewers/:userId`
+## Update viewer currency  {{ tag: 'POST', label: '/viewers/:userId/currency/:currencyId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Adjusts the amount of a specific currency for the user.
 
-Retrieves metadata for a specific user based on `userId` (or `username` if specified).
+    ### URL Parameters
+    <Properties>
+      <Property name="userId" type="string" required>
+        The user ID of the viewer to update currency for.
+      </Property>
+      <Property name="currencyId" type="string" required>
+        The currency ID to update.
+      </Property>
+    </Properties>
 
-#### Example Response:
+    ### Body Parameters
+    <Properties>
+      <Property name="amount" type="number" required>
+        The new amount for the currency.
+      </Property>
+    </Properties>
+  </Col>
 
-```json
-{
-  "id": "1000638593",
-  "username": "sapherydesing",
-  "displayName": "sapherydesing",
-  "customRoles": ["coolPeople", "partyPeople"]
-}
-```
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/viewers/:userId/currency/:currencyId">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/viewers/1000638593/currency/d073da00-a726-11e9-a874-7de9c8544807 -d '{"amount": 200}'
+    ```
+    </CodeGroup>
 
----
-
-## **POST** `/viewers/:userId/metadata/:metadataKey`
-
-## **PUT** `/viewers/:userId/metadata/:metadataKey`
-
-#### Description:
-
-Updates the value of a metadata key for a specific user.
-
-#### Example Response:
-
-```json
-{
-  "status": "success",
-  "message": "Metadata updated successfully"
-}
-```
-
----
-
-## **DELETE** `/viewers/:userId/metadata/:metadataKey`
-
-#### Description:
-
-Removes a metadata key for a specific user.
-
-#### Example Response:
-
-```json
-{
-  "status": "success",
-  "message": "Metadata key removed successfully"
-}
-```
+    ```json {{ title: 'Response' }}
+    {
+      "status": "success",
+      "message": "Currency updated successfully"
+    }
+    ```
+  </Col>
+</Row>
 
 ---
 
-## **GET** `/viewers/:userId/currency`
+## Retrieve viewer custom roles  {{ tag: 'GET', label: '/viewers/:userId/customRoles' }}
 
-#### Description:
+<Row>
+  <Col>
+    Retrieves a list of custom roles associated with a specific user.
 
-Retrieves the list of currencies associated with a specific user.
+    ### URL Parameters
+    <Properties>
+      <Property name="userId" type="string" required>
+        The user ID of the viewer to retrieve custom roles for.
+      </Property>
+    </Properties>
+  </Col>
 
-#### Example Response:
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/viewers/:userId/customRoles">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/viewers/1000638593/customRoles
+    ```
+    </CodeGroup>
 
-```json
-{
-  "d073da00-a726-11e9-a874-7de9c8544807": {
-    "id": "d073da00-a726-11e9-a874-7de9c8544807",
-    "name": "points",
-    "amount": 150
-  },
-  "3eba5d80-4297-11ee-86eb-d7d7d2938882": {
-    "id": "3eba5d80-4297-11ee-86eb-d7d7d2938882",
-    "name": "coins",
-    "amount": 130
-  }
-}
-```
-
----
-
-## **GET** `/viewers/:userId/currency/:currencyId`
-
-#### Description:
-
-Retrieves details for a specific currency associated with a user.
-
-#### Example Response:
-
-```json
-{
-  "id": "d073da00-a726-11e9-a874-7de9c8544807",
-  "name": "points",
-  "amount": 150
-}
-```
+    ```json {{ title: 'Response' }}
+    ["coolPeople", "partyPeople"]
+    ```
+  </Col>
+</Row>
 
 ---
 
-## **POST** `/viewers/:userId/currency/:currencyId`
+## Add viewer to custom role  {{ tag: 'POST', label: '/viewers/:userId/customRoles/:customRoleId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Adds a user to a custom role.
 
-Adjusts the amount of a specific currency for the user.
+    ### URL Parameters
+    <Properties>
+      <Property name="userId" type="string" required>
+        The user ID of the viewer to add to the custom role.
+      </Property>
+      <Property name="customRoleId" type="string" required>
+        The ID of the custom role to add the user to.
+      </Property>
+    </Properties>
+  </Col>
 
-#### Example Response:
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/viewers/:userId/customRoles/:customRoleId">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/viewers/1000638593/customRoles/coolPeople
+    ```
+    </CodeGroup>
 
-```json
-{
-  "status": "success",
-  "message": "Currency updated successfully"
-}
-```
-
----
-
-## **GET** `/viewers/:userId/customRoles`
-
-#### Description:
-
-Retrieves a list of custom roles associated with a specific user.
-
-#### Example Response:
-
-```json
-["coolPeople", "partyPeople"]
-```
-
----
-
-## **POST** `/viewers/:userId/customRoles/:customRoleId`
-
-#### Description:
-
-Adds a user to a custom role.
-
-#### Example Response (JSON):
-
-```json
-{
-  "status": "success",
-  "message": "User added to custom role"
-}
-```
+    ```json {{ title: 'Response' }}
+    {
+      "status": "success",
+      "message": "User added to custom role"
+    }
+    ```
+  </Col>
+</Row>
 
 ---
 
-## **DELETE** `/viewers/:userId/customRoles/:customRoleId`
+## Remove viewer from custom role  {{ tag: 'DELETE', label: '/viewers/:userId/customRoles/:customRoleId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Removes a user from a custom role.
 
-Removes a user from a custom role.
+    ### URL Parameters
+    <Properties>
+      <Property name="userId" type="string" required>
+        The user ID of the viewer to remove from the custom role.
+      </Property>
+      <Property name="customRoleId" type="string" required>
+        The ID of the custom role to remove the user from.
+      </Property>
+    </Properties>
+  </Col>
 
-#### Example Response:
+  <Col sticky>
+    <CodeGroup title="Request" tag="DELETE" label="/viewers/:userId/customRoles/:customRoleId">
+    ```bash {{ title: 'cURL' }}
+    curl -X DELETE http://localhost:7472/api/v1/viewers/1000638593/customRoles/coolPeople
+    ```
+    </CodeGroup>
 
-```json
-{
-  "status": "success",
-  "message": "User removed from custom role"
-}
-```
+    ```json {{ title: 'Response' }}
+    {
+      "status": "success",
+      "message": "User removed from custom role"
+    }
+    ```
+  </Col>
+</Row>

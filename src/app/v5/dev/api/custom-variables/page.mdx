@@ -1,76 +1,126 @@
+export const metadata = {
+  title: 'Custom Variables',
+  description: 'Documentation for custom variable API endpoints.',
+}
+
 # Custom Variables
 
-## `GET /custom-variables`
+Custom Variables are created by the Custom Variable effect and can be used to store arbitrary data.
 
-#### Description:
-Fetches all custom variables in the system.
+---
 
-#### Example Response (JSON):
-```json
-[
+## List all custom variables {{ tag: 'GET', label: '/custom-variables' }}
+
+<Row>
+  <Col>
+    Lists all custom variables in the system.
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/custom-variables">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/custom-variables
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    [
+        {
+            "name": "var1",
+            "data": "some data",
+            "ttl": 3600
+        },
+        {
+            "name": "var2",
+            "data": "more data",
+            "ttl": 0
+        }
+    ]
+    ```
+    </Col>
+</Row>
+
+---
+
+## Retrieve a custom variable {{ tag: 'GET', label: '/custom-variables/:variableName' }}
+
+<Row>
+  <Col>
+    Fetches the value of a specific custom variable by its `variableName`.
+    
+    ### URL parameters
+
+    <Properties>
+      <Property name="variableName" type="string">
+        The name of the custom variable to retrieve.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/custom-variables/:variableName">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/custom-variables/var1
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
     {
         "name": "var1",
         "data": "some data",
         "ttl": 3600
-    },
-    {
-        "name": "var2",
-        "data": "more data",
-        "ttl": 0
     }
-]
-```
+    ```
+  </Col>
+</Row>
 
-## `GET /custom-variables/:variableName`
+---
 
-#### Description:
-Fetches the value of a specific custom variable by its `variableName`.
+## Set a custom variable {{ tag: 'POST', label: '/custom-variables/:variableName' }}
 
-#### URL Parameters:
-- `variableName` `string`: The name of the custom variable to retrieve.
+<Row>
+  <Col>
+    Sets a custom variable by its `variableName`
+    
+    ### URL parameters
 
-#### Example Request (URL):
-```
-GET /custom-variables/var1
-```
+    <Properties>
+      <Property name="variableName" type="string">
+        The name of the custom variable to set.
+      </Property>
+    </Properties>
 
-#### Example Response (JSON):
-```json
-{
-    "name": "var1",
-    "data": "some data",
-    "ttl": 3600
-}
-```
+    ### Request Body (JSON)
 
-## `POST /custom-variables/:variableName`
+    <Properties>
+      <Property name="data" type="any">
+        The new value for the variable.
+      </Property>
+      <Property name="ttl" type="number">
+        Optional time-to-live for the variable in seconds. Set to 0 for no expiration.
+      </Property>
+    </Properties>
+  </Col>
 
-#### Description:
-Sets a custom variable by its `variableName`. The request body should contain the data and optional TTL (time-to-live)
-for the variable.
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/custom-variables/:variableName">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/custom-variables/var1 -d '{"data": "new value", "ttl": 3600}'
+    ```
+    </CodeGroup>
 
-#### URL Parameters:
-- `variableName` `string`: The name of the custom variable to set.
-
-#### Request Body (JSON):
-```json
-{
-    "data": "new value",
-    "ttl": 3600
-}
-```
-
-#### Example Response (Success):
-```json
-{
-    "status": "success"
-}
-```
-
-#### Example Response (Error):
-```json
-{
-    "status": "error",
-    "message": "No data provided"
-}
-```
+    <CodeGroup title="Response">
+    ```json {{ title: 'Success' }}
+    {
+        "status": "success"
+    }
+    ```
+    ```json {{ title: 'Error' }}
+    {
+        "status": "error",
+        "message": "No data provided"
+    }
+    ```
+    </CodeGroup>
+  </Col>
+</Row>

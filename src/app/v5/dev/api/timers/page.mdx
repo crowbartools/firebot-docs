@@ -1,105 +1,191 @@
-# Timers API
+export const metadata = {
+  title: 'Timers',
+  description:
+    'Documentation for the timer API endpoints.',
+}
 
-## `GET /timers`
+# Timers
 
-#### Description:
-
-Fetches all available timers.
-
-#### Example Request:
-
-```
-GET /timers
-```
-
-#### Example Response:
-
-```json
-[
-  {
-    "id": "timer1",
-    "name": "Timer 1",
-    "active": true
-  },
-  {
-    "id": "timer2",
-    "name": "Timer 2",
-    "active": false
-  }
-]
-```
+The timers API allows you to manage timers in Firebot.
 
 ---
 
-## `GET /timers/:timerId`
+## List all timers  {{ tag: 'GET', label: '/timers' }}
 
-#### Description:
+<Row>
+  <Col>
+    Retrieves a list of all timers
+  </Col>
 
-Fetches a specific timer by its `timerId`.
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/timers">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/timers
+    ```
+    </CodeGroup>
 
-#### Request Parameters:
-
-- `timerId`: The unique identifier of the timer.
-
-#### Example Request:
-
-```
-GET /timers/timer1
-```
-
-#### Example Response:
-
-```json
-{
-  "id": "timer1",
-  "name": "Timer 1",
-  "active": true
-}
-```
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "timer1",
+        "name": "Timer 1",
+        "active": true
+      },
+      {
+        "id": "timer2",
+        "name": "Timer 2",
+        "active": false
+      }
+    ]
+    ```
+  </Col>
+</Row>
 
 ---
 
-## `POST /timers/:timerId/:action`
+## Retrieve a timer  {{ tag: 'GET', label: '/timers/:timerId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Fetches a specific timer by its `timerId`.
 
-Performs an action on the specified timer.
+    ### URL Parameters
+    <Properties>
+      <Property name="timerId" type="string" required>
+        The unique identifier of the timer
+      </Property>
+    </Properties>
+  </Col>
 
-#### Request Parameters:
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/timers/timer1">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/timers/timer1
+    ```
+    </CodeGroup>
 
-- `timerId`: The unique identifier of the timer to be modified.
-- `action`: The action to perform on the timer. Can be one of the following:
-- `enable`: Enables the timer.
-- `disable`: Disables the timer.
-- `toggle`: Toggles the active state of the timer.
-- `clear`: Clears the timer's interval.
+    ```json {{ title: 'Response' }}
+    {
+      "id": "timer1",
+      "name": "Timer 1",
+      "active": true
+    }
+    ```
+  </Col>
+</Row>
 
-#### Example Request:
+---
 
-```
-POST /timers/timer1/enable
-```
+## Enable a timer  {{ tag: 'POST', label: '/timers/:timerId/enable' }}
 
-#### Example Response:
+<Row>
+  <Col>
+    Enables a timer.
 
-```json
-{
-  "status": "success",
-  "message": "Timer enabled"
-}
-```
+    ### URL Parameters
+    <Properties>
+      <Property name="timerId" type="string" required>
+        The unique identifier of the timer to enable
+      </Property>
+    </Properties>
+  </Col>
 
-#### Example Request:
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/timers/timer1/enable">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/timers/timer1/enable
+    ```
+    </CodeGroup>
 
-```
-POST /timers/timer1/clear
-```
+    ```html {{ title: 'Response' }}
+    HTTP Status 200 No Content
+    ```
+  </Col>
+</Row>
 
-#### Example Response:
+---
 
-```json
-{
-  "status": "success",
-  "message": "Timer interval cleared"
-}
-```
+## Disable a timer  {{ tag: 'POST', label: '/timers/:timerId/disable' }}
+
+<Row>
+  <Col>
+    Disables a timer.
+
+    ### URL Parameters
+    <Properties>
+      <Property name="timerId" type="string" required>
+        The unique identifier of the timer to disable
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/timers/timer1/disable">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/timers/timer1/disable
+    ```
+    </CodeGroup>
+
+    ```html {{ title: 'Response' }}
+    HTTP Status 200 No Content
+    ```
+  </Col>
+</Row>
+
+---
+
+## Toggle a timer  {{ tag: 'POST', label: '/timers/:timerId/toggle' }}
+
+<Row>
+  <Col>
+    Toggles the active state of a timer.
+
+    ### URL Parameters
+    <Properties>
+      <Property name="timerId" type="string" required>
+        The unique identifier of the timer to toggle
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/timers/timer1/toggle">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/timers/timer1/toggle
+    ```
+    </CodeGroup>
+
+    ```html {{ title: 'Response' }}
+    HTTP Status 200 No Content
+    ```
+  </Col>
+</Row>
+
+---
+
+## Clear a timer  {{ tag: 'POST', label: '/timers/:timerId/clear' }}
+
+<Row>
+  <Col>
+    Clears a timer's interval.
+
+    ### URL Parameters
+    <Properties>
+      <Property name="timerId" type="string" required>
+        The unique identifier of the timer to clear
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/timers/timer1/clear">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/timers/timer1/clear
+    ```
+    </CodeGroup>
+
+    ```html {{ title: 'Response' }}
+    HTTP Status 200 No Content
+    ```
+  </Col>
+</Row>

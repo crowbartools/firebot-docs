@@ -1,170 +1,206 @@
-# Effect Queue API
+export const metadata = {
+  title: 'Effect Queues',
+  description: 'Documentation for effect queue API endpoints.',
+}
 
-## `GET /queues`
+# Effect Queues
 
-#### Description:
-
-Fetches all available effect queues.
-
-#### Example Request:
-
-```
-GET /queues
-```
-
-#### Example Response:
-
-```json
-[
-  {
-    "id": "queue1",
-    "name": "Queue 1",
-    "status": "active"
-  },
-  {
-    "id": "queue2",
-    "name": "Queue 2",
-    "status": "paused"
-  }
-]
-```
+The effect queues API allows you to manage effect queues in Firebot.
 
 ---
 
-## `GET /queues/:queueId`
+## List all effect queues  {{ tag: 'GET', label: '/queues' }}
 
-#### Description:
+<Row>
+  <Col>
+    Retrieves a list of all effect queues
+  </Col>
 
-Fetches a specific effect queue by its `queueId`.
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/queues">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/queues
+    ```
+    </CodeGroup>
 
-#### Request Parameters:
-
-- `queueId`: The unique identifier of the queue.
-
-#### Example Request:
-
-```
-GET /queues/queue1
-```
-
-#### Example Response:
-
-```json
-{
-  "id": "queue1",
-  "name": "Queue 1",
-  "status": "active"
-}
-```
-
----
-
-## `POST /queues/:queueId/pause`
-
-#### Description:
-
-Pauses the specified effect queue.
-
-#### Request Parameters:
-
-- `queueId`: The unique identifier of the queue to be paused.
-
-#### Example Request:
-
-```
-POST /queues/queue1/pause
-```
-
-#### Example Response:
-
-```json
-{
-  "id": "queue1",
-  "name": "Queue 1",
-  "status": "paused"
-}
-```
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "queue1",
+        "name": "Queue 1",
+        "status": "active"
+      },
+      {
+        "id": "queue2",
+        "name": "Queue 2",
+        "status": "paused"
+      }
+    ]
+    ```
+  </Col>
+</Row>
 
 ---
 
-## `POST /queues/:queueId/resume`
+## Retrieve an effect queue  {{ tag: 'GET', label: '/queues/:queueId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Fetches a specific effect queue by its `queueId`.
 
-Resumes the specified effect queue.
+    ### URL Parameters
+    <Properties>
+      <Property name="queueId" type="string" required>
+        The unique identifier of the queue
+      </Property>
+    </Properties>
+  </Col>
 
-#### Request Parameters:
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/queues/queue1">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/queues/queue1
+    ```
+    </CodeGroup>
 
-- `queueId`: The unique identifier of the queue to be resumed.
-
-#### Example Request:
-
-```
-POST /queues/queue1/resume
-```
-
-#### Example Response:
-
-```json
-{
-  "id": "queue1",
-  "name": "Queue 1",
-  "status": "active"
-}
-```
-
----
-
-## `POST /queues/:queueId/toggle`
-
-#### Description:
-
-Toggles the status of the specified effect queue (pauses if active, resumes if paused).
-
-#### Request Parameters:
-
-- `queueId`: The unique identifier of the queue to be toggled.
-
-#### Example Request:
-
-```
-POST /queues/queue1/toggle
-```
-
-#### Example Response:
-
-```json
-{
-  "id": "queue1",
-  "name": "Queue 1",
-  "status": "paused"
-}
-```
+    ```json {{ title: 'Response' }}
+    {
+      "id": "queue1",
+      "name": "Queue 1",
+      "status": "active"
+    }
+    ```
+  </Col>
+</Row>
 
 ---
 
-## `POST /queues/:queueId/clear`
+## Pause an effect queue  {{ tag: 'POST', label: '/queues/:queueId/pause' }}
 
-#### Description:
+<Row>
+  <Col>
+    Pauses the specified effect queue.
 
-Clears the specified effect queue (removes the queue).
+    ### URL Parameters
+    <Properties>
+      <Property name="queueId" type="string" required>
+        The unique identifier of the queue
+      </Property>
+    </Properties>
+  </Col>
 
-#### Request Parameters:
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/queues/queue1/pause">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/queues/queue1/pause
+    ```
+    </CodeGroup>
 
-- `queueId`: The unique identifier of the queue to be cleared.
+    ```json {{ title: 'Response' }}
+    {
+      "id": "queue1",
+      "name": "Queue 1",
+      "status": "paused"
+    }
+    ```
+  </Col>
+</Row>
 
-#### Example Request:
+---
 
-```
-POST /queues/queue1/clear
-```
+## Resume an effect queue  {{ tag: 'POST', label: '/queues/:queueId/resume' }}
 
-#### Example Response:
+<Row>
+  <Col>
+    Resumes the specified effect queue.
 
-```json
-{
-  "id": "queue1",
-  "name": "Queue 1",
-  "status": "removed"
-}
-```
+    ### URL Parameters
+    <Properties>
+      <Property name="queueId" type="string" required>
+        The unique identifier of the queue
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/queues/queue1/resume">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/queues/queue1/resume
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": "queue1",
+      "name": "Queue 1",
+      "status": "active"
+    }
+    ```
+  </Col>
+</Row>
+
+---
+
+## Toggle an effect queue  {{ tag: 'POST', label: '/queues/:queueId/toggle' }}
+
+<Row>
+  <Col>
+    Toggles the status of the specified effect queue (pauses if active, resumes if paused).
+
+    ### URL Parameters
+    <Properties>
+      <Property name="queueId" type="string" required>
+        The unique identifier of the queue
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/queues/queue1/toggle">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/queues/queue1/toggle
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": "queue1",
+      "name": "Queue 1",
+      "status": "paused"
+    }
+    ```
+  </Col>
+</Row>
+
+---
+
+## Clear an effect queue  {{ tag: 'POST', label: '/queues/:queueId/clear' }}
+
+<Row>
+  <Col>
+    Clears the specified effect queue (removes the queue).
+
+    ### URL Parameters
+    <Properties>
+      <Property name="queueId" type="string" required>
+        The unique identifier of the queue
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/queues/queue1/clear">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/queues/queue1/clear
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": "queue1",
+      "name": "Queue 1",
+      "status": "removed"
+    }
+    ```
+  </Col>
+</Row>

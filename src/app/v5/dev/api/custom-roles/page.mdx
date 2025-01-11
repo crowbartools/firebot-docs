@@ -1,169 +1,226 @@
-# Custom Roles API
+export const metadata = {
+  title: 'Custom Roles',
+  description: 'Documentation for custom roles API endpoints.',
+}
 
-## `GET /customRoles`
+# Custom Roles
 
-#### Description:
-
-Fetches a list of all custom roles with the associated viewers.
-
-#### Example Response (JSON):
-
-```json
-[
-  {
-    "id": "role1",
-    "name": "Moderator",
-    "viewers": ["viewer1", "viewer2"]
-  },
-  {
-    "id": "role2",
-    "name": "VIP",
-    "viewers": ["viewer3"]
-  }
-]
-```
+The Custom Roles API allows you to create, manage, and retrieve custom roles for viewers.
 
 ---
 
-## `GET /customRoles/:customRoleId`
+## List all custom roles  {{ tag: 'GET', label: '/customRoles' }}
 
-#### Description:
+<Row>
+  <Col>
+    List all custom roles with associated viewers.
+  </Col>
 
-Fetches a specific custom role by its ID. Returns role details and the list of viewers associated with it.
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/customRoles">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/customRoles
+    ```
+    </CodeGroup>
 
-#### Example Response (JSON):
-
-```json
-{
-  "id": "role1",
-  "name": "Moderator",
-  "viewers": ["viewer1", "viewer2"]
-}
-```
-
-#### Example Error Response (if the role does not exist):
-
-```json
-{
-  "status": "error",
-  "message": "Custom role 'role1' not found"
-}
-```
-
----
-
-## `POST /customRoles/:customRoleId/viewer/:userId`
-
-#### Description:
-
-Adds a user to a custom role. You can specify the user by either `userId` or `username` via query parameter.
-
-#### Request Parameters:
-
-- `customRoleId`: The ID of the custom role to which the user is being added.
-- `userId`: The ID of the viewer to be added to the role.
-
-#### Query Parameter:
-
-- `username`: Set to "true" if the user should be found by `username` instead of `userId`.
-
-#### Example Request (URL):
-
-```
-POST /customRoles/role1/viewer/viewer1?username=true
-```
-
-#### Example Success Response:
-
-```json
-{
-  "status": "success",
-  "message": "Viewer added to custom role"
-}
-```
-
-#### Example Error Response (if user or custom role does not exist):
-
-```json
-{
-  "status": "error",
-  "message": "Specified viewer does not exist"
-}
-```
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "role1",
+        "name": "Moderator",
+        "viewers": ["viewer1", "viewer2"]
+      },
+      {
+        "id": "role2",
+        "name": "VIP",
+        "viewers": ["viewer3"]
+      }
+    ]
+    ```
+  </Col>
+</Row>
 
 ---
 
-### `DELETE /customRoles/:customRoleId/viewer/:userId`
+## Retrieve a custom role  {{ tag: 'GET', label: '/customRoles/:customRoleId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Fetches a specific custom role by its ID. Returns role details and the list of viewers associated with it.
 
-Removes a user from a custom role. You can specify the user by either `userId` or `username` via query parameter.
+    ### URL Parameters
+    <Properties>
+      <Property name="customRoleId" type="string" required>
+        The ID of the custom role to retrieve.
+      </Property>
+    </Properties>
+  </Col>
 
-#### Request Parameters:
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/customRoles/:customRoleId">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/customRoles/role1
+    ```
+    </CodeGroup>
 
-- `customRoleId`: The ID of the custom role to which the user is being removed from.
-- `userId`: The ID of the viewer to be removed from the role.
+    <CodeGroup title="Response">
+    ```json {{ title: 'Success' }}
+    {
+      "id": "role1",
+      "name": "Moderator",
+      "viewers": ["viewer1", "viewer2"]
+    }
+    ```
+    ```json {{ title: 'Error' }}
+    {
+      "status": "error",
+      "message": "Custom role 'role1' not found"
+    }
+    ```
+    </CodeGroup>
 
-#### Query Parameter:
-
-- `username`: Set to "true" if the user should be found by `username` instead of `userId`.
-
-#### Example Request (URL):
-
-```
-DELETE /customRoles/role1/viewer/viewer1?username=true
-```
-
-#### Example Success Response:
-
-```json
-{
-  "status": "success",
-  "message": "Viewer removed from custom role"
-}
-```
-
-#### Example Error Response (if user or custom role does not exist):
-
-```json
-{
-  "status": "error",
-  "message": "Specified viewer does not exist"
-}
-```
+  </Col>
+</Row>
 
 ---
 
-### `DELETE /customRoles/:customRoleId/clear`
+## Add user to custom role  {{ tag: 'POST', label: '/customRoles/:customRoleId/viewer/:userIdOrName' }}
 
-#### Description:
+<Row>
+  <Col>
+    Adds a user to a custom role.
 
-Removes all viewers from a custom role.
+    ### URL Parameters
+    <Properties>
+      <Property name="customRoleId" type="string" required>
+        The ID of the custom role to which the user is being added.
+      </Property>
+      <Property name="userIdOrName" type="string" required>
+        The ID or username of the viewer to be added to the role.
+      </Property>
+    </Properties>
 
-#### Request Parameters:
+    ### Query Parameters
+    <Properties>
+      <Property name="username" type="boolean">
+        Set to "true" if the user should be found by `username` instead of `userId`.
+      </Property>
+    </Properties>
+  </Col>
 
-- `customRoleId`: The ID of the custom role from which all viewers are being removed.
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/customRoles/:customRoleId/viewer/:userId">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/customRoles/role1/viewer/viewer1?username=true
+    ```
+    </CodeGroup>
 
-#### Example Request (URL):
+    <CodeGroup title="Response">
+    ```json {{ title: 'Success' }}
+    {
+      "status": "success",
+      "message": "Viewer added to custom role"
+    }
+    ```
+    ```json {{ title: 'Error' }}
+    {
+      "status": "error",
+      "message": "Specified viewer does not exist"
+    }
+    ```
+    </CodeGroup>
 
-```
-DELETE /customRoles/role1/clear
-```
+  </Col>
+</Row>
 
-#### Example Success Response:
+---
 
-```json
-{
-  "status": "success",
-  "message": "All viewers removed from the custom role"
-}
-```
+## Remove user from custom role  {{ tag: 'DELETE', label: '/customRoles/:customRoleId/viewer/:userId' }}
 
-#### Example Error Response (if custom role does not exist):
+<Row>
+  <Col>
+    Removes a user from a custom role. You can specify the user by either `userId` or `username` via query parameter.
 
-```json
-{
-  "status": "error",
-  "message": "Specified custom role does not exist"
-}
-```
+    ### URL Parameters
+    <Properties>
+      <Property name="customRoleId" type="string" required>
+        The ID of the custom role to which the user is being removed from.
+      </Property>
+      <Property name="userId" type="string" required>
+        The ID of the viewer to be removed from the role.
+      </Property>
+    </Properties>
+
+    ### Query Parameters
+    <Properties>
+      <Property name="username" type="boolean">
+        Set to "true" if the user should be found by `username` instead of `userId`.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="DELETE" label="/customRoles/:customRoleId/viewer/:userId">
+    ```bash {{ title: 'cURL' }}
+    curl -X DELETE http://localhost:7472/api/v1/customRoles/role1/viewer/viewer1?username=true
+    ```
+    </CodeGroup>
+
+    <CodeGroup title="Response">
+    ```json {{ title: 'Success' }}
+    {
+      "status": "success",
+      "message": "Viewer removed from custom role"
+    }
+    ```
+    ```json {{ title: 'Error' }}
+    {
+      "status": "error",
+      "message": "Specified viewer does not exist"
+    }
+    ```
+    </CodeGroup>
+
+  </Col>
+</Row>
+
+---
+
+## Remove all viewers from custom role  {{ tag: 'DELETE', label: '/customRoles/:customRoleId/clear' }}
+
+<Row>
+  <Col>
+    Removes all viewers from a custom role.
+
+    ### URL Parameters
+    <Properties>
+      <Property name="customRoleId" type="string" required>
+        The ID of the custom role from which all viewers are being removed.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="DELETE" label="/customRoles/:customRoleId/clear">
+    ```bash {{ title: 'cURL' }}
+    curl -X DELETE http://localhost:7472/api/v1/customRoles/role1/clear
+    ```
+    </CodeGroup>
+
+    <CodeGroup title="Response">
+    ```json {{ title: 'Success' }}
+    {
+      "status": "success",
+      "message": "All viewers removed from the custom role"
+    }
+    ```
+    ```json {{ title: 'Error' }}
+    {
+      "status": "error",
+      "message": "Specified custom role does not exist"
+    }
+    ```
+    </CodeGroup>
+
+  </Col>
+</Row>

@@ -1,67 +1,84 @@
-# Variables
+export const metadata = {
+  title: 'Replace Variables',
+  description: 'Documentation for replace variables API endpoints.',
+}
 
-## `GET /variables`
+# Replace Variables
 
-#### Description:
+Replace Variables are used to retrieve data from Firebot in text fields and other places where you can use the $variableName syntax.
 
-Fetches a list of all replace variables, sorted by their `handle` value.
+---
 
-#### Example Response:
+## List all replace variables  {{ tag: 'GET', label: '/variables' }}
 
-```json
-[
-  {
-    "definition": {
-      "handle": "example_variable_name",
-      "aliases": ["alias1", "alias2"],
-      "usage": "Example usage description",
-      "description": "Example variable definition description",
-      "examples": [
-        {
-          "usage": "example usage 1",
-          "description": "Example description 1"
+<Row>
+  <Col>
+    List all available replace variable definitions.
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/variables">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/variables
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "definition": {
+          "handle": "example_variable_name",
+          "aliases": ["alias1", "alias2"],
+          "usage": "Example usage description",
+          "description": "Example variable definition description",
+          "examples": [
+            {
+              "usage": "example usage 1",
+              "description": "Example description 1"
+            },
+            {
+              "usage": "example usage 2",
+              "description": "Example description 2"
+            }
+          ],
+          "categories": [
+            "common",
+            "trigger based",
+            "user based",
+            "text",
+            "numbers",
+            "advanced",
+            "obs",
+            "integrations"
+          ],
+          "triggers": {
+            "command": true,
+            "custom_script": true,
+            "startup_script": false,
+            "api": true,
+            "event": ["event1", "event2"],
+            "hotkey": false,
+            "timer": true,
+            "counter": false,
+            "preset": true,
+            "quick_action": false,
+            "manual": true
+          },
+          "possibleDataOutput": [
+            "null",
+            "bool",
+            "number",
+            "text",
+            "array",
+            "object",
+            "ALL"
+          ],
+          "hidden": false,
+          "spoof": true
         },
-        {
-          "usage": "example usage 2",
-          "description": "Example description 2"
-        }
-      ],
-      "categories": [
-        "common",
-        "trigger based",
-        "user based",
-        "text",
-        "numbers",
-        "advanced",
-        "obs",
-        "integrations"
-      ],
-      "triggers": {
-        "command": true,
-        "custom_script": true,
-        "startup_script": false,
-        "api": true,
-        "event": ["event1", "event2"],
-        "hotkey": false,
-        "timer": true,
-        "counter": false,
-        "preset": true,
-        "quick_action": false,
-        "manual": true
-      },
-      "possibleDataOutput": [
-        "null",
-        "bool",
-        "number",
-        "text",
-        "array",
-        "object",
-        "ALL"
-      ],
-      "hidden": false,
-      "spoof": true
-    },
-    "handle": "ALL"
-  }
-]
-```
+        "handle": "ALL"
+      }
+    ]
+    ```
+    </Col>
+</Row>

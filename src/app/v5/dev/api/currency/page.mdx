@@ -1,153 +1,153 @@
-# Currency API
-
-## `GET /currencies/:currencyName?`
-
-#### Description:
-
-Fetches currency data for a specific currency or all currencies if no currency name is provided.
-
-- If `currencyName` is specified, it will return data for the specified currency.
-- If `currencyName` is not provided, it will return a list of all currencies.
-
-#### Example Request (for a specific currency):
-
-```
-GET /currencies/coin
-```
-
-#### Example Response (for a specific currency):
-
-```json
-{
-  "d073da00-a726-11e9-a874-7de9c8544807": {
-    "id": "d073da00-a726-11e9-a874-7de9c8544807",
-    "name": "coin",
-    "active": true,
-    "payout": 5,
-    "interval": 5,
-    "limit": 1000000,
-    "transfer": "Allow",
-    "bonus": {},
-    "offline": 5,
-    "$$hashKey": "object:35427"
-  }
+export const metadata = {
+  title: 'Currency',
+  description: 'Documentation for currency API endpoints.',
 }
-```
 
-#### Example Request (for all currencies):
+# Currency
 
-```
-GET /currencies
-```
-
-#### Example Response (for all currencies):
-
-```json
-[
-  {
-    "d073da00-a726-11e9-a874-7de9c8544807": {
-      "id": "d073da00-a726-11e9-a874-7de9c8544807",
-      "name": "coin",
-      "active": true,
-      "payout": 5,
-      "interval": 5,
-      "limit": 1000000,
-      "transfer": "Allow",
-      "bonus": {},
-      "offline": 5,
-      "$$hashKey": "object:35427"
-    }
-  },
-  {
-    "d073da00-a726-11e9-a874-7de9c8544807": {
-      "id": "d073da00-a726-11e9-a874-7de9c8544807",
-      "name": "pups",
-      "active": true,
-      "payout": 5,
-      "interval": 5,
-      "limit": 1000000,
-      "transfer": "Allow",
-      "bonus": {},
-      "offline": 5,
-      "$$hashKey": "object:35427"
-    }
-  }
-]
-```
+The Currency API allows you to fetch currency data and top holders for a specific currency.
 
 ---
 
-## `GET /currencies/:currencyName/topHolders`
+## List all currencies  {{ tag: 'GET', label: '/currencies' }}
 
-#### Description:
+<Row>
+  <Col>
+    Retrieves a list of all currencies
+  </Col>
 
-Fetches the top holders of a specific currency. By default, it will return the top 10 holders, but you can specify a
-`count` query parameter to change the number of top holders returned.
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/currencies">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/currencies
+    ```
+    </CodeGroup>
 
-#### Request Parameters:
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "d073da00-a726-11e9-a874-7de9c8544807": {
+          "id": "d073da00-a726-11e9-a874-7de9c8544807",
+          "name": "coin",
+          "active": true,
+          "payout": 5,
+          "interval": 5,
+          "limit": 1000000,
+          "transfer": "Allow",
+          "bonus": {},
+          "offline": 5,
+        }
+      },
+      {
+        "d073da00-a726-11e9-a874-7de9c8544807": {
+          "id": "d073da00-a726-11e9-a874-7de9c8544807",
+          "name": "pups",
+          "active": true,
+          "payout": 5,
+          "interval": 5,
+          "limit": 1000000,
+          "transfer": "Allow",
+          "bonus": {},
+          "offline": 5,
+        }
+      }
+    ]
+    ```
+  </Col>
+</Row>
 
-- `currencyName`: The name of the currency (e.g., "coin", "pups").
-- `count`: (Optional) The number of top holders to return. If not specified, defaults to 10.
+---
 
-#### Example Request (with `count` query parameter):
+## Retrieve a currency  {{ tag: 'GET', label: '/currencies/:currencyName' }}
 
-```
-GET /currencies/pups/topHolders?count=2
-```
+<Row>
+  <Col>
+    Retrieves a specific currency
 
-#### Example Response:
+    ### URL Parameters
+    <Properties>
+      <Property name="currencyName" type="string" required>
+        The name of the currency to retrieve
+      </Property>
+    </Properties>
+  </Col>
 
-```json
-[
-  {
-    "username": "fluffypanda",
-    "displayName": "FluffyPanda",
-    "currency": {
-      "d073da00-a726-11e9-a874-7de9c8544807": 281272,
-      "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
-    },
-    "_id": "90448736"
-  },
-  {
-    "username": "sparklenova",
-    "displayName": "SparkleNova",
-    "currency": {
-      "d073da00-a726-11e9-a874-7de9c8544807": 281272,
-      "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
-    },
-    "_id": "90448726"
-  }
-]
-```
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/currencies/coin">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/currencies/coin
+    ```
+    </CodeGroup>
 
-#### Example Request (default 10 top holders):
+    ```json {{ title: 'Response' }}
+    {
+      "d073da00-a726-11e9-a874-7de9c8544807": {
+        "id": "d073da00-a726-11e9-a874-7de9c8544807",
+        "name": "coin",
+        "active": true,
+        "payout": 5,
+        "interval": 5,
+        "limit": 1000000,
+        "transfer": "Allow",
+        "bonus": {},
+        "offline": 5,
+      }
+    }
+    ```
+  </Col>
+</Row>
 
-```
-GET /currencies/coin/topHolders
-```
+---
 
-#### Example Response (default top 10 holders):
+## Retrieve top holders  {{ tag: 'GET', label: '/currencies/:currencyName/topHolders' }}
 
-```json
-[
-  {
-    "username": "fluffypanda",
-    "displayName": "FluffyPanda",
-    "currency": {
-      "d073da00-a726-11e9-a874-7de9c8544807": 281272,
-      "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
-    },
-    "_id": "90448736"
-  },
-  {
-    "username": "sparklenova",
-    "displayName": "SparkleNova",
-    "currency": {
-      "d073da00-a726-11e9-a874-7de9c8544807": 281272,
-      "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
-    },
-    "_id": "90448726"
-  }
-  // More users...
-]
-```
+<Row>
+  <Col>
+    Retrieves the top holders of a specific currency
+
+    ### URL Parameters
+    <Properties>
+      <Property name="currencyName" type="string" required>
+        The name of the currency to retrieve top holders for
+      </Property>
+    </Properties>
+
+    ### Query Parameters
+    <Properties>
+      <Property name="count" type="number">
+        The number of top holders to return. Defaults to 10.
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/currencies/coin/topHolders">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/currencies/coin/topHolders
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "username": "fluffypanda",
+        "displayName": "FluffyPanda",
+        "currency": {
+          "d073da00-a726-11e9-a874-7de9c8544807": 281272,
+          "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
+        },
+        "_id": "90448736"
+      },
+      {
+        "username": "sparklenova",
+        "displayName": "SparkleNova",
+        "currency": {
+          "d073da00-a726-11e9-a874-7de9c8544807": 281272,
+          "3eba5d80-4297-11ee-86eb-d7d7d2938882": 103665
+        },
+        "_id": "90448726"
+      }
+    ]
+    ```
+  </Col>
+</Row>

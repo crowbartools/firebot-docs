@@ -1,221 +1,283 @@
-# Quotes API
+export const metadata = {
+  title: 'Quotes',
+  description: 'Documentation for quote API endpoints.',
+}
 
-## `GET /quotes`
+# Quotes
 
-#### Description:
-
-Fetches all available quotes.
-
-#### Example Request:
-
-```
-GET /quotes
-```
-
-#### Example Response:
-
-```json
-[
-  {
-    "id": 1,
-    "text": "This is a sample quote.",
-    "originator": "John Doe",
-    "creator": "Jane Smith",
-    "game": "Game Name",
-    "createdAt": "2024-12-14T00:00:00Z"
-  },
-  {
-    "id": 2,
-    "text": "Another quote here.",
-    "originator": "Alice",
-    "creator": "Bob",
-    "game": "Another Game",
-    "createdAt": "2024-12-13T00:00:00Z"
-  }
-]
-```
+The Quotes API allows you to manage quotes in Firebot
 
 ---
 
-## `GET /quotes/:quoteId`
+## List all quotes  {{ tag: 'GET', label: '/quotes' }}
 
-#### Description:
+<Row>
+  <Col>
+    Retrieves a list of all quotes
+  </Col>
 
-Fetches a specific quote by its `quoteId`.
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/quotes">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/quotes
+    ```
+    </CodeGroup>
 
-#### Request Parameters:
-
-- `quoteId`: The unique identifier of the quote.
-
-#### Example Request:
-
-```
-GET /quotes/1
-```
-
-#### Example Response:
-
-```json
-{
-  "id": 1,
-  "text": "This is a sample quote.",
-  "originator": "John Doe",
-  "creator": "Jane Smith",
-  "game": "Game Name",
-  "createdAt": "2024-12-14T00:00:00Z"
-}
-```
-
----
-
-## `POST /quotes`
-
-#### Description:
-
-Creates a new quote.
-
-#### Request Body:
-
-- `text`: The text content of the quote (required).
-- `originator`: The person who originated the quote (required).
-- `creator`: The creator of the quote (required).
-- `game`: The game context (optional).
-
-#### Example Request:
-
-```json
-{
-  "text": "This is a new quote.",
-  "originator": "Alice",
-  "creator": "Bob",
-  "game": "Sample Game"
-}
-```
-
-#### Example Response:
-
-```json
-{
-  "id": 3,
-  "text": "This is a new quote.",
-  "originator": "Alice",
-  "creator": "Bob",
-  "game": "Sample Game",
-  "createdAt": "2024-12-14T00:00:00Z"
-}
-```
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": 1,
+        "text": "This is a sample quote.",
+        "originator": "John Doe",
+        "creator": "Jane Smith",
+        "game": "Game Name",
+        "createdAt": "2024-12-14T00:00:00Z"
+      },
+      {
+        "id": 2,
+        "text": "Another quote here.",
+        "originator": "Alice",
+        "creator": "Bob",
+        "game": "Another Game",
+        "createdAt": "2024-12-13T00:00:00Z"
+      }
+    ]
+    ```
+  </Col>
+</Row>
 
 ---
 
-### `PUT /quotes/:quoteId`
+## Retrieve a quote  {{ tag: 'GET', label: '/quotes/:quoteId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Fetches a specific quote by its `quoteId`.
 
-Creates or updates a specific quote. If a quote with the provided `quoteId` does not exist, it will be created;
-otherwise, it will be updated.
+    ### URL Parameters
+    <Properties>
+      <Property name="quoteId" type="string" required>
+        The unique identifier of the quote
+      </Property>
+    </Properties>
+  </Col>
 
-#### Request Parameters:
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/quotes/1">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/quotes/1
+    ```
+    </CodeGroup>
 
-- `quoteId`: The unique identifier of the quote to be updated or created.
-
-#### Request Body:
-
-- `text`: The text content of the quote (required).
-- `originator`: The person who originated the quote (required).
-- `creator`: The creator of the quote (required).
-- `game`: The game context (optional).
-- `createdAt`: The creation date (optional).
-
-#### Example Request:
-
-```json
-{
-  "text": "Updated quote content",
-  "originator": "Alice",
-  "creator": "Bob",
-  "game": "Sample Game",
-  "createdAt": "2024-12-14T00:00:00Z"
-}
-```
-
-#### Example Response:
-
-```json
-{
-  "id": 1,
-  "text": "Updated quote content",
-  "originator": "Alice",
-  "creator": "Bob",
-  "game": "Sample Game",
-  "createdAt": "2024-12-14T00:00:00Z"
-}
-```
+    ```json {{ title: 'Response' }}
+    {
+      "id": 1,
+      "text": "This is a sample quote.",
+      "originator": "John Doe",
+      "creator": "Jane Smith",
+      "game": "Game Name",
+      "createdAt": "2024-12-14T00:00:00Z"
+    }
+    ```
+  </Col>
+</Row>
 
 ---
 
-### `PATCH /quotes/:quoteId`
+## Create a quote  {{ tag: 'POST', label: '/quotes' }}
 
-#### Description:
+<Row>
+  <Col>
+    Creates a new quote.
 
-Partially updates an existing quote. You can update specific fields such as `text`, `originator`, `creator`, `game`, or
-`createdAt`.
+    ### Request Body
+    <Properties>
+      <Property name="text" type="string" required>
+        The text content of the quote
+      </Property>
+      <Property name="originator" type="string" required>
+        The person who originated the quote
+      </Property>
+      <Property name="creator" type="string" required>
+        The creator of the quote
+      </Property>
+      <Property name="game" type="string">
+        The game context
+      </Property>
+    </Properties>
+  </Col>
 
-#### Request Parameters:
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/quotes">
+    ```json {{ title: 'Request Body' }}
+    {
+      "text": "This is a new quote.",
+      "originator": "Alice",
+      "creator": "Bob",
+      "game": "Sample Game"
+    }
+    ```
+    </CodeGroup>
 
-- `quoteId`: The unique identifier of the quote to be updated.
-
-#### Request Body:
-
-Any of the following fields can be included:
-
-- `text`: The text content of the quote.
-- `originator`: The person who originated the quote.
-- `creator`: The creator of the quote.
-- `game`: The game context.
-- `createdAt`: The creation date.
-
-#### Example Request:
-
-```json
-{
-  "text": "Partially updated quote content",
-  "originator": "Alice"
-}
-```
-
-#### Example Response:
-
-```json
-{
-  "id": 1,
-  "text": "Partially updated quote content",
-  "originator": "Alice",
-  "creator": "Bob",
-  "game": "Sample Game",
-  "createdAt": "2024-12-14T00:00:00Z"
-}
-```
+    ```json {{ title: 'Response' }}
+    {
+      "id": 3,
+      "text": "This is a new quote.",
+      "originator": "Alice",
+      "creator": "Bob",
+      "game": "Sample Game",
+      "createdAt": "2024-12-14T00:00:00Z"
+    }
+    ```
+  </Col>
+</Row>
 
 ---
 
-### `DELETE /quotes/:quoteId`
+## Update a quote  {{ tag: 'PUT', label: '/quotes/:quoteId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Creates or updates a specific quote. If a quote with the provided `quoteId` does not exist, it will be created;
+    otherwise, it will be updated.
 
-Deletes a specific quote by its `quoteId`.
+    ### Request Parameters
+    <Properties>
+      <Property name="quoteId" type="string" required>
+        The unique identifier of the quote to be updated or created
+      </Property>
+    </Properties>
 
-#### Request Parameters:
+    ### Request Body
+    <Properties>
+      <Property name="text" type="string" required>
+        The text content of the quote
+      </Property>
+      <Property name="originator" type="string" required>
+        The person who originated the quote
+      </Property>
+      <Property name="creator" type="string" required>
+        The creator of the quote
+      </Property>
+      <Property name="game" type="string">
+        The game context
+      </Property>
+      <Property name="createdAt" type="string">
+        The creation date
+      </Property>
+    </Properties>
+  </Col>
 
-- `quoteId`: The unique identifier of the quote to be deleted.
+  <Col sticky>
+    <CodeGroup title="Request" tag="PUT" label="/quotes/1">
+    ```json {{ title: 'Request Body' }}
+    {
+      "text": "Updated quote content",
+      "originator": "Alice",
+      "creator": "Bob",
+      "game": "Sample Game",
+      "createdAt": "2024-12-14T00:00:00Z"
+    }
+    ```
+    </CodeGroup>
 
-#### Example Request:
+    ```json {{ title: 'Response' }}
+    {
+      "id": 1,
+      "text": "Updated quote content",
+      "originator": "Alice",
+      "creator": "Bob",
+      "game": "Sample Game",
+      "createdAt": "2024-12-14T00:00:00Z"
+    }
+    ```
+  </Col>
+</Row>
 
-```
-DELETE /quotes/1
-```
+---
 
-#### Example Response:
+## Partially update a quote  {{ tag: 'PATCH', label: '/quotes/:quoteId' }}
 
-```
-HTTP Status 204 No Content
-```
+<Row>
+  <Col>
+    Partially updates an existing quote. You can update specific fields such as `text`, `originator`, `creator`, `game`,
+    or `createdAt`.
+
+    ### Request Parameters
+    <Properties>
+      <Property name="quoteId" type="string" required>
+        The unique identifier of the quote to be updated
+      </Property>
+    </Properties>
+
+    ### Request Body
+    <Properties>
+      <Property name="text" type="string">
+        The text content of the quote
+      </Property>
+      <Property name="originator" type="string">
+        The person who originated the quote
+      </Property>
+      <Property name="creator" type="string">
+        The creator of the quote
+      </Property>
+      <Property name="game" type="string">
+        The game context
+      </Property>
+      <Property name="createdAt" type="string">
+        The creation date
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="PATCH" label="/quotes/1">
+    ```json {{ title: 'Request Body' }}
+    {
+      "text": "Partially updated quote content",
+      "originator": "Alice"
+    }
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "id": 1,
+      "text": "Partially updated quote content",
+      "originator": "Alice",
+      "creator": "Bob",
+      "game": "Sample Game",
+      "createdAt": "2024-12-14T00:00:00Z"
+    }
+    ```
+  </Col>
+</Row>
+
+---
+
+## Delete a quote  {{ tag: 'DELETE', label: '/quotes/:quoteId' }}
+
+<Row>
+  <Col>
+    Deletes a specific quote by its `quoteId`.
+
+    ### Request Parameters
+    <Properties>
+      <Property name="quoteId" type="string" required>
+        The unique identifier of the quote to be deleted
+      </Property>
+    </Properties>
+  </Col>
+
+  <Col sticky>
+    <CodeGroup title="Request" tag="DELETE" label="/quotes/1">
+    ```bash {{ title: 'cURL' }}
+    curl -X DELETE http://localhost:7472/api/v1/quotes/1
+    ```
+    </CodeGroup>
+
+    ```html {{ title: 'Response' }}
+    HTTP Status 204 No Content
+    ```
+  </Col>
+</Row>

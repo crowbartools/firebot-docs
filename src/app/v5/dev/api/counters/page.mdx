@@ -1,93 +1,119 @@
-# Counters API
+export const metadata = {
+  title: 'Counters',
+  description: 'Documentation for counter API endpoints.',
+}
 
-## `GET /counters`
+# Counters
 
-#### Description:
-
-Fetches all available counters.
-
-#### Example Request:
-
-```
-GET /counters
-```
-
-#### Example Response:
-
-```json
-[
-  {
-    "id": "counter1",
-    "name": "Counter 1",
-    "value": 10
-  },
-  {
-    "id": "counter2",
-    "name": "Counter 2",
-    "value": 15
-  }
-]
-```
+The Counters API allows you to manage and retrieve counter values.
 
 ---
 
-## `GET /counters/:counterId`
+## List all counters  {{ tag: 'GET', label: '/counters' }}
 
-#### Description:
+<Row>
+  <Col>
+    Retrieves a list of all counters
+  </Col>
 
-Fetches a specific counter by its `counterId`.
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/counters">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/counters
+    ```
+    </CodeGroup>
 
-#### Request Parameters:
-
-- `counterId`: The unique identifier of the counter.
-
-#### Example Request:
-
-```
-GET /counters/counter1
-```
-
-#### Example Response:
-
-```json
-{
-  "id": "counter1",
-  "name": "Counter 1",
-  "value": 10
-}
-```
+    ```json {{ title: 'Response' }}
+    [
+      {
+        "id": "counter1",
+        "name": "Counter 1",
+        "value": 10
+      },
+      {
+        "id": "counter2",
+        "name": "Counter 2",
+        "value": 15
+      }
+    ]
+    ```
+  </Col>
+</Row>
 
 ---
 
-## `POST /counters/:counterId`
+## Retrieve a counter  {{ tag: 'GET', label: '/counters/:counterId' }}
 
-#### Description:
+<Row>
+  <Col>
+    Fetches a specific counter by its `counterId`.
 
-Updates the value of an existing counter. Optionally, you can override the current value.
+    ### URL Parameters
+    <Properties>
+      <Property name="counterId" type="string" required>
+        The unique identifier of the counter
+      </Property>
+    </Properties>
+  </Col>
 
-#### Request Parameters:
+  <Col sticky>
+    <CodeGroup title="Request" tag="GET" label="/counters/counter1">
+    ```bash {{ title: 'cURL' }}
+    curl http://localhost:7472/api/v1/counters/counter1
+    ```
+    </CodeGroup>
 
-- `counterId`: The unique identifier of the counter to be updated.
+    ```json {{ title: 'Response' }}
+    {
+      "id": "counter1",
+      "name": "Counter 1",
+      "value": 10
+    }
+    ```
+  </Col>
+</Row>
 
-#### Request Body:
+---
 
-- `value`: The new value to set for the counter (required).
-- `override`: A boolean indicating whether to override the counter's current value (optional, defaults to `false`).
+## Update a counter  {{ tag: 'POST', label: '/counters/:counterId' }}
 
-#### Example Request:
+<Row>
+  <Col>
+    Updates the value of an existing counter. Optionally, you can override the current value.
 
-```json
-{
-  "value": 20,
-  "override": true
-}
-```
+    ### Request Parameters
+    <Properties>
+      <Property name="counterId" type="string" required>
+        The unique identifier of the counter to be updated
+      </Property>
+    </Properties>
 
-#### Example Response:
+    ### Request Body
+    <Properties>
+      <Property name="value" type="number" required>
+        The new value to set for the counter
+      </Property>
+      <Property name="override" type="boolean">
+        A boolean indicating whether to override the counter's current value.
+        If false, the new value will be added to the current value (optional, defaults to `false`)
+      </Property>
+    </Properties>
+  </Col>
 
-```json
-{
-  "oldValue": 10,
-  "newValue": 20
-}
-```
+  <Col sticky>
+    <CodeGroup title="Request" tag="POST" label="/counters/counter1">
+    ```bash {{ title: 'cURL' }}
+    curl -X POST http://localhost:7472/api/v1/counters/counter1 \
+      -H "Content-Type: application/json" \
+      -d '{"value": 20, "override": true}'
+    ```
+    </CodeGroup>
+
+    ```json {{ title: 'Response' }}
+    {
+      "oldValue": 10,
+      "newValue": 20
+    }
+    ```
+  </Col>
+</Row>
