@@ -1,0 +1,46 @@
+## Evaluate JavaScript effects and variables.
+
+Firebot will allow you to run JS (JavaScript) code to process information more programmatically than using the UI and built in effects. The JS code will run in a limited sandbox to make sure it doesn't affect any other Firebot systems, and will only run for a maximum of 5 seconds, after which point it will terminate. This means that it's very useful but cannot be used to, for example,  run a HTTP request to contact an API, or process extremely large amounts of data. These limitations aside it is very useful for processing text and information more directly and easily than working with the Firebot UI. 
+
+There are two methods for using evalJs. You can use an Evaluate JavaScript effect, like a chat effect or play sound effect that you may be more familiar with, or you can use an evalJs variable, like the `$user` or `$chatMessage` variables that you may be using already. We'll explain the effect first, and then the variable afterwards. 
+
+**Evaluate JavaScript Effect**
+To use an Evaluate JavaScript effect click "Add New Effect" in any effect list. Remember that for commands you will need the UI set to "Advanced" to access this. When the "Select New Effect" menu pops up make sure your category is set to "All" or "Advanced" and in the search bar at the top type "eval". This should bring up the Evaluate Javascript effect for you to select. 
+
+Once you select this it should bring up the Edit Effect UI. You will have a large text box for Code, and a separate section for Parameters. In order to get information into the effect you will save it as a parameter. You can use variables in parameters, which means you can pass custom data saved as custom variables, you can learn more about them here: https://docs.firebot.app/v5/guides/custom-variables. For now we're just going to save something very basic, click on the `+` sign underneath Parameters and when it asks you to add text just add the number `1`. You should now have this saved as `parameters[0]`. Let's add one more parameter by again clicking on the plus sign and this time saving `2`. We now have `parameters[0]` and `parameters[1]`. 
+
+Now lets access that data in the code section. At the top of the code section (where it's easy to find if you need to edit it later) write the following
+```
+let firstNum = parameters[0];
+let secondNum = parameters[1];
+```
+This means we have now saved the data in the parameters into the code section, and can access it by using the `firstNum` and `secondNum` variables. so let's write some basic code to process it, in this case we'll just write `let sum = firstNum + secondNum;` which will add the firstNum and secondNum variables together and save it as a third variable `sum`. 
+
+Now we need to get the data out of the effect, and to do this we need to use `return` to tell the code what data to return to Firebot. So our code section now looks like this:
+```
+let firstNum = parameters[0];
+let secondNum = parameters[1];
+
+let sum = firstNum + secondNum;
+
+return sum
+```
+
+1+2=3 so this will return 3, now we just need to access this. At the very bottom of the Edit Effect UI you can see `[→ Outputs` in blue if we click on this we can see `$effectOutput[jsResult]`. This is a variable that we can use elsewhere in Firebot. We can also click on the little edit symbol to edit what it's called. If you plan on using multiple evalJs effects it's a good idea to rename this to avoid multiple effects accidentally saving data over each others effects. so let's call this one "sum". Edit the name to "sum", click save, and now you will see it's called `$effectOutput[sum]`. You can now write this into any text box in Firebot that accepts variables, and it will convert to the result of the Evaluate JavaScript effect, in this case `3`. 
+
+**evalJs variable**
+You can also write JS into any text box that will accept the evalJs variable. You can find this by clicking on the blue `$vars` button that you can find in almost all the text boxes in Firebot and typing "eval" into the search bar that comes up. It will show you `$evalJs[`` code ``, ...parameters]`. This works in a very similar way to the Evaluate JavaScript effect, you write the JS code between the two bacticks, and you add the data at the end of variable as parameters. So our little script will look like this:
+```
+$evalJs[``
+let firstNum = parameters[0];
+let secondNum = parameters[1];
+
+let sum = firstNum + secondNum;
+
+return sum``
+, 1, 2]
+```
+
+This will give us exactly the same result as the effect we made earlier, but this will do it in place. Meaning we do not need to use the `$effectOutput[jsResult]` variable. It will replace the evalJs variable with whatever we return from that variable. 
+
+The evalJs effect and variable are very powerful ways to process data, they can cut out a lot of other effects (like multiple conditional effects that can all be written into a simple JS script) and simplify your commands and effects a lot. They will be more useful for people who already know a bit of code, and Firebot has many alternatives to almost anything you can do in a sandboxed JS script if you are not comefortable with coding. 
