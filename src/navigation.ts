@@ -31,6 +31,7 @@ export const nav: Array<NavGroup> = [
             { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
             { title: 'Time Variables', href: '/v5/guides/time-variable' },
             { title: 'Custom Variables', href: '/v5/guides/custom-variables' },
+            { title: 'Evaluate JavaScript', href: '/v5/guides/evaluate-javascript' },
             { title: 'Manual Restore', href: '/v5/guides/manual-restore' },
         ],
     },
