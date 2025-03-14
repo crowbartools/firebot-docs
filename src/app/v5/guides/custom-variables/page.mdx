@@ -21,11 +21,11 @@ This is used for accessing or modifying specific parts of complex data structure
   Access "banana" with `$$myArray[1]`.
 
 - **Object Example:** `{"fruit":"apple", "color":"red"}`  
-  Access "apple" with `$$myObject.fruit`.
+  Access "apple" with `$$myObject[fruit]`.
 
 - **Array of Objects Example:**  
   `[{"fruit":"apple"}, {"fruit":"banana"}]`  
-  Access "apple" with `$$myArray[0].fruit`.
+  Access "apple" with `$$myArray[0, fruit]`.
 
 You can use the Property Path field to update a specific part of the variable without overwriting the entire structure.
 
