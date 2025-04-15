@@ -1,0 +1,141 @@
+# Commands
+
+Commands, or chat commands, are a way for your viewers to interact with Firebot. Commands can be triggered by typing a specific keyword or phrase in chat, and can be used to run effects, send messages, or perform other actions.
+
+They can be found in the **Commands** tab of Firebot on the left of the UI under "Triggers".
+
+Commands are a great way to engage with your viewers and add interactivity to your stream. You can create commands for fun effects, games, or even to provide information about your stream or channel.
+
+# Custom Commands
+
+Custom commands are commands that you create yourself. They can be triggered by a specific keyword or phrase, and can be used to run effects, send messages, or perform other actions.
+
+You can make a new custom command by clicking the blue **"New Custom Command"** button in the top left of the commands tab. This will open a new window where you can enter the command trigger and effects.
+
+There are two ways to view the Add New Command UI: **Simple Mode** and **Advanced Mode**. You can switch between these at any time by using the blue "Switch to Advanced/Simple Mode ->" link at the bottom of the UI, but be aware that only Advanced mode has an effects list and switching to simple mode will remove effects in that effects list.
+
+## Simple Mode
+
+Simple Mode is the default view, with the following settings:
+
+*   **Trigger**:
+    *   A trigger is the keyword or phrase that will activate the command. For example, if you create a command with the trigger `!hello`, viewers can type `!hello` in chat to activate the command.
+    *   Triggers can be any combination of letters, numbers, and symbols, but they must be unique to each command.
+    *   You can also use phrases as triggers, such as `"hello world"`, but these are not recommended as they can be easily confused with other messages in chat.
+    *   It is common to use an exclamation mark `!` at the start of a trigger to indicate that it is a command. You can also use other symbols, such as `?`, but these are less common.
+
+*   **Cooldowns**:
+    *   Cooldowns are a way to timeout a command. You have two options:
+        *   **Global Cooldown**: A timer that applies to all users, meaning that once the command is used, no one can use it again until the cooldown expires.
+        *   **User Cooldown**: A timer that applies to each individual user, meaning that once a user uses the command, they cannot use it again until the cooldown expires.
+    *   Cooldowns are useful for preventing spam and ensuring that commands are used at a reasonable rate. You can set the cooldown in seconds.
+
+*   **Permissions**:
+    *   Permissions are a way to limit who can use the command. You can set permissions so that:
+        *   Everyone can trigger a command.
+        *   Subs Only can trigger a command.
+        *   Mods Only can trigger a command.
+
+*   **Response Text**:
+    *   Response text is the message that will be sent in chat when the command is triggered. This can be a simple message, such as "Hello World".
+    *   If you want to use more complex effects, you will want to switch to advanced mode.
+
+## Advanced Mode
+
+Advanced Mode is a more complex view with additional settings. You can switch to Advanced Mode by clicking the blue "Switch to Advanced Mode ->" link at the bottom of the UI.
+
+Below is a description of each setting in Advanced Mode:
+
+*   **Trigger**:
+    *   This acts exactly like the trigger setting from the Simple Mode UI, but also allows for two more optional settings:
+        *   **Auto Delete Trigger**: Automatically deletes the trigger message from chat after the command is run. This is useful for commands that are meant to be used once, such as a trivia game or a giveaway.
+        *   **Scan Whole Message**: Scans the entire message for the trigger. This is useful for commands that are meant to be used in a sentence, such as "I love Firebot". If this option is not selected, only the first word of the message will be scanned for the trigger.
+
+*   **Description**:
+    *   A short text that explains what the command does.
+    *   Descriptions are optional, but recommended for clarity.
+    *   These cannot be seen directly in the stream, but viewers will be able to find them when they use `!commands` in chat, which provides a link displaying all available and non-hidden commands.
+
+*   **Aliases**:
+    *   Alternative triggers that can be used to activate the command. For example, if you create a command with the trigger `!hello`, you can add an alias `!hi`.
+    *   Aliases are optional but useful for providing multiple ways to access the same command.
+    *   You can add as many aliases as you like, but keep them short and relevant.
+
+*   **Cooldowns**:
+    *   This acts exactly like the cooldown setting from the Simple Mode UI, but will also allow for two more options (details not specified in the original text).
+
+*   **Stats**:
+    *   Tracks how many times a specific command has been used in your chat, useful for seeing command popularity.
+
+*   **Restrictions**:
+    *   Limit who can use the command based on roles (e.g., all users, subscribers, moderators, streamers, custom roles).
+    *   Useful for commands meant for specific user groups.
+    *   Roles can be managed in the "ROLES & RANKS" tab.
+    *   To set a restriction, click the "+" and select the restriction type. Multiple restrictions can be set.
+
+*   **Settings**:
+    *   **Enabled**: Determines if the command is active. If "off", the command won't trigger in chat. Useful for temporarily disabling commands.
+    *   **Hidden**: Hides the command from the list generated by `!commands`. Useful for moderator commands or commands under testing.
+    *   **Treat quoted text as single argument**: When enabled, text inside quotes (e.g., `"Hello World"`) is treated as one argument (e.g., in `!command add !hello "Hello World"`). If disabled, quoted text is split into multiple arguments.
+
+*   **Ignore**:
+    *   Allows the command to ignore triggers from specific accounts or sources:
+        *   **Streamer Account**
+        *   **Bot Account**
+        *   **Whispers**
+    *   Useful if you want users to trigger a command (e.g., `!hello`) but not the bot or streamer account itself.
+
+*   **Shared Chat**:
+    *   Configure how commands react to shared chat messages:
+        *   **Allow**: Reacts to shared chat messages as if they came from your own chat.
+        *   **Ignore**: Ignores shared chat messages.
+        *   **Inherit**: Uses the global setting from `Settings > Triggers > Allow Shared Chat`.
+
+## Base Effects
+
+This is where you add actions to your command. You can find out more about effects here: [Firebot Effects](https://docs.firebot.app/v5/core/effects).
+
+*   Add effects by clicking the blue **"Add Effect"** button in the bottom right of the UI.
+*   Select the desired effect from the new window.
+*   Multiple effects can be added and will run in the order they appear.
+*   Remove effects by clicking the three dots on the effect bar and selecting "Delete".
+
+## Subcommands
+
+Subcommands allow you to trigger different effects based on arguments (words/numbers) provided after the main command trigger.
+
+*   They trigger different effects *instead* of the main command's effects list.
+*   Click the **"+"** symbol to add an argument for a new subcommand.
+*   Clicking the subcommand opens a UI identical to the main command UI for configuring its specific effects and settings.
+*   You can add multiple subcommands, but you cannot add a subcommand to another subcommand.
+*   For more complex conditional logic, consider using [conditional effects](https://docs.firebot.app/v5/guides/conditional-effects).
+
+# System Commands
+
+System commands are built-in commands available in all Firebot installations. You can find them by swapping to the **"SYSTEM COMMANDS"** tab (top left, above the "New Custom Command" button).
+
+These include basic commands like `!commands` (provides a link to the commands page) and `!uptime` (shows stream duration), as well as commands specific to Firebot currencies that are automatically created when you add a new currency in the "Currencies" tab.
+
+Below is an example of commands automatically created for a "gold" currency:
+
+| Name              | !Trigger | Description                             | Usage                                                                                                                                                                                                                                                                                                                                                                                        |
+|-------------------|----------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **gold Management** | !gold    | Allows management of the "gold" currency. | `!gold` — See your balance.<br/>`!gold @username` — Gets the currency of the specified user.<br/>`!gold add [@user] [amount]` — Adds currency for a given user.<br/>`!gold remove [@user] [amount]` — Removes currency for a given user.<br/>`!gold give [@user] [amount]` — Gives currency from one user to another user.<br/>`!gold set [@user] [amount]` — Sets currency to the amount.<br/>`!gold addall [amount]` — Adds currency to all online users.<br/>`!gold removeall [amount]` — Removes currency from all online users. |
+
+Below is a list of all standard system commands available in Firebot. These can be enabled or disabled in the commands tab.
+
+| Name                    | !Trigger           | Description                                                        | Usage                                                                                                                                                                                                                                                                                                                                                                                        |
+|-------------------------|--------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Bid**                 | !bid               | Allows viewers to participate in the Bid game.                     | `!bid start [currencyAmount]` — Starts the bidding at the given amount.<br/>`!bid stop` — Manually stops the bidding. Highest bidder wins.<br/>`!bid [currencyAmount]` — Joins the bidding at the given amount.                                                                                                                                                                |
+| **Command List**            | !commands          | Displays a link to your profile page with all available commands.  | `!commands`                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Command Management**      | !command           | Allows custom command management via chat.                         | `!command add [!trigger or "phrase"] [message]` — Adds a new command with a given response message.<br/>`!command response [!trigger or "phrase"] [message]` — Updates the response message for a command. Only works for commands that have 1 or less chat effects.<br/>`!command setcount [!trigger or "phrase"] count#` — Updates the commands usage count.<br/>`!command cooldown [!trigger or "phrase"] [globalCooldownSecs] [userCooldownSecs]` — Change the cooldown for a command.<br/>`!command restrict [!trigger or "phrase"] [All/Sub/Mod/Streamer/Custom Group]` — Update permissions for a command.<br/>`!command remove [!trigger or "phrase"]` — Removes the given command.<br/>`!command description [!trigger or "phrase"]` — Updates the description for a command.<br/>`!command enable [!trigger or "phrase"]` — Enables the given custom command.<br/>`!command disable [!trigger or "phrase"]` — Disables the given custom command.<br/>`!command addalias [!trigger or "phrase"] !alias` — Adds the specified alias to the given custom command.<br/>`!command removealias [!trigger or "phrase"] !alias` — Removed the specified alias from the given custom command. |
+| **Create Stream Marker**    | !marker            | Create a stream marker.                                            | `!marker [marker name]`                                                                                                                                                                                                                                                                                                                                                                       |
+| **Custom Role Management**  | !role              | Allows management of viewer's custom roles from chat.              | `!role add @viewer roleName` — Adds a custom role to a viewer.<br/>`!role remove @viewer roleName` — Removes a custom role from a viewer.<br/>`!role list [@viewer]` — List all custom roles, or just roles a viewer has.                                                                                                                                                                |
+| **Follow Age**              | !followage         | Displays how long the user has been following the channel.         | `!followage`                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Heist**                   | !heist             | Allows viewers to play the Heist game.                             | `!heist` — Starts/joins the heist with the default wager amount, if one is set.<br/>`!heist [wagerAmount]` — Starts/joins the heist with the given amount.                                                                                                                                                                                                                              |
+| **Quotes Management**       | !quote             | Allows quote management via chat.                                  | `!quote` — Display a random quote<br/>`!quote [quoteId]` — Displays the quote with the given ID.<br/>`!quote add [@username] [quoteText]` — Adds a new quote.<br/>`!quote remove [quoteId]` — Removes a quote using its id.<br/>`!quote edittext [quoteId] [newText]` — Edit the text given quote.<br/>`!quote edituser [quoteId] [newUsername]` — Edit the user of the given quote.<br/>`!quote editgame [quoteId] [newGame]` — Edit the game of the given quote.<br/>`!quote editdate [quoteId] [newDate]` — Edit the date of the given quote.<br/>`!quote list` — Gives a link that lists out all quotes.<br/>`!quote search [searchTerm]` — Gives a random quote using the search term(s).<br/>`!quote searchuser @username` — Gives a random quote said by the given user.<br/>`!quote searchdate DD MM YYYY` — Gives a random quote at the given date.<br/>`!quote searchgame [searchTerm]` — Gives a random quote at the given game. |
+| **Spam Raid Protection**    | !spamraidprotection| Toggles protective measures such as follow-only mode, slow mode, etc.| `!spamraidprotection off` — Turn off the protection command.                                                                                                                                                                                                                                                                                                                                      |
+| **Spin (Slots)**            | !spin              | Allows viewers to play the Slots game.                             | `!spin [currencyAmount]` — Spins the slot machine with the given amount                                                                                                                                                                                                                                                                                                                            |
+| **Steam Search**            | !steam             | Displays information about a game on Steam.                        | `!steam [game name]`                                                                                                                                                                                                                                                                                                                                                                            |
+| **Trivia**                  | !trivia            | Allows viewers to play trivia                                      | `!trivia [wager]` — Triggers trivia for the given wager amount                                                                                                                                                                                                                                                                                                                                      |
+| **Uptime**                  | !uptime            | Displays how long the stream has been live in chat.                | `!uptime`                                                                                                                                                                                                                                                                                                                                                                                       |

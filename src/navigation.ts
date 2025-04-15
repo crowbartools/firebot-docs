@@ -12,7 +12,7 @@ export const nav: Array<NavGroup> = [
         title: 'Core concepts',
         links: [
             { title: 'Effects', href: '/v5/core/effects' },
-            { title: 'Commands', href: '/commands' },
+            { title: 'Commands', href: '/v5/core/commands' },
             { title: 'Events', href: '/events' },
             { title: 'Timers', href: '/timers' },
             { title: 'Channel Rewards', href: '/channel-rewards' },
