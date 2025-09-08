@@ -1,0 +1,148 @@
+# Events
+
+Events in Firebot are automatic triggers that run a list of effects in response to specific activities on your stream, such as new followers, subscribers, cheers, or chat messages. This allows you to create dynamic and interactive alerts and responses without any manual input. They will often have specific variables associated with the event, so if you're trying to recreate an effect from a command and it isn't working it is worth checking to make sure that you are using the correct variables. For example, sub events do *not* have an associated `$chatMessage` variable, as there is no chat message associated with the event. If you want to capture the message associated with a sub then you would instead use the `$subMessage` variable. You can check available variables anywhere you can see the blue `$vars` button.
+
+You can manage all your events from the **Events** tab, located in the main navigation sidebar under the "Triggers" category. 
+
+Events are a good way to acknowledge and reward your community's engagement, making your stream more interactive and professional. 
+
+## General Events vs. Event Sets
+
+Firebot organizes events into two main categories:
+
+*   **General Events:** This is where you can create and set effects for general events that you want to react to. They are perfect for alerts that you want to be available at all times, like standard follow or subscription notifications.
+*   **Event Sets:** These are groups of events that you can activate or deactivate as a whole. This is useful for creating different themes of alerts for specific games, holidays, or special stream occasions. For example, you could have a "Horror Game" event set with spooky alerts that you only activate when playing horror games.
+
+## Creating a New Event
+In the top left of the screen is a blue button with `+ New Event` as the label. To create a new event simply click on this button.
+
+## Configuring an Event
+
+Whether you're creating a new event or editing an existing one, the configuration process is the same.
+
+### **Trigger On**
+This is the core of your event. Here you select the specific activity that will trigger the effects. Firebot provides a wide range of triggers from various sources:
+
+*   **Twitch:** Includes follows, subs, raids, cheers, channel point redemptions, and more.
+*   **Integrations:** If you have linked services like Streamlabs, StreamElements, or others, their specific events (like donations) will appear here.
+*   **Firebot:** Internal events such as chat connections or when a custom variable expires.
+
+*   **Others:** Custom scripts can sometimes add custom events. 
+*   A complete list of triggers will be added to the bottom of the document. 
+
+### **Name**
+Give your event a descriptive name (e.g., "New Follower Alert," "Tier 2 Sub Thank You"). This helps you stay organized, especially as you create more events.
+
+### **Filters**
+Filters allow you to add specific conditions that must be met for the event to trigger. This lets you create targeted responses.
+
+**Example**: You could create a "Sub" event but add a filter for "Sub Tier" -> "is" -> "Tier 3". This event would then *only* trigger for Tier 3 subscriptions, allowing you to have a special alert just for them.
+
+You can add multiple filters and choose whether **all** of them must be met or if **any** of them can be met for the event to trigger.
+
+### **Settings**
+
+*   **Is Enabled:** A simple toggle to turn the event on or off without deleting it.
+*   **Custom Cooldown:** This prevents the event from triggering too frequently. You can set a cooldown in seconds and specify if it applies globally (to all viewers) or per user. This is useful for events like "First Time Chat" to prevent it from firing multiple times if a new chatter sends several messages in quick succession.
+
+### **Effects**
+This is where you define what happens when the event is triggered. You can add one or more effects that will run in sequence.
+
+*   Click the **"Add New Effect"** button to open the effect selector.
+*   Choose any effect, such as **Play Sound**, **Show Image/GIF**, or **Chat**.
+*   Configure each effect as needed. You can use event-specific variables (like `$user` for the person who triggered the event) to personalize the response.
+*   Find out more about effects here: [Effects](../effects/page.mdx)
+
+## Event Sets
+
+Event Sets are useful for managing different themes of alerts.
+
+*   **Creating a Set:** In the Events tab, click the plus icon next to the "Event Sets" header. Give your set a name, and it will appear in the list.
+*   **Activating/Deactivating:** Each Event Set has a status dot next to its name. A green dot indicates it's active; a gray dot means it's inactive. Click the three-dot menu next to the set's name to activate or deactivate it. You can also use the **Toggle Event Set** effect to control this automatically.
+*   **Managing Events:** Click on an Event Set to view and manage the events within it, just as you would with General Events.
+
+## Simulating Events
+
+To test your events without waiting for a real stream activity, you can use the "Simulate Event" button located in the toolbar. This opens a modal where you can select any event type and fill in placeholder data (like a username or sub tier) to see how your effects will behave. This is an excellent way to fine-tune your alerts.
+
+---
+
+## **Example: Creating a Custom Raid Alert**
+
+**Premise:** You want to create a special alert that plays a sound and shows a GIF when your channel gets raided.
+
+1.  **Create a New Event:** In the **Events** tab, click the **"New Event"** button.
+
+2.  **Configure the Trigger:**
+    *   For **Trigger On**, select `Twitch` as the source and `Raid` as the event.
+    *   Give it a **Name**, like "Raid Alert".
+
+3.  **Add Effects:**
+    *   **Play Sound:** Add a "Play Sound" effect and choose a sound file from your computer that you want to play when you get raided.
+    *   **Show Image/GIF:** Add a "Show Image/GIF" effect and select a GIF to display on your overlay. Configure its position and duration.
+    *   **Chat Message:** Add a "Chat" effect to thank the raider and welcome their viewers.
+        *   **Message:** `Welcome raiders from $user's channel! Thanks so much for the raid, hope you enjoy your stay!`
+
+4.  **Save the Event:** Click "Save" and your new raid alert is ready to go!
+
+---
+
+## Events List
+
+### **Firebot Events** 
+
+*   **Chat Connected:** Triggers when Firebot successfully connects to Twitch chat. 
+*   **Overlay Connected:** Activates when a Firebot overlay is connected. 
+*   **View Time Update:** Runs when a viewer's watch time is updated. 
+*   **Currency Update:** Triggers when a viewer's currency amount changes. 
+*   **Viewer Created:** Activates when a new viewer is added to the database, typically after their first chat message.
+*   **Firebot Started:** Triggers when Firebot is launched and running. 
+*   **Custom Variable Expired:** Activates when a custom variable's set duration expires. 
+*   **Custom Variable Created:** Triggers when a new custom variable is created. 
+*   **Chat Message Spotlight:** Activates when a chat message is spotlighted, for example, to be displayed on an overlay. 
+*   **Category Changed:** Triggers when the stream category is changed in the Firebot dashboard. 
+*   **Effect Queue Cleared:** Activates when an effect queue has finished and is cleared. 
+*   **Before Firebot Closed:** Triggers just before Firebot shuts down. 
+*   **Viewer Rank Updated:** Activates when a viewer's rank changes. 
+*   **Viewer Metadata Updated:** Triggers when a viewer's metadata is updated. 
+
+### **Twitch Events** 
+
+*   **Raid:** Triggers when another channel raids yours.
+*   **Follow:** Activates when someone follows your channel.
+*   **Sub:** Triggers for new subscriptions and re-subscriptions.
+*   **Prime Sub Upgraded:** Activates when a viewer upgrades their Prime Gaming subscription to a paid one. 
+*   **Sub Gifted:** Triggers when a viewer gifts a subscription to another user.
+*   **Community Subs Gifted:** Activates when a viewer gifts multiple subscriptions to the community.
+*   **Gift Sub Upgraded:** Triggers when a viewer upgrades their gifted subscription to a paid one. 
+*   **Cheer:** Activates when a viewer sends Bits.
+*   **Bits Badge Unlocked:** Triggers when a viewer unlocks a new Bits badge tier. 
+*   **Viewer Arrived:** Activates when a viewer sends their first message in a stream.
+*   **Chat Cleared:** Triggers when the chat is cleared. 
+*   **Chat Message:** Activates for every new chat message.
+*   **Chat Message Deleted:** Triggers when a chat message is deleted. 
+*   **First Time Chat:** Activates when a viewer chats for the first time ever in your channel.
+*   **Announcement:** Triggers when a moderator sends an announcement. 
+*   **Viewer Banned:** Activates when a viewer is banned from the channel. 
+*   **Viewer Unbanned:** Triggers when a viewer is unbanned. 
+*   **Viewer Timeout:** Activates when a viewer is timed out. 
+*   **Channel Reward Redemption:** Triggers when a viewer redeems a channel point reward. 
+*   **Channel Reward Redemption Approved:** Activates when a channel point redemption is approved.
+*   **Channel Reward Redemption Rejected:** Triggers when a channel point redemption is rejected. 
+*   **Whisper:** Activates when you or your bot account receives a whisper. 
+*   **Chat Mode Changed:** Triggers when a moderator changes chat modes (e.g., emote-only, sub-only). 
+*   **Channel Poll Started/Progress/Ended:** Activates at the start, during, and at the end of a Twitch poll. 
+*   **Channel Goal Started/Progress/Ended:** Activates at the start, during, and at the end of a channel goal. 
+*   **Channel Prediction Started/Progress/Locked/Ended:** Triggers at the start, during, when locked, and at the end of a channel prediction. 
+*   **Hype Train Started/Progress/Ended:** Activates at the start, during, and at the end of a Hype Train. 
+*   **Stream Started/Ended:** Triggers when your stream goes live or ends. 
+*   **Charity Campaign Started/Donation/Progress/Ended:** Triggers for events related to a charity campaign on your channel. 
+*   **Shoutout Sent/Received:** Activates when you send or receive a shoutout. 
+*   **Category Changed:** Triggers when your stream category changes on Twitch. 
+*   **Title Changed:** Activates when your stream title changes on Twitch. 
+*   **Scheduled Ad Break Starting Soon:** Triggers when a scheduled ad break is about to start. 
+*   **Ad Break Started/Ended:** Activates at the start and end of an ad break.
+
+### **Integration Events** 
+
+*   **Streamlabs, StreamElements, TipeeeStream, Extra Life:** These integrations have their own set of events, primarily for donations and follows, which will appear as "Trigger On" options when the respective service is linked to Firebot.
