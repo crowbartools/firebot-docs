@@ -33,6 +33,7 @@ export const nav: Array<NavGroup> = [
             { title: 'Custom Variables', href: '/v5/guides/custom-variables' },
             { title: 'Evaluate JavaScript', href: '/v5/guides/evaluate-javascript' },
             { title: 'Manual Restore', href: '/v5/guides/manual-restore' },
+            { title: 'Metadata', href: '/v5/guides/metadata' },
         ],
     },
     {

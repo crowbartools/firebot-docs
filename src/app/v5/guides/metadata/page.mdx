@@ -1,0 +1,77 @@
+# **Metadata Effects**
+
+Metadata allows you to store viewer specific data for use in Firebot. 
+
+You can use metadata by using the  **Set User Metadata** and **Remove User Metadata** effects, found in the “Select New Effect” box when adding a new effect. They’re listed under the “ALL” and “Scripting” tabs.  Metadata works by storing data (basically text) associated with a specific viewer's username.
+
+Using Metadata you can tailor interactive experiences to individual viewers like tracking stats, preferences, or progress within a game or loyalty system. It works similarly to [Custom Variables](/v5\guides\custom-variables\page.mdx), but custom variables are not associated with a single viewer, and unless you have changed the settings do not persist when you close Firebot, meaning that when you close Firebot all data is deleted. Metadata on the other hand is stored for each user persistently and can be used across Firebot sessions. 
+
+## **Configuring Metadata Effects**
+
+### **Username**
+
+Specify the username for whom you want to configure or modify the metadata.  This should generally be the `$user` variable to affect the user triggering the event.
+
+### **Metadata Key**
+
+This is where you define the name of the specific piece of information you want to store. Choose a descriptive key without spaces (e.g., `favoriteColor`, `level`, `totalPoints`). A common practice is using camelCase.
+
+### **Data**
+
+This is the actual value you want to store under the specified Metadata Key. This can be static text, numbers, or any other data, or you can reference Firebot's built-in variables using the `$vars` button to create dynamic values.
+
+### **Advanced (Optional)**
+
+You can click on the blue "Advanced" text to open up this section, which enables you to directly access or modify specific parts of complex data structures, such as arrays or objects, associated with the Metadata key. This is designed for advanced users already familiar with property paths.
+Most users can skip this section.
+
+This is used for accessing or modifying specific parts of complex data structures like arrays or objects. Most users can skip this section, but here’s a quick overview:
+
+- **Array Example:** `["apple", "banana", "cherry"]`  
+  Access "banana" with `$$myArray[1]`.
+
+- **Object Example:** `{"fruit":"apple", "color":"red"}`  
+  Access "apple" with `$$myObject[fruit]`.
+
+- **Array of Objects Example:**  
+  `[{"fruit":"apple"}, {"fruit":"banana"}]`  
+  Access "apple" with `$$myArray[0, fruit]`.
+
+You can use the Property Path field to update a specific part of the variable without overwriting the entire structure.
+
+<Note type="info">
+    **Example**: To change the color of a fruit from red to yellow in `{"fruit":"apple", "color":"red"}`, set `Variable Name` to your object’s name, `Variable Data` to `yellow`, and `Property Path` to `color`.
+</Note>
+
+## **Accessing and Using Metadata**
+
+Metadata is accessed using the `$userMetadata` replace variable.
+
+*   `$userMetadata[key]`
+*   `$userMetadata[key, propertyPath]`
+
+<Note type="info">
+  **Example:** Once you have used a `Set User Metadata` effect to set the user data for one of your viewers you can use `$userMetadata[key]` to display a viewer's favorite color, if for example you saved the metadata as "favouriteColor" you would set  `Key` to `favoriteColor`, and use `$userMetadata[favoriteColor]` in a chat message or overlay effect.
+</Note>
+
+## Example: Tracking Viewer Stats
+
+**Premise:** Suppose you want to keep track of how many times a viewer has checked into your stream.
+
+1.  **Add Set User Metadata Effect to Check In:** Set up your check in, either with a new command or a channel reward, and add a "Set User metadata" effect. 
+2.  **Set Up The Metadata Effect:**
+
+    *   `Username`: `$user` (This ensures the metadata is stored for the user who triggered the command/reward)
+    *   `Metadata Key`: `checkInCount`
+    *   `Data`: `$numberMath[$userMetadata[checkInCount] + 1]`
+
+    Every time this event is triggered, the user's `checkInCount` will increase by one.
+3.  **Display the Stat:** In a chat message or overlay effect, use the following:
+
+    *   `$userMetadata[$username, checkInCount]`
+
+    This will display the number of times the user has triggered the command or reward.
+
+    ## Viewing and Managing Metadata
+
+    You can view and manage metadata stored for a user by going to the "VIEWERS" tab in Firebot, selecting a viewer and looking at the "METADATA" table available there. You can see what metadata has been stored on the viewer, what the keys are to that data, and the data itself. You can also edit or delete metadata directly from this table. 
