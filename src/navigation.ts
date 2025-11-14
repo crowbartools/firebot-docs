@@ -14,7 +14,7 @@ export const nav: Array<NavGroup> = [
             { title: 'Effects', href: '/v5/core/effects' },
             { title: 'Commands', href: '/v5/core/commands' },
             { title: 'Events', href: '/v5/core/events' },
-            { title: 'Timers', href: '/timers' },
+            { title: 'Timers And Scheduled Effects', href: '/v5/core/timers' },
             { title: 'Channel Rewards', href: '/channel-rewards' },
             { title: 'Preset Effect Lists', href: '/preset-effect-lists' },
             { title: 'Hotkeys', href: '/hotkeys' },
@@ -27,7 +27,7 @@ export const nav: Array<NavGroup> = [
     {
         title: 'Guides',
         links: [
-            { title: 'Alert Queues', href: '/guides/alert-queues' },
+            { title: 'Effect Queues', href: '/v5/guides/effect-queues' },
             { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
             { title: 'Time Variables', href: '/v5/guides/time-variable' },
             { title: 'Custom Variables', href: '/v5/guides/custom-variables' },

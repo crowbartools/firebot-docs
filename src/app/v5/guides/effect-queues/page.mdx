@@ -1,0 +1,46 @@
+# **Effect Queues**
+
+The Effect Queues in Firebot are a feature that helps manage and display alerts on your stream in an organized manner. It allows you to add separate effects lists to a queue, meaning that you can play lists of effects one after another, preventing overlap and ensuring that each effect list gets its moment in the spotlight.
+
+You can find queues in two locations. First in the **Effect Queues** tab, located in the main navigation sidebar under the "Management" category. You can also find them by looking at the top right of any effects list just underneath **QUEUE**. If you haven't set a queue yet, click on the `V` symbol next to "Not set" to add your effects to a queue, or create a new queue. If you already added the effects to a queue then "Not set" will become the name of the queue, you can still click on the `V` to change the queue.
+
+## **Creating an Effect Queue**
+If you are in the Effect Queues management tab then click on the blue button labeled `+ New Effect Queue`. If you want to create a queue from the drop down menu for an effects list then select "Create new queue".
+
+## **Configuring an Effect Queue**
+When creating a new queue you will be given two options, name and mode. 
+
+### **Name**
+This is where you create the name for your queue, it is generally good practice to use a descriptive name that will make it obvious what the queue is for when you come to look at it later. 
+
+### **Mode**
+
+Here you have three options:
+
+* **Custom**
+    This will wait a custome amount of time between effects, meaning you can set a specific time before it moves onto the next effect. When you select a custom effect queue from the effect list drop down menu two options will appear next to it, "EFFECTS DURATION", which is the total duration (in seconds) the queue should wait after triggering the effect list before triggering the next one. And "QUEUE PRIORITY", if an effect list has priority it will get added in front of other lists in that queue that do not have priority. 
+* **Sequential**
+    This will run effects lists in the queue sequentially, priority items will be addded before non-priority. There is an optional additional delay that you can add between effects lists, that will default to 0 seconds. When you select this option while creating the queue it will give you a new third option "INTERVAL/DELAY (SECS)", where you can optionally add the delay time between effect lists. When you add a list to this queue the option to give the effect list priority will appear to the left of the queue drop down menu. 
+* **Interval**
+    This runs effects lists after a set interval. When you select this option this will give you the third "INTERVAL/DELAY (SECS)" option. When you add an effects list it will also give you the option to make the effects list a priority for that queue. 
+---
+## **Example: Managing Multiple Donations with a Queue**
+
+You want to ensure that every donation, regardless of how quickly they come in, gets a distinct on-stream alert without overlapping.
+
+1.  **Create a New Effect Queue:**
+    *   Navigate to the **Effect Queues** tab in Firebot.
+    *   Click the blue **"+ New Effect Queue"** button.
+    *   Name your queue: `"Donation Alerts"`
+    *   Select **Mode**: `"Sequential"` (This ensures alerts play one after another).
+    *   Click **"Save"**.
+
+2.  **Configure a Donation Event to use the Queue:**
+    *   Go to the **Events** tab.
+    *   Find or create an event that triggers on `"Twitch"` -> `"Cheer"` (for Bits) and another for `"Streamlabs"` -> `"Donation"`.
+    *   For each of these events, in the event's "Effects" section:
+        *   Add your desired effects (e.g., **Play Sound**, **Show Image/GIF**, **Chat Message**).
+        *   In the top right corner of the effects list, next to **"QUEUE"**, click the `V` symbol.
+        *   Select your newly created `"Donation Alerts"` queue from the dropdown.
+
+Now, whenever you receive multiple donations close together, Firebot will add each associated effects list to the "Donation Alerts" queue. Each alert will play fully, ensuring no alerts overlap and every donor is properly acknowledged.

@@ -1,0 +1,118 @@
+# Timers and scheduled effects
+
+## **Timers**
+
+Timers in Firebot are a crucial feature for automating various actions on your stream at set intervals. They allow you to schedule regular messages in chat, trigger effects, or perform other tasks, ensuring consistent engagement even when you're focused on gameplay or conversation.
+
+You can access and manage all your timers from the **TIME-BASED** tab, located in the main navigation sidebar under "Triggers". This tab is dedicated to "Time-Based" events, allowing you to schedule actions to occur automatically.
+
+Timers are an good way to remind your viewers about important information, promote your social media, or even run mini-games without constant manual intervention.
+
+## **Creating a Timer**
+To create a new time click on the blue button in the top right labeled `+ New Timer` of the Time-Based tab. This will bring up four options, name, interval, required chat lines and "Only Run When Live", as well as an effects list when you can add the effects to be run on the timer. 
+
+*   **Name**
+    This is where you can name your timer. It is generally a good idea to give it a descriptive name so you don't forget what it's for. 
+*   **interval**
+    This is where you decide how long an interval Firebot waits before triggering the effects list. This is measured in seconds, so if you wanted to wait 30 minutes you would use 1800 seconds. 
+*   **Required Chat Lines**
+    This is the minimum number of lines in chat since the last time this interval timer ran. So if nobody has said anything in chat this timer will not trigger until the some people have commented in chat enough to reach this minimum. 
+
+**Example**: If you set `Interval` to `900` seconds (15 minutes) and `Required Chat Lines` to `25`, the timer will only send a message if 25 or more lines of chat have occurred in the last 15 minutes. This prevents messages from repeating in an empty channel.
+
+* **Only Run When Live**
+This checkbox determines whether the timer should operate only when your stream is actively live.
+    *   **Enabled (checked):** The timer will only run its effects when your stream is online. This is generally recommended for most chat-based timers.
+    *   **Disabled (unchecked):** The timer will run its effects even when your stream is offline. This might be useful for very specific, non-stream-dependent automation.
+
+### **Effects**
+This is where you define the actions that the timer will perform when it triggers. You can add one or more effects that will run in the order they appear.
+
+*   **Add effects:** Click the blue **"Add New Effect"** button to open the effect selector.
+*   **Select effects:** Choose any effect, such as **Chat**, **Play Sound**, or **Run Random Effect**.
+*   **Configure effects:** Each added effect has its own settings that you can customize.
+*   **Order of execution:** Multiple effects will run sequentially.
+*   **Random or Sequential Effects:** For timers that display chat messages, it's often useful to use the **Run Random Effect** or **Run Sequential Effect** within your effects list. This allows you to set up multiple chat messages, and the timer will rotate through them or pick one at random each time it fires, preventing repetitive messages.
+---
+
+
+## Timer Example: Promoting Social Media
+
+You want to periodically remind your viewers about your social media channels in chat, but only when chat is active.
+
+1.  **Create a New Timer:**
+    *   Navigate to the **Timers** tab.
+    *   Click the blue **"+ New Timer"** button.
+    *   **Name**: `"Social Media Plug"`
+    *   **Interval (secs)**: `"600"` (This means the timer will try to run every 10 minutes).
+    *   **Required Chat Lines**: `"5"` (The timer will only run if there have been at least 5 lines of chat in the last 10 minutes).
+    *   **Only Run When Live**: Ensure this is **checked**.
+
+2.  **Add Effects:**
+    *   Add a **Run Sequential Effect**.
+        *   Inside this sequential effect, add multiple **Chat** effects.
+            *   **Chat Effect 1 Message**: `"Don't forget to follow me on Twitter! $twitter[handle]"`
+            *   **Chat Effect 2 Message**: `"Join our Discord server for more fun! $discord[invite]"`
+            *   **Chat Effect 3 Message**: `"Check out my latest YouTube video! $youtube[latestvideo]"`
+
+3.  **Save the Timer**: Click **"Save"**.
+
+Now, every 10 minutes (provided there's been at least 5 lines of chat), Firebot will post one of your social media messages in chat, rotating through them sequentially.
+
+---
+## **Scheduled Effect List**
+
+Scheduled Effect Lists in Firebot allow you to automate actions at specific times or recurring schedules, independent of chat activity or stream status. This is ideal for daily greetings, weekly reminders, or seasonal events.
+
+You can create and manage all your Scheduled Effect Lists from the **TIME-BASED** tab, located in the main navigation sidebar under "Triggers", by selecting the **"SCHEDULED EFFECT LISTS"** sub-tab.
+
+Scheduled Effect Lists are perfect for automating consistent stream elements, such as reminding viewers about an upcoming weekly show, a daily poll, or even a monthly giveaway announcement.
+
+## **Creating a Scheduled Effect List**
+To create a new Scheduled Effect List, click on the blue button labeled `+ New Scheduled Effect List` in the top right of the "SCHEDULED EFFECT LISTS" sub-tab. This will open a new window with several options, including name, schedule, and an effects list.
+
+*   **Name**
+    This is where you name your Scheduled Effect List. A descriptive name helps you quickly identify its purpose, especially if you have multiple schedules.
+*   **Schedule**
+    This is the core of a Scheduled Effect List, defining exactly when your effects will run. You have two options:
+    *   **Simple Schedule**: Choose from predefined options like "Every Minute," "Every Hour," "Every Day," "Every Month," or "Every Weekday." This is straightforward for common recurring tasks.
+    *   **Advanced Schedule**: For more complex timing, you can use a [crontab expression](https://crontab.guru/). This allows for highly specific schedules (e.g., "every Monday at 8 AM" or "the last day of every month").
+        *   When you add a crontab expression to the input field, a "friendly name" will appear, translating your cron expression into a human-readable format to help you verify your schedule.
+*   **Only Run When Live**
+    This checkbox determines whether the Scheduled Effect List should operate only when your stream is actively live.
+    *   **Enabled (checked):** The effects will only run when your stream is online. This is generally recommended for most alerts or chat messages.
+    *   **Disabled (unchecked):** The effects will run even when your stream is offline. This might be useful for behind-the-scenes tasks or messages intended for your community outside of live hours.
+
+### **Effects**
+This is where you define the actions that the Scheduled Effect List will perform when it triggers. You can add one or more effects that will run in the order they appear.
+
+*   **Add effects:** Click the blue **"Add New Effect"** button to open the effect selector.
+*   **Select effects:** Choose any effect, such as **Chat**, **Play Sound**, or **Run Command**.
+*   **Configure effects:** Each added effect has its own settings that you can customize.
+*   **Order of execution:** Multiple effects will run sequentially.
+*   **Random or Sequential Effects:** For chat messages, using **Run Random Effect** or **Run Sequential Effect** can prevent repetitive messages by rotating through a list of predefined messages or selecting one randomly.
+
+---
+
+## Scheduled Effect List Example: Weekly Stream Reminder
+
+You want to automatically post a reminder in chat every Sunday at 3 PM (your local time) about your upcoming stream, but only if you are live.
+
+1.  **Create a New Scheduled Effect List:**
+    *   Navigate to the **TIME-BASED** tab and select the **"SCHEDULED EFFECT LISTS"** sub-tab.
+    *   Click the blue **"+ New Scheduled Effect List"** button.
+    *   **Name**: `"Weekly Stream Reminder"`
+    *   **Schedule**:
+        *   Select **"Advanced Schedule"**.
+        *   Enter the cron expression: `"0 15 * * SUN"` (This translates to "At 3:00 PM, only on Sunday").
+        *   Verify the "friendly name" matches your intention.
+    *   **Only Run When Live**: Ensure this is **checked**.
+    *   **Enabled**: Ensure this is **checked**.
+
+2.  **Add Effects:**
+    *   Add a **Chat** effect.
+        *   **Message**: `"Don't forget, my stream is coming up this week! Get ready for some fun at [Your Stream Link]"`
+
+3.  **Save the Scheduled Effect List**: Click **"Save"**.
+
+Now, every Sunday at 3 PM, if your stream is live, Firebot will automatically post your stream reminder message in chat.
