@@ -21,6 +21,7 @@ export const nav: Array<NavGroup> = [
             { title: 'Hotkeys', href: '/v5/core/hotkeys' },
             { title: 'Counters', href: '/v5/core/counters' },
             { title: 'Variables', href: '/v5/core/variables' },
+            { title: 'Restrictions', href: '/v5/core/restrictions' },
             { title: 'Effect Queues', href: '/v5/core/effect-queues' },
             { title: 'Setups', href: '/v5/core/setups' },
             { title: 'Overlay Widgets', href: '/v5/core/overlay-widgets' },

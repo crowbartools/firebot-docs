@@ -1,0 +1,122 @@
+﻿# Restrictions
+
+Restrictions decide whether Firebot should run effects after something is triggered.
+
+They are used when you want something to only run for certain viewers, during certain streams, or under certain channel conditions.
+
+Restrictions can be used in places such as **Commands** and **Channel Rewards**.
+
+<Note type="info">
+    You can learn more about commands here: [Commands](/v5/core/commands).
+</Note>
+
+<Note type="info">
+    You can learn more about Channel Rewards here: [Channel Rewards](/v5/core/channel-rewards).
+</Note>
+
+---
+
+## **Using Restrictions**
+
+Restrictions are added from the **Restrictions** section by clicking the plus button.
+
+When restrictions are added, Firebot checks them before running the effects.
+
+The effects only run when the selected restrictions pass.
+
+Restrictions are useful when something should only work during certain streams, for certain viewers, or when specific channel conditions are met.
+
+---
+
+## **Available Restrictions**
+
+Available restrictions include:
+
+* **Active Chat Users**
+Restricts effects to active chat users.
+* **Channel Category/Game**
+Restricts effects to a specific Twitch category or game.
+* **Channel Currency**
+Restricts effects based on Firebot channel currency amounts.
+* **Channel Viewer Count**
+Restricts effects based on the current viewer count.
+* **Chat Messages**
+Restricts effects based on how many chat messages a viewer has sent.
+* **Custom Variable**
+Restricts effects based on a custom variable set with the **Custom Variable** effect.
+* **Follow Check**
+Restricts effects based on whether the viewer follows one or more channels.
+* **Only When Live**
+Only allows effects to run while the channel is live.
+* **Permissions**
+Restricts effects based on viewer roles or username.
+* **Time / Day**
+Restricts effects to a specific local time or day.
+* **View Time**
+Restricts effects based on how long the viewer has watched the channel.
+
+<Note type="info">
+    You can learn more about custom variables here: [Custom Variables](/v5/guides/custom-variables).
+</Note>
+
+---
+
+## **Restriction Examples**
+
+### Command Restriction
+
+Use restrictions on a command when only certain viewers should be able to use it.
+
+For example, you can make a command only work for moderators, subscribers, the streamer, a custom role, or viewers who meet another condition.
+
+### Channel Reward Restriction
+
+Use restrictions on a Channel Reward when the reward should only run under certain conditions.
+
+For example, you can make a reward only work while live, during a specific category, or when the viewer has enough view time.
+
+### Stream Category Restriction
+
+Use **Channel Category/Game** when something should only run while you are streaming a specific category.
+
+For example, a game-specific command or reward can be restricted so it only works while that game is selected.
+
+### Live Stream Restriction
+
+Use **Only When Live** when something should only run while the stream is online.
+
+This is useful for rewards, commands, reminders, alerts, and effects that should not run while offline.
+
+### Custom Variable Restriction
+
+Use **Custom Variable** when Firebot should check saved data before running effects.
+
+For example, you can use a custom variable to track whether a game is active, whether a viewer is allowed to join, or whether an event is currently open.
+
+<Note type="info">
+    You can learn more about custom variables here: [Custom Variables](/v5/guides/custom-variables).
+</Note>
+
+---
+
+## **Restrictions and Testing**
+
+When testing a Channel Reward, the play button tests the attached effects.
+
+Use `Simulate` when you need to test restrictions, viewer input, or other redemption details that the play button does not cover.
+
+<Note type="info">
+    You can learn more about simulating events here: [Simulate](/v5/core/events#simulating-events).
+</Note>
+
+---
+
+## **Restrictions and Variables**
+
+Some restrictions depend on viewer data, channel data, custom variables, or other stored Firebot values.
+
+Variables can help you understand what data is available when building effects around restrictions.
+
+<Note type="info">
+    You can learn more about variables here: [Variables](/v5/core/variables).
+</Note>
