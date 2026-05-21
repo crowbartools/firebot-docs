@@ -1,0 +1,910 @@
+﻿# Overlay Widgets
+
+Overlay Widgets are visual elements that can be shown on your Firebot overlay.
+
+You can access **Overlay Widgets** in the main navigation sidebar under **Triggers**.
+
+Overlay Widgets are useful when you want something visible on stream, such as chat, text, images, counters, countdowns, progress bars, or custom widgets.
+
+<Note type="info">
+    Overlay Widgets only appear on stream if your Firebot overlay is added to your broadcasting software as a browser source.
+</Note>
+
+---
+
+## **Creating an Overlay Widget**
+
+To create a new widget, click `New Overlay Widget` in the **Overlay Widgets** tab. This opens the widget editor.
+
+The widget editor lets you choose the widget type, name the widget, choose an overlay instance, configure the widget settings, and set where it should appear on the overlay.
+
+Available widget types include:
+
+* **Chat**
+* **Chat (Advanced)**
+* **Countdown Timer (Dynamic)**
+* **Countdown to Date**
+* **Counter Display**
+* **Current Date / Time**
+* **Custom Widget**
+* **Custom Widget (Advanced)**
+* **Image**
+* **Progress Bar**
+* **Text**
+
+Click `Save` when you are finished.
+
+<Note type="info">
+    Each widget type has different settings. Choose the widget type based on what you want to show on stream.
+</Note>
+
+---
+
+## **Widget Position**
+
+Most widgets share the same position controls.
+
+The position editor lets you place and resize the widget inside the overlay canvas. You can drag the widget, resize it, or enter exact values.
+
+| Option               | What it does                                          |
+|----------------------|-------------------------------------------------------|
+| **Overlay Instance** | Selects which overlay instance the widget belongs to. |
+| **X Position (px)**  | Sets the widget's horizontal position in pixels.      |
+| **Y Position (px)**  | Sets the widget's vertical position in pixels.        |
+| **Width (px)**       | Sets the widget width in pixels.                      |
+| **Height (px)**      | Sets the widget height in pixels.                     |
+| **Z-index**          | Controls the widget's layer order.                    |
+|                      |                                                       |
+
+Use **Z-index** when widgets overlap. A higher value appears above a lower value.
+
+---
+
+## **Chat**
+
+The **Chat** widget shows Twitch chat on your overlay.
+
+Use this when you want a regular chat feed on stream without writing custom HTML or CSS.
+
+### Display Options
+
+| Option                        | What it does                                                                             |
+|-------------------------------|------------------------------------------------------------------------------------------|
+| **Show Timestamps**           | Shows timestamps next to chat messages.                                                  |
+| **Show Viewer Avatars**       | Shows the chatter's profile image next to their message.                                 |
+| **Show Chat Badges**          | Shows Twitch badges such as sub badges, Bits badges, and other chat badges.              |
+| **Show Pronouns**             | Shows chatter pronouns when available from [Twitch Chat Pronouns](https://pr.alejo.io/). |
+| **Show Shared Chat Messages** | Shows messages sent from other channels during a shared chat session.                    |
+| **Show Announcements**        | Shows chat announcements sent by the streamer or moderators.                             |
+|                               |                                                                                          |
+
+### Message Timing
+
+| Option                            | What it does                                                               |
+|-----------------------------------|----------------------------------------------------------------------------|
+| **Add Message Delay**             | Delays messages before they are sent to the widget. Useful for moderation. |
+| **New Message Entry Animation**   | Sets the animation used when new messages appear.                          |
+| **Automatically Remove Messages** | Removes messages from the widget after a set amount of time.               |
+|                                   |                                                                            |
+
+### Message Layout
+
+| Option                | What it does                                      |
+|-----------------------|---------------------------------------------------|
+| **Message Style**     | Controls how usernames and messages are shown.    |
+| **Compact**           | Shows the username and message on the same line.  |
+| **Modern (Expanded)** | Shows the username and message on separate lines. |
+| **Chat Order**        | Controls where new messages appear.               |
+| **Normal**            | New messages appear at the bottom of the feed.    |
+| **Reversed**          | New messages appear at the top of the feed.       |
+|                       |                                                   |
+
+### Message Types
+
+| Option                        | What it does                                                 |
+|-------------------------------|--------------------------------------------------------------|
+| **Action Display Format**     | Controls how `/me` messages are displayed.                   |
+| **Modern**                    | Shows action text like normal chat text, but italicized.     |
+| **Classic**                   | Shows action text in the username color, but not italicized. |
+| **Highlighted Message Style** | Controls how highlighted Twitch messages are displayed.      |
+| **Normal**                    | Highlighted messages look like regular chat messages.        |
+| **Highlighted**               | Highlighted messages use a different background color.       |
+|                               |                                                              |
+
+### Filtering and Emotes
+
+| Option                                  | What it does                                   |
+|-----------------------------------------|------------------------------------------------|
+| **Enabled Third-Party Emote Providers** | Enables supported third-party emote providers. |
+| **BTTV**                                | Enables BetterTTV emotes.                      |
+| **7TV**                                 | Enables 7TV emotes.                            |
+| **FFZ**                                 | Enables FrankerFaceZ emotes.                   |
+| **Hidden Users**                        | Hides messages from selected usernames.        |
+|                                         |                                                |
+
+<Note type="info">
+    Third-party emote providers enabled in the Chat widget must also be enabled in Dashboard settings before emotes from those services will show.
+</Note>
+
+### Alignment and Spacing
+
+| Option                     | What it does                                                      |
+|----------------------------|-------------------------------------------------------------------|
+| **Horizontal Alignment**   | Aligns chat messages left or right inside the widget area.        |
+| **Vertical Alignment**     | Aligns chat messages to the top or bottom inside the widget area. |
+| **Space Between Messages** | Sets the spacing between messages in pixels.                      |
+|                            |                                                                   |
+
+### Font Options
+
+| Option                        | What it does                                                    |
+|-------------------------------|-----------------------------------------------------------------|
+| **Username Font Options**     | Controls username font, size, weight, and italic styling.       |
+| **Chat Message Font Options** | Controls message font, color, size, weight, and italic styling. |
+|                               |                                                                 |
+
+---
+
+## **Chat (Advanced)**
+
+The **Chat (Advanced)** widget shows Twitch chat on your overlay using custom HTML and CSS.
+
+Use this when you want to build your own chat layout instead of using the standard **Chat** widget.
+
+<Note type="warning">
+    Chat (Advanced) expects valid HTML and CSS. Broken templates can stop messages from displaying correctly.
+</Note>
+
+### CSS Template
+
+The **CSS Template** field is where you add CSS styles and custom CSS classes for the widget.
+
+Firebot automatically puts this CSS inside a `<style>` tag.
+
+| Field                       | What it inserts                                                                                       |
+|-----------------------------|-------------------------------------------------------------------------------------------------------|
+| `{{messageContainerClass}}` | The chat message container `<div>` created by the widget. New messages are added inside this element. |
+| `{{messageClass}}`          | The message `<div>` created by the widget for a single chat message.                                  |
+|                             |                                                                                                       |
+
+### Message HTML Templates
+
+The **Default Message HTML Template** controls the HTML used when Firebot creates normal chat messages.
+
+| Field                    | What it inserts                                                    |
+|--------------------------|--------------------------------------------------------------------|
+| `{{avatarUrl}}`          | URL for the chatter's avatar.                                      |
+| `{{badges}}`             | HTML for chat badges. Each badge is converted to an `<img>` tag.   |
+| `{{chatMessage}}`        | Chat message with formatted emotes and cheermotes.                 |
+| `{{chatMessageRawText}}` | Raw chat message text without formatting for emotes or cheermotes. |
+| `{{pronouns}}`           | Chatter's pronouns, if set.                                        |
+| `{{timestamp}}`          | Timestamp of when the message was sent.                            |
+| `{{username}}`           | Chatter's display name.                                            |
+| `{{usernameColor}}`      | Chatter's username color in hex format, such as `#0066FF`.         |
+|                          |                                                                    |
+
+### Action Messages
+
+The **Action HTML Template** controls the HTML used for `/me` messages.
+
+Enable **Use Separate Template for Actions** when you want `/me` messages to look different from normal chat messages.
+
+<Note type="info">
+    The Action HTML Template can use the same fields as the Default Message HTML Template.
+</Note>
+
+### Highlighted Messages
+
+The **Highlighted Message HTML Template** controls the HTML used for messages sent with Twitch's **Highlight My Message** Channel Reward.
+
+Enable **Use Separate Template for Highlighted Messages** when you want highlighted messages to use different HTML from normal chat messages.
+
+<Note type="info">
+    The Highlighted Message HTML Template can use the same fields as the Default Message HTML Template.
+</Note>
+
+### Message Options
+
+| Option                            | What it does                                                               |
+|-----------------------------------|----------------------------------------------------------------------------|
+| **Show Shared Chat Messages**     | Shows messages sent from other channels during a shared chat session.      |
+| **Show Announcements**            | Shows chat announcements sent by the streamer or moderators.               |
+| **Add Message Delay**             | Delays messages before they are sent to the widget. Useful for moderation. |
+| **New Message Entry Animation**   | Sets the animation used when new messages appear.                          |
+| **Automatically Remove Messages** | Removes messages from the widget after a set amount of time.               |
+|                                   |                                                                            |
+
+### Emotes and Filtering
+
+| Option                                  | What it does                                   |
+|-----------------------------------------|------------------------------------------------|
+| **Enabled Third-Party Emote Providers** | Enables supported third-party emote providers. |
+| **BTTV**                                | Enables BetterTTV emotes.                      |
+| **7TV**                                 | Enables 7TV emotes.                            |
+| **FFZ**                                 | Enables FrankerFaceZ emotes.                   |
+| **Hidden Users**                        | Hides messages from selected usernames.        |
+|                                         |                                                |
+
+<Note type="info">
+    Third-party emote providers enabled in the Chat (Advanced) widget must also be enabled in Dashboard settings before emotes from those services will show.
+</Note>
+
+---
+
+## **Countdown Timer (Dynamic)**
+
+The **Countdown Timer (Dynamic)** widget shows a countdown timer on your overlay.
+
+Use this when you want a timer that can be controlled dynamically by Firebot effects instead of only being set once in the widget settings.
+
+### Animation Options
+
+| Option              | What it does                                  |
+|---------------------|-----------------------------------------------|
+| **Entry Animation** | Sets the animation used when the timer shows. |
+| **Exit Animation**  | Sets the animation used when the timer hides. |
+|                     |                                               |
+
+### Timer Display
+
+| Option             | What it does                                                             |
+|--------------------|--------------------------------------------------------------------------|
+| **Font Options**   | Controls the timer font, color, size, weight, and italic styling.        |
+| **Text Alignment** | Aligns the countdown text left, center, or right inside the widget area. |
+|                    |                                                                          |
+
+### Timer Behavior
+
+| Option                  | What it does                                                          |
+|-------------------------|-----------------------------------------------------------------------|
+| **Run When Inactive**   | Keeps the countdown running when the widget is not active or visible. |
+| **On Complete Effects** | Runs effects when the countdown reaches zero.                         |
+|                         |                                                                       |
+
+<Note type="info">
+    Use **On Complete Effects** when you want something to happen automatically after the timer ends, such as sending a chat message, changing scenes, playing a sound, or triggering another effect.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Countdown to Date**
+
+The **Countdown to Date** widget shows a countdown to a specific date and time on your overlay.
+
+Use this when you want a fixed countdown for something like a stream event, launch, birthday, deadline, or scheduled reveal.
+
+### Countdown Settings
+
+| Option               | What it does                                                         |
+|----------------------|----------------------------------------------------------------------|
+| **Target Date/Time** | Sets the date and time the countdown should reach zero.              |
+| **Format**           | Controls how the remaining time is displayed.                        |
+| **Simple**           | Shows the timer in a compact format, such as `8:35:42`.              |
+| **Human-readable**   | Shows the timer in words, such as `8 hours, 35 minutes, 42 seconds`. |
+|                      |                                                                      |
+
+### Animation Options
+
+| Option              | What it does                                  |
+|---------------------|-----------------------------------------------|
+| **Entry Animation** | Sets the animation used when the timer shows. |
+| **Exit Animation**  | Sets the animation used when the timer hides. |
+|                     |                                               |
+
+### Timer Display
+
+| Option                   | What it does                                                    |
+|--------------------------|-----------------------------------------------------------------|
+| **Font Options**         | Controls the timer font, color, size, weight, and italic style. |
+| **Horizontal Alignment** | Aligns the countdown text left, center, or right.               |
+| **Vertical Alignment**   | Aligns the countdown text to the top, center, or bottom.        |
+|                          |                                                                 |
+
+### Completion
+
+| Option                  | What it does                                  |
+|-------------------------|-----------------------------------------------|
+| **On Complete Effects** | Runs effects when the countdown reaches zero. |
+|                         |                                               |
+
+<Note type="info">
+    Use **On Complete Effects** when you want Firebot to do something automatically when the countdown ends, such as posting a chat message, playing a sound, changing scenes, or showing another overlay.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Counter Display**
+
+The **Counter Display** widget shows the value of a Firebot counter on your overlay.
+
+Use this when you want a counter visible on stream, such as deaths, wins, attempts, streaks, or any other number you track with Firebot.
+
+### Counter
+
+| Option      | What it does                                                       |
+|-------------|--------------------------------------------------------------------|
+| **Counter** | Selects which Firebot counter value should be shown in the widget. |
+|             |                                                                    |
+
+<Note type="info">
+    Create the counter from the **Counters** tab before selecting it in the Counter Display widget.
+</Note>
+
+<Note type="info">
+    You can learn more about counters here: [Counters](/v5/core/counters).
+</Note>
+
+### Animation Options
+
+| Option              | What it does                                    |
+|---------------------|-------------------------------------------------|
+| **Entry Animation** | Sets the animation used when the counter shows. |
+| **Exit Animation**  | Sets the animation used when the counter hides. |
+|                     |                                                 |
+
+### Counter Value
+
+| Option                   | What it does                                                            |
+|--------------------------|-------------------------------------------------------------------------|
+| **Counter Font Options** | Controls the counter value font, color, size, weight, and italic style. |
+|                          |                                                                         |
+
+### Counter Name
+
+| Option                        | What it does                                                           |
+|-------------------------------|------------------------------------------------------------------------|
+| **Show Counter Name**         | Shows the counter name above the counter value.                        |
+| **Counter Name Font Options** | Controls the counter name font, color, size, weight, and italic style. |
+|                               |                                                                        |
+
+### Text Alignment
+
+| Option             | What it does                                                       |
+|--------------------|--------------------------------------------------------------------|
+| **Text Alignment** | Aligns the counter text left, center, or right in the widget area. |
+|                    |                                                                    |
+
+---
+
+## **Current Date / Time**
+
+The **Current Date / Time** widget shows the current date, time, or both on your overlay.
+
+Use this when you want a clock, date label, stream timestamp, or any other live time display.
+
+### Format
+
+| Option     | What it does                                                                                                                                         |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Format** | Controls how the current date and time are displayed. Uses [Luxon formatting rules](https://moment.github.io/luxon/#/formatting?id=table-of-tokens). |
+|            |                                                                                                                                                      |
+
+Example format: `DD h:mm:ss a`
+
+### Animation Options
+
+| Option              | What it does                                   |
+|---------------------|------------------------------------------------|
+| **Entry Animation** | Sets the animation used when the widget shows. |
+| **Exit Animation**  | Sets the animation used when the widget hides. |
+|                     |                                                |
+
+### Date and Time Display
+
+| Option                   | What it does                                                      |
+|--------------------------|-------------------------------------------------------------------|
+| **Font Options**         | Controls the font, color, size, weight, and italic style.         |
+| **Horizontal Alignment** | Aligns the text left, center, or right in the widget area.        |
+| **Vertical Alignment**   | Aligns the text to the top, center, or bottom of the widget area. |
+|                          |                                                                   |
+
+<Note type="info">
+    Change the Format field when you want to show only the time, only the date, or a custom date and time layout.
+</Note>
+
+---
+
+## **Custom Widget**
+
+The **Custom Widget** lets you build your own overlay widget with HTML and JavaScript.
+
+Use this when the built-in widgets do not cover what you need, or when you want a widget that reacts to Firebot effects.
+
+### Widget Code
+
+| Option               | What it does                                                                                          |
+|----------------------|-------------------------------------------------------------------------------------------------------|
+| **HTML**             | Sets the initial HTML shown inside the widget.                                                        |
+| **onShow JS**        | Runs JavaScript when the widget is shown. Runs inside an async function, so `await` is supported.     |
+| **onStateUpdate JS** | Runs JavaScript when the widget state is updated by the **Set Custom Widget State** effect.           |
+| **onMessage JS**     | Runs JavaScript when the widget receives a message from the **Send Message to Custom Widget** effect. |
+|                      |                                                                                                       |
+
+### Available JS Values
+
+These values are available in **onShow JS** and **onStateUpdate JS**.
+
+| Value                                                                | What it is                               |
+|----------------------------------------------------------------------|------------------------------------------|
+| `containerElement`                                                   | The root HTML element of the widget.     |
+| `widgetId`                                                           | This widget's unique ID.                 |
+| `widgetState`                                                        | The current state of the widget, if any. |
+| `utils.sendMessageToFirebot(messageName: string, messageData?: any)` | Sends a message back to Firebot.         |
+|                                                                      |                                          |
+
+These values are available in **onMessage JS**.
+
+| Value                                                                | What it is                               |
+|----------------------------------------------------------------------|------------------------------------------|
+| `containerElement`                                                   | The root HTML element of the widget.     |
+| `widgetId`                                                           | This widget's unique ID.                 |
+| `widgetState`                                                        | The current state of the widget, if any. |
+| `messageName`                                                        | The name of the received message.        |
+| `messageData`                                                        | The data sent with the message, if any.  |
+| `utils.sendMessageToFirebot(messageName: string, messageData?: any)` | Sends a message back to Firebot.         |
+|                                                                      |                                          |
+
+### Animation Options
+
+| Option              | What it does                                   |
+|---------------------|------------------------------------------------|
+| **Entry Animation** | Sets the animation used when the widget shows. |
+| **Exit Animation**  | Sets the animation used when the widget hides. |
+|                     |                                                |
+
+<Note type="info">
+    Custom Widgets can receive messages from the **Send Message to Custom Widget** effect and state updates from the **Set Custom Widget State** effect.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Custom Widget (Advanced)**
+
+**Custom Widget (Advanced)** gives you one event script instead of separate scripts for showing, state updates, messages, and removal.
+
+Use this when you want full control over how the widget reacts to overlay events.
+
+### Event Script
+
+| Option         | What it does                                                                                                |
+|----------------|-------------------------------------------------------------------------------------------------------------|
+| **onEvent JS** | Runs JavaScript when the widget receives any event. Runs inside an async function, so `await` is supported. |
+|                |                                                                                                             |
+
+### Event Names
+
+The `eventName` value tells you what happened.
+
+| Event name        | When it runs                     |
+|-------------------|----------------------------------|
+| `show`            | The widget is shown.             |
+| `settings-update` | The widget settings are updated. |
+| `state-update`    | The widget state is updated.     |
+| `message`         | The widget receives a message.   |
+| `remove`          | The widget is removed.           |
+|                   |                                  |
+
+### Available JS Values
+
+| Value                                                                | What it is                                                                                                |
+|----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `eventName`                                                          | The name of the received event. Can be `show`, `settings-update`, `state-update`, `message`, or `remove`. |
+| `widgetId`                                                           | This widget's unique ID.                                                                                  |
+| `widgetState`                                                        | The current state of the widget, if any.                                                                  |
+| `messageName`                                                        | The name of the received message. Only available when `eventName` is `message`.                           |
+| `messageData`                                                        | The data sent with the message, if any. Only available when `eventName` is `message`.                     |
+| `overlayWrapperElement`                                              | The official root element of the overlay. Use this for DOM changes.                                       |
+| `utils.stylesToString(styles)`                                       | Converts a styles object to an inline CSS string.                                                         |
+| `utils.sendMessageToFirebot(messageName: string, messageData?: any)` | Sends a message back to Firebot.                                                                          |
+|                                                                      |                                                                                                           |
+
+<Note type="info">
+    Use **Custom Widget** for separate script fields. Use **Custom Widget (Advanced)** when you want one script to handle every widget event.
+</Note>
+
+<Note type="info">
+    Advanced custom widgets can receive messages from the **Send Message to Custom Widget** effect and state updates from the **Set Custom Widget State** effect.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Image**
+
+The **Image** widget shows an image on your overlay.
+
+Use this for static graphics, logos, character art, panels, sponsor images, or any image you want to place on stream.
+
+### Image Source
+
+| Option         | What it does                                                          |
+|----------------|-----------------------------------------------------------------------|
+| **Image Type** | Chooses whether the image comes from a local file or a URL.           |
+| **Local File** | Uses an image file from your computer.                                |
+| **URL**        | Uses an image from an external image URL.                             |
+| **Image File** | Lets you choose the local image file when **Local File** is selected. |
+| **Image URL**  | Sets the image URL when **URL** is selected.                          |
+|                |                                                                       |
+
+### Animation Options
+
+| Option              | What it does                                    |
+|---------------------|-------------------------------------------------|
+| **Entry Animation** | Sets the animation used when the image appears. |
+| **Exit Animation**  | Sets the animation used when the image hides.   |
+|                     |                                                 |
+
+<Note type="info">
+    Use **Local File** for images stored with your setup. Use **URL** when the image is hosted online and should load from a web address.
+</Note>
+
+---
+
+## **Progress Bar**
+
+The **Progress Bar** widget shows a value as a filled bar.
+
+Use this for goals, counters, timers, health bars, donation progress, event progress, or anything else that needs a visual fill amount.
+
+### Display Options
+
+| Option                    | What it does                                                                                               |
+|---------------------------|------------------------------------------------------------------------------------------------------------|
+| **Title**                 | Sets the text shown with the progress bar.                                                                 |
+| **Current Value Display** | Controls how the current value is shown in the center of the bar.                                          |
+| **Hide**                  | Does not show the current value.                                                                           |
+| **Raw Value**             | Shows the current value as a number.                                                                       |
+| **Percentage**            | Shows the current value as a percentage.                                                                   |
+| **Show Max Value**        | Shows the maximum value at the end of the bar.                                                             |
+| **Value Prefix**          | Adds text before values, such as `$`, `#`, or another prefix. This is not shown when using **Percentage**. |
+|                           |                                                                                                            |
+
+### Font Options
+
+| Option           | What it does                                             |
+|------------------|----------------------------------------------------------|
+| **Font Options** | Controls the font used for the text on the progress bar. |
+| **Name**         | Sets the font family.                                    |
+| **Color**        | Sets the text color.                                     |
+| **Size**         | Sets the text size in pixels.                            |
+| **Weight**       | Sets the font weight.                                    |
+| **Italic**       | Makes the text italic.                                   |
+|                  |                                                          |
+
+### Bar Style
+
+| Option              | What it does                                                 |
+|---------------------|--------------------------------------------------------------|
+| **Track Color**     | Sets the background color behind the filled part of the bar. |
+| **Bar Color**       | Sets the fill color of the progress bar.                     |
+| **End Cap Style**   | Sets the shape of the bar ends.                              |
+| **Rounded**         | Uses rounded bar ends.                                       |
+| **Squared**         | Uses square bar ends.                                        |
+| **Bar Orientation** | Sets the overall direction of the bar.                       |
+| **Horizontal**      | Displays the bar sideways.                                   |
+| **Vertical**        | Displays the bar up and down.                                |
+| **Fill Direction**  | Sets which direction the bar fills as progress increases.    |
+| **Left to Right**   | Fills the bar from left to right.                            |
+| **Right to Left**   | Fills the bar from right to left.                            |
+|                     |                                                              |
+
+### Values
+
+| Option            | What it does                          |
+|-------------------|---------------------------------------|
+| **Minimum Value** | Sets the value where the bar starts.  |
+| **Maximum Value** | Sets the value where the bar is full. |
+|                   |                                       |
+
+### Effects
+
+| Option                  | What it does                                                  |
+|-------------------------|---------------------------------------------------------------|
+| **On Update Effects**   | Runs effects when the progress bar value is updated.          |
+| **On Complete Effects** | Runs effects when the progress bar reaches its maximum value. |
+|                         |                                                               |
+
+<Note type="info">
+    A progress bar needs a minimum value and maximum value so Firebot can calculate how much of the bar should be filled.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Text**
+
+The **Text** widget shows a line of custom text on the overlay.
+
+Use this for labels, stream messages, scene text, reminders, social links, or any short text you want to place on screen.
+
+### Text Content
+
+| Option   | What it does                       |
+|----------|------------------------------------|
+| **Text** | Sets the text shown by the widget. |
+|          |                                    |
+
+### Font Options
+
+| Option           | What it does                  |
+|------------------|-------------------------------|
+| **Font Options** | Controls how the text looks.  |
+| **Name**         | Sets the font family.         |
+| **Color**        | Sets the text color.          |
+| **Size**         | Sets the text size in pixels. |
+| **Weight**       | Sets the font weight.         |
+| **Italic**       | Makes the text italic.        |
+|                  |                               |
+
+### Alignment
+
+| Option                   | What it does                                                      |
+|--------------------------|-------------------------------------------------------------------|
+| **Horizontal Alignment** | Sets the text position from left to right inside the widget area. |
+| **Left**                 | Aligns the text to the left.                                      |
+| **Center**               | Centers the text horizontally.                                    |
+| **Right**                | Aligns the text to the right.                                     |
+| **Vertical Alignment**   | Sets the text position from top to bottom inside the widget area. |
+| **Top**                  | Aligns the text to the top.                                       |
+| **Center**               | Centers the text vertically.                                      |
+| **Bottom**               | Aligns the text to the bottom.                                    |
+|                          |                                                                   |
+
+<Note type="info">
+    The text is placed inside the widget area. If the text looks off-center, check the widget position, width, height, and alignment settings.
+</Note>
+
+---
+
+## **Editing an Overlay Widget**
+
+Existing widgets are shown in the **Overlay Widgets** tab. Each row shows the widget name, tags, and active status.
+
+To manage a widget, click the three dot menu on the widget or right-click the widget row.
+
+| Option               | What it does                                          |
+|----------------------|-------------------------------------------------------|
+| **Edit**             | Opens the widget editor so you can change the widget. |
+| **Enable / Disable** | Turns the widget on or off.                           |
+| **Duplicate**        | Creates a copy of the widget.                         |
+| **Delete**           | Deletes the widget.                                   |
+| **Move to**          | Moves the widget up or down for organizing.           |
+|                      |                                                       |
+
+<Note type="info">
+    You can also drag the handle on the right side of a widget row to reorganize widgets.
+</Note>
+
+---
+
+## **Overlay Widget Effects**
+
+Firebot includes effects that can control Overlay Widgets from commands, events, hotkeys, Channel Rewards, Power-Ups, and other triggers.
+
+| Effect                             | What it does                                                              |
+|------------------------------------|---------------------------------------------------------------------------|
+| **Toggle Overlay Widgets**         | Toggles, enables, or disables selected overlay widgets.                   |
+| **Update Overlay Widget Settings** | Updates or resets settings on an existing overlay widget.                 |
+| **Send Message to Custom Widget**  | Sends a named message to a Custom Widget or Custom Widget (Advanced).     |
+| **Set Custom Widget State**        | Updates the stored state for a Custom Widget or Custom Widget (Advanced). |
+|                                    |                                                                           |
+
+Use these effects when a widget should change because something happened in Firebot.
+
+For example, a hotkey can enable an image widget, a Channel Reward can update a progress bar, or a command can send JSON data to a custom widget.
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Send Message to Custom Widget**
+
+The **Send Message to Custom Widget** effect sends a named message to a **Custom Widget** or **Custom Widget (Advanced)** overlay widget.
+
+Use this when you want an effect to tell a widget to do something, such as show a new value, play an animation, update text, or react to a command.
+
+| Option            | What it does                                      |
+|-------------------|---------------------------------------------------|
+| **Custom Widget** | Selects which custom widget receives the message. |
+| **Name**          | Sets the message name sent to the widget.         |
+| **Data (JSON)**   | Optional JSON data sent with the message.         |
+|                   |                                                   |
+
+<Note type="info">
+    The message is handled in the widget's message script. The message name is available as `messageName`, and the JSON data is available as `messageData`.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Set Custom Widget State**
+
+The **Set Custom Widget State** effect updates the stored state for a **Custom Widget** or **Custom Widget (Advanced)** overlay widget.
+
+Use this when the widget needs to remember data, such as a score, setting, name, list, timer state, or anything else the widget should keep track of.
+
+| Option                                | What it does                                                          |
+|---------------------------------------|-----------------------------------------------------------------------|
+| **Custom Widget**                     | Selects which custom widget receives the state update.                |
+| **New State JSON**                    | Sets the new widget state. Must be valid JSON.                        |
+| **Merge with existing state, if any** | Merges the new state into the existing state instead of replacing it. |
+|                                       |                                                                       |
+
+<Note type="info">
+    State updates are handled in the widget's state update script. The current state is available as `widgetState`.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Toggle Overlay Widgets**
+
+The **Toggle Overlay Widgets** effect changes the active status of selected overlay widgets.
+
+Use this when you want an event, command, hotkey, or other trigger to toggle, enable, or disable one or more overlay widgets.
+
+| Option              | What it does                                                |
+|---------------------|-------------------------------------------------------------|
+| **Mode**            | Controls how the selected overlay widgets should change.    |
+| **Toggle**          | Switches each selected widget to the opposite active state. |
+| **Enable**          | Makes the selected widgets active.                          |
+| **Disable**         | Makes the selected widgets inactive.                        |
+| **Overlay Widgets** | Selects which overlay widgets the effect should change.     |
+|                     |                                                             |
+
+<Note type="info">
+    Use **Toggle** when the same effect should turn the widget on if it is off, or turn it off if it is already on. Use **Enable** or **Disable** when you want a fixed result.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Update Overlay Widget Settings**
+
+The **Update Overlay Widget Settings** effect changes settings for an existing overlay widget.
+
+Use this when you want an effect to move a widget, change its z-index, switch its overlay instance, update widget-specific settings, or reset the widget's settings.
+
+| Option                       | What it does                                      |
+|------------------------------|---------------------------------------------------|
+| **Overlay Widget to Update** | Selects which overlay widget should be updated.   |
+| **Mode**                     | Controls whether settings are updated or reset.   |
+| **Update**                   | Updates selected widget settings with new values. |
+| **Reset**                    | Resets the widget settings to default values.     |
+|                              |                                                   |
+
+### Update Mode
+
+When **Update** is selected, Firebot shows update options for the selected widget.
+
+| Option           | What it does                                     |
+|------------------|--------------------------------------------------|
+| **Save Changes** | Saves the updated settings so they persist.      |
+| **Customize**    | Selects which parts of the widget should change. |
+|                  |                                                  |
+
+### Customize Options
+
+The available options depend on the selected widget type.
+
+| Option                    | What it does                                                  |
+|---------------------------|---------------------------------------------------------------|
+| **Edit Position**         | Lets the effect change the widget position and size.          |
+| **Edit z-index**          | Lets the effect change the widget's layer order.              |
+| **Edit Overlay Instance** | Lets the effect move the widget to another overlay instance.  |
+| **Edit HTML**             | Lets the effect change the HTML for a Custom Widget.          |
+| **Edit onShow JS**        | Lets the effect change the Custom Widget's onShow JS code.    |
+| **Edit onStateUpdate JS** | Lets the effect change the Custom Widget's state update code. |
+| **Edit onMessage JS**     | Lets the effect change the Custom Widget's message code.      |
+|                           |                                                               |
+
+### Reset Mode
+
+When **Reset** is selected, Firebot resets the selected widget's settings to their default values.
+
+<Note type="info">
+    The available update options depend on the selected widget type. For example, Custom Widgets can expose HTML and JavaScript fields, while simpler widgets expose their own display settings.
+</Note>
+
+<Note type="warning">
+    **Reset** restores the selected widget's settings to default values. Use it only when that is the intended result.
+</Note>
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Widget Events**
+
+Widget events are internal overlay events that custom widgets can receive and react to.
+
+The **Custom Widget** type splits these into separate script fields, such as **onShow JS**, **onStateUpdate JS**, and **onMessage JS**.
+
+The **Custom Widget (Advanced)** type uses one **onEvent JS** field and gives you the event name.
+
+| Event name        | When it runs                     |
+|-------------------|----------------------------------|
+| `show`            | The widget is shown.             |
+| `settings-update` | The widget settings are updated. |
+| `state-update`    | The widget state is updated.     |
+| `message`         | The widget receives a message.   |
+| `remove`          | The widget is removed.           |
+|                   |                                  |
+
+<Note type="info">
+    Use widget events when you want custom JavaScript to react to overlay changes, messages, state updates, or removal.
+</Note>
+
+<Note type="info">
+    You can learn more about events here: [Events](/v5/core/events).
+</Note>
+
+---
+
+## **Overlay Widget Variables**
+
+Overlay Widgets can be read from supported variable fields with `$overlayWidgetState[]`.
+
+| Variable                                       | What it does                                      |
+|------------------------------------------------|---------------------------------------------------|
+| `$overlayWidgetState[nameOrId]`                | Gets the state of an overlay widget.              |
+| `$overlayWidgetState[nameOrId, path.to.value]` | Gets a nested value from an overlay widget state. |
+|                                                |                                                   |
+
+Use this when another effect, condition, command, or message needs to read data stored in a widget state.
+
+<Note type="info">
+    This only returns useful data when the widget has state to read. Custom Widgets can store state through the **Set Custom Widget State** effect.
+</Note>
+
+<Note type="info">
+    You can learn more about variables here: [Variables](/v5/core/variables).
+</Note>
+
+---
+
+## Overlay Widget Example: Toggle a Widget with a Hotkey
+
+You want a hotkey that toggles an overlay widget on or off.
+
+1. Open **Overlay Widgets** in Firebot.
+2. Create or edit the widget you want to control.
+3. Open **Hotkeys**.
+4. Create or edit the hotkey you want to use.
+5. Add a **Toggle Overlay Widgets** effect.
+6. Set **Mode** to `Toggle`.
+7. Select the overlay widget you want the hotkey to control.
+8. Click `Save`.
+
+When you press the hotkey, Firebot will run the effect and toggle the selected overlay widget.

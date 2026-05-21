@@ -1,0 +1,664 @@
+﻿# Variables
+
+Variables let Firebot insert dynamic values into supported text fields.
+
+You can use variables in chat messages, effect settings, overlay widgets, conditions, commands, events, timers, hotkeys, counters, Channel Rewards, Power-Ups, and any other field that supports variables.
+
+Anywhere you see the `$vars` button or a field that supports variables, you can use values like `$user`, `$counter[name]` or `$date`.
+
+---
+
+## **Using Variables**
+
+Most variables start with `$`.
+
+For example: `Hello $user!`
+
+Some variables use brackets to pass in a value: `$counter[BlameChat]`
+
+Some variables can read nested data from custom variables, effect outputs, objects, or arrays: `$customVariable[profile, stats.wins]`
+
+The `$vars` menu includes **Macros**, **Global Values**, and categories such as **Common**, **Trigger Based**, **User Based**, **Text**, **Numbers**, **Advanced**, **Integrations**, and **OBS**.
+
+<Note type="info">
+    Some variables only return useful data in certain places. For example, Channel Reward variables only make sense when a Channel Reward triggered the effects.
+</Note>
+
+---
+
+## **Macros**
+
+Macros are reusable variable expressions.
+
+Use them when you have a variable expression that you want to reuse in multiple places.
+
+You can manage Macros from the `$vars` menu by selecting **Macros**, then clicking `Add Macro`.
+
+Use `$%name` to run a macro.
+
+For example: `$%shoutoutMessage`
+
+Macros can also use arguments. Add arguments in the macro editor, then use them inside the macro expression.
+
+Use `$^name` inside the macro to read an argument.
+
+| Variable             | Description                           |
+|----------------------|---------------------------------------|
+| `$%name`             | Runs the macro named `name`.          |
+| `$%name[arg1, arg2]` | Runs the macro with arguments.        |
+| `$^name`             | Gets a named argument inside a macro. |
+|                      |                                       |
+
+<Note type="warning">
+    Renaming a macro does not update existing references automatically. Any effects using the old macro name need to be updated manually.
+</Note>
+
+---
+
+## **Global Values**
+
+Global Values are static values that can be reused anywhere variables are supported.
+
+They are useful for links, common text, usernames, API keys, or other values you do not want to type in multiple places.
+
+You can manage Global Values from the `$vars` menu by selecting **Global Values**, then clicking `Manage Global Values`.
+
+Use `$!name` to insert a Global Value.
+
+For example: `$!discordLink`
+
+Global Values can be marked as **Secret**. Secret values are hidden in the UI, but should still be treated like sensitive data.
+
+| Variable | Description                         |
+|----------|-------------------------------------|
+| `$!name` | Gets the global value named `name`. |
+|          |                                     |
+
+---
+
+## **Custom Variable Shortcuts**
+
+Custom variables are created with the **Custom Variable** effect.
+
+These shortcuts let you read custom variables and effect outputs without writing the full variable name.
+
+For example: `$$example`
+
+This is the same as: `$customVariable[example]`
+
+| Variable                  | Description                                         |
+|---------------------------|-----------------------------------------------------|
+| `$$name`                  | Gets the value of the custom variable named `name`. |
+| `$$name[path, to, value]` | Gets a nested value from the custom variable.       |
+| `$&name`                  | Gets the value of the effect output named `name`.   |
+| `$&name[path, to, value]` | Gets a nested value from the effect output.         |
+|                           |                                                     |
+
+<Note type="info">
+    You can learn more about saving and using custom variables here: [Custom Variables](/v5/guides/custom-variables).
+</Note>
+
+---
+
+## **Common Variables**
+
+| Variable              | Description                                |
+|-----------------------|--------------------------------------------|
+| `$user`               | The user connected to the current trigger. |
+| `$target`             | The target user, when one is available.    |
+| `$streamer`           | The streamer account username.             |
+| `$bot`                | The bot account username.                  |
+| `$date`               | The current date.                          |
+| `$time`               | The current time.                          |
+| `$uptime`             | The current stream uptime.                 |
+| `$category`           | The current Twitch category or game.       |
+| `$game`               | Alias for `$category`.                     |
+| `$streamTitle`        | The current stream title.                  |
+| `$currentViewerCount` | The current stream viewer count.           |
+| `$counter[name]`      | The current value of the selected counter. |
+|                       |                                            |
+
+---
+
+## **Trigger Based Variables**
+
+These variables depend on what triggered the effect.
+
+They are commonly used with commands, events, rewards, Power-Ups, counter updates, loops, and effect outputs.
+
+| Variable                | Description                                                                        |
+|-------------------------|------------------------------------------------------------------------------------|
+| `$counterChange`        | Shows how much the counter increased or decreased.                                 |
+| `$counterMaximum`       | Shows the maximum value of the counter, or an empty string if there is no maximum. |
+| `$counterMinimum`       | Shows the minimum value of the counter, or an empty string if there is no minimum. |
+| `$counterName`          | Shows the name of the counter.                                                     |
+| `$counterNewValue`      | Shows the new value of the counter.                                                |
+| `$counterPreviousValue` | Shows the previous value of the counter.                                           |
+| `$effectOutput[name]`   | Gets data output by a prior effect.                                                |
+| `$loopCount`            | Gets the current loop count inside a **Loop Effects** effect.                      |
+| `$loopItem`             | Gets the current loop item inside a **Loop Effects** effect.                       |
+| `$powerUpCost`          | Gets the Bit cost of the current Power-Up.                                         |
+| `$powerUpDescription`   | Gets the description of the current Power-Up.                                      |
+| `$powerUpImageUrl`      | Gets the image URL of the current Power-Up.                                        |
+| `$rewardCost`           | Gets the channel point cost of the current Channel Reward.                         |
+| `$rewardDescription`    | Gets the description of the current Channel Reward.                                |
+| `$rewardImageUrl`       | Gets the image URL of the current Channel Reward.                                  |
+|                         |                                                                                    |
+
+<Note type="info">
+    For counter update effects, `$counterNewValue` is usually the best option because it returns the value after the counter changes.
+</Note>
+
+---
+
+## **User Based Variables**
+
+| Variable                         | Description                                                         |
+|----------------------------------|---------------------------------------------------------------------|
+| `$accountCreationDate`           | Gets the creation date of the streamer's Twitch account.            |
+| `$accountCreationDate[username]` | Gets the creation date for a specific Twitch account.               |
+| `$activeChatUserCount`           | Gets the number of active viewers in chat.                          |
+| `$activeChatUserCount[role]`     | Gets the number of active chat users in a custom role.              |
+| `$chatMessages`                  | Gets the number of chat messages for the current viewer.            |
+| `$chatMessages[username]`        | Gets the number of chat messages for a specific viewer.             |
+| `$chatUserColor`                 | Gets the chat color for the current user.                           |
+| `$chatUserColor[username]`       | Gets the chat color for a specific user.                            |
+| `$chatUserCount`                 | Gets the total number of current users in chat.                     |
+| `$chatUserCount[role]`           | Gets the total number of chat users in a custom role.               |
+| `$customRoleUserCount[role]`     | Gets the number of people in a custom role.                         |
+| `$customRoleUsers[role]`         | Gets display names for users in a custom role.                      |
+| `$isUserInChat[username]`        | Returns true if the user is currently in Twitch chat.               |
+| `$joinDate`                      | Gets the date the current viewer was first seen by Firebot.         |
+| `$joinDate[username]`            | Gets the date a specific viewer was first seen by Firebot.          |
+| `$lastSeen`                      | Gets the date the current viewer was last seen by Firebot.          |
+| `$lastSeen[username]`            | Gets the date a specific viewer was last seen by Firebot.           |
+| `$randomActiveViewer`            | Gets a random active chatter.                                       |
+| `$randomCustomRoleUser[role]`    | Gets a random user from a custom role.                              |
+| `$randomViewer`                  | Gets a random online viewer in chat.                                |
+| `$userAvatarUrl`                 | Gets the avatar URL for the current user.                           |
+| `$userProfileImageUrl`           | Alias for `$userAvatarUrl`.                                         |
+| `$userBio`                       | Gets the bio for the current user.                                  |
+| `$userAbout`                     | Alias for `$userBio`.                                               |
+| `$userDescription`               | Alias for `$userBio`.                                               |
+| `$userDisplayName`               | Gets the formatted display name for the current user.               |
+| `$userDisplayName[username]`     | Gets the formatted display name for a specific user.                |
+| `$userExists[username]`          | Returns true if the user exists in Firebot's database.              |
+| `$userId`                        | Gets the user ID for the current user.                              |
+| `$userId[username]`              | Gets the user ID for a specific user.                               |
+| `$userIsBanned[username]`        | Returns true if the user is currently banned.                       |
+| `$userIsTimedOut[username]`      | Returns true if the user is currently timed out.                    |
+| `$usernameArray`                 | Returns an array of all usernames saved in Firebot's user database. |
+| `$userRoles`                     | Returns all roles for the current user.                             |
+| `$userRoles[username]`           | Returns roles for a specific user.                                  |
+| `$vipArray`                      | Returns an array of all VIPs.                                       |
+| `$viewTime`                      | Gets the view time for the current viewer.                          |
+| `$viewTime[username]`            | Gets the view time for a specific viewer.                           |
+|                                  |                                                                     |
+
+---
+
+## **Twitch Channel Variables**
+
+| Variable                         | Description                                                    |
+|----------------------------------|----------------------------------------------------------------|
+| `$category`                      | Gets the current category or game for your channel.            |
+| `$category[username]`            | Gets the current category or game for a specific channel.      |
+| `$categoryImageUrl`              | Gets the image URL for the last streamed category.             |
+| `$categoryImageUrl[username]`    | Gets the category image URL for a specific channel.            |
+| `$followAge[username]`           | Gets how long a viewer has followed the channel.               |
+| `$followCount`                   | Gets your current follower count.                              |
+| `$followCount[username]`         | Gets the follower count for a specific channel.                |
+| `$isAdBreakRunning`              | Returns whether an ad break is currently running.              |
+| `$isChannelLive`                 | Returns whether your Twitch channel is live.                   |
+| `$isChannelLive[username]`       | Returns whether a specific channel is live.                    |
+| `$isSharedChatEnabled`           | Returns whether the channel is in a shared chat session.       |
+| `$latestClipUrl`                 | Gets the URL for the most recent Twitch clip.                  |
+| `$latestClipUrl[username]`       | Gets the URL for the most recent clip from a specific channel. |
+| `$latestFollower`                | Gets the most recent follower.                                 |
+| `$randomClipUrl`                 | Gets a random Twitch clip URL.                                 |
+| `$randomClipUrl[username]`       | Gets a random clip URL from a specific channel.                |
+| `$secondsUntilNextAdBreak`       | Gets the number of seconds until the next scheduled ad break.  |
+| `$sharedChatParticipants`        | Gets shared chat participant data.                             |
+| `$streamTitle`                   | Gets the current stream title.                                 |
+| `$streamTitle[username]`         | Gets the stream title for a specific channel.                  |
+| `$subCount`                      | Gets the current sub count.                                    |
+| `$subNames`                      | Returns an array of subscribers.                               |
+| `$subPoints`                     | Gets the current sub point count.                              |
+| `$twitchChannelUrl[channelName]` | Gets the Twitch channel URL for a channel name.                |
+| `$twitchVodUrl`                  | Gets the current Twitch VOD URL.                               |
+| `$twitchVodUrl[true]`            | Gets the current Twitch VOD URL with the current timestamp.    |
+|                                  |                                                                |
+
+---
+
+## **Channel Goal Variables**
+
+Goal types include `follow`, `sub`, `subpoint`, `newsub`, and `newsubpoint`.
+
+| Variable                          | Description                                          |
+|-----------------------------------|------------------------------------------------------|
+| `$channelGoalCurrentAmount`       | Gets the current amount for the active channel goal. |
+| `$channelGoalCurrentAmount[type]` | Gets the current amount for a specific goal type.    |
+| `$channelGoalDescription`         | Gets the description for the active channel goal.    |
+| `$channelGoalDescription[type]`   | Gets the description for a specific goal type.       |
+| `$channelGoalTargetAmount`        | Gets the target amount for the active channel goal.  |
+| `$channelGoalTargetAmount[type]`  | Gets the target amount for a specific goal type.     |
+|                                   |                                                      |
+
+---
+
+## **Bits, Rewards, and Power-Ups**
+
+| Variable                          | Description                                                |
+|-----------------------------------|------------------------------------------------------------|
+| `$bitsCheered[username]`          | Gets the all-time Bits cheered by a user.                  |
+| `$bitsCheered[username, period]`  | Gets Bits cheered by a user during a period.               |
+| `$bitsLeaderboard[count]`         | Gets the all-time Bits leaderboard.                        |
+| `$bitsLeaderboard[count, period]` | Gets the Bits leaderboard for a period.                    |
+| `$powerUpCost[name]`              | Gets the Bit cost of a specific Power-Up.                  |
+| `$powerUpDescription[name]`       | Gets the description of a specific Power-Up.               |
+| `$powerUpImageUrl[name]`          | Gets the image URL of a specific Power-Up.                 |
+| `$rewardCost[name]`               | Gets the channel point cost of a specific Channel Reward.  |
+| `$rewardDescription[name]`        | Gets the description of a specific Channel Reward.         |
+| `$topBitsCheerers`                | Gets the top Bits cheerer.                                 |
+| `$topBitsCheerers[count]`         | Gets multiple top Bits cheerers.                           |
+| `$topBitsCheerers[count, period]` | Gets top Bits cheerers for a period.                       |
+|                                   |                                                            |
+
+---
+
+## **Counter Variables**
+
+| Variable                | Description                                                                        |
+|-------------------------|------------------------------------------------------------------------------------|
+| `$counter[name]`        | Displays the value of the given counter.                                           |
+| `$counterChange`        | Shows how much the counter increased or decreased.                                 |
+| `$counterMaximum`       | Shows the maximum value of the counter, or an empty string if there is no maximum. |
+| `$counterMinimum`       | Shows the minimum value of the counter, or an empty string if there is no minimum. |
+| `$counterName`          | Shows the name of the counter.                                                     |
+| `$counterNewValue`      | Shows the new value of the counter.                                                |
+| `$counterPreviousValue` | Shows the previous value of the counter.                                           |
+|                         |                                                                                    |
+
+---
+
+## **Currency Variables**
+
+| Variable                                             | Description                                                                  |
+|------------------------------------------------------|------------------------------------------------------------------------------|
+| `$currency[currencyName, user]`                      | Gets how much currency a user has.                                           |
+| `$currencyRank[currencyName, user]`                  | Gets a user's rank for the selected currency.                                |
+| `$rawTopCurrency[currencyName]`                      | Returns a raw array of users with the most of the selected currency.         |
+| `$topCurrency[currencyName]`                         | Gets a comma-separated list of users with the most of the selected currency. |
+| `$topCurrency[currencyName, count]`                  | Gets a limited list of top currency users.                                   |
+| `$topCurrencyUser[currencyName, position, username]` | Gets the username at a specific position in the currency leaderboard.        |
+| `$topCurrencyUser[currencyName, position, amount]`   | Gets the amount at a specific position in the currency leaderboard.          |
+|                                                      |                                                                              |
+
+---
+
+## **Rank Variables**
+
+| Variable                                             | Description                                      |
+|------------------------------------------------------|--------------------------------------------------|
+| `$rankLadderMode[rankLadderName]`                    | Gets the mode of a rank ladder.                  |
+| `$rankValue[rankLadderName, rankName]`               | Gets the threshold value for a rank.             |
+| `$rankValueDescription[rankLadderName, rankName]`    | Gets the threshold value description for a rank. |
+| `$viewerHasRank[username, rankLadderName, rankName]` | Returns whether a viewer has a specific rank.    |
+| `$viewerNamesInRank[rankLadderName, rankName]`       | Gets viewer names in a rank.                     |
+| `$viewerNextRank[username, rankLadderName]`          | Gets the next rank for a viewer.                 |
+| `$viewerRank[username, rankLadderName]`              | Gets a viewer's current rank.                    |
+| `$viewersInRankArray[rankLadderName, rankName]`      | Gets raw viewer objects in a rank.               |
+|                                                      |                                                  |
+
+---
+
+## **Metadata Variables**
+
+| Variable                                             | Description                                                             |
+|------------------------------------------------------|-------------------------------------------------------------------------|
+| `$rawTopMetadata[metadataKey]`                       | Returns a raw array of users with the most of a metadata value.         |
+| `$topMetadata[metadataKey]`                          | Gets a comma-separated list of users with the most of a metadata value. |
+| `$topMetadata[metadataKey, count]`                   | Gets a limited metadata leaderboard.                                    |
+| `$topMetadataUser[metadataKey, position, username]`  | Gets the username at a specific metadata leaderboard position.          |
+| `$topMetadataUser[metadataKey, position, amount]`    | Gets the amount at a specific metadata leaderboard position.            |
+| `$userMetadata[username, metadataKey]`               | Gets metadata for a user.                                               |
+| `$userMetadata[username, metadataKey, defaultValue]` | Gets metadata for a user with a fallback value.                         |
+|                                                      |                                                                         |
+
+---
+
+## **Quote Variables**
+
+Quote object properties include `id`, `createdAt`, `creator`, `originator`, `text`, and `game`.
+
+| Variable                         | Description                              |
+|----------------------------------|------------------------------------------|
+| `$quote`                         | Gets a random quote.                     |
+| `$quote[#]`                      | Gets a specific quote by ID.             |
+| `$quoteAsObject`                 | Gets a random quote as a JSON object.    |
+| `$quoteAsObject[#]`              | Gets a specific quote as a JSON object.  |
+| `$quoteAsObject[#, property]`    | Gets one property from a specific quote. |
+| `$quoteAsObject[null, property]` | Gets one property from a random quote.   |
+|                                  |                                          |
+
+---
+
+## **Text Variables**
+
+| Variable                                              | Description                                           |
+|-------------------------------------------------------|-------------------------------------------------------|
+| `$capitalize[text]`                                   | Capitalizes the first letter and lowercases the rest. |
+| `$commafy[number]`                                    | Adds commas to a number.                              |
+| `$concat[text, text]`                                 | Joins text together.                                  |
+| `$decodeFromHtml[text]`                               | Decodes HTML-encoded text.                            |
+| `$decodeFromUrl[text]`                                | Decodes URL-encoded text.                             |
+| `$encodeForHtml[text]`                                | Encodes text for safe use in HTML templates.          |
+| `$encodeForUrl[text]`                                 | Encodes text for use in a URL.                        |
+| `$evalVars[text]`                                     | Evaluates variables inside a string of text.          |
+| `$lowercase[text]`                                    | Makes text lowercase.                                 |
+| `$replace[textInput, searchValue, replacement]`       | Replaces text with another value.                     |
+| `$replace[textInput, searchValue, replacement, true]` | Replaces text using a regular expression.             |
+| `$scrambleText[text]`                                 | Scrambles the input text.                             |
+| `$splitText[text, separator]`                         | Splits text into an array.                            |
+| `$sprintf[template, values]`                          | Formats text using a template.                        |
+| `$textContains[text, search]`                         | Returns true if the text contains the search value.   |
+| `$textLength[text]`                                   | Returns the length of the text.                       |
+| `$textPadEnd[input, count, countIsLength, padChar]`   | Pads the end of text.                                 |
+| `$textPadStart[input, count, countIsLength, padChar]` | Pads the start of text.                               |
+| `$textSubstring[text, start, end]`                    | Gets part of a text value.                            |
+| `$trim[text]`                                         | Removes whitespace from the start and end of text.    |
+| `$trimEnd[text]`                                      | Removes whitespace from the end of text.              |
+| `$trimStart[text]`                                    | Removes whitespace from the start of text.            |
+| `$uppercase[text]`                                    | Makes text uppercase.                                 |
+| `$word[text, #]`                                      | Gets a word from a sentence by position.              |
+|                                                       |                                                       |
+
+---
+
+## **Numbers Variables**
+
+| Variable                              | Description                                                                |
+|---------------------------------------|----------------------------------------------------------------------------|
+| `$ceil[num]`                          | Rounds a number up.                                                        |
+| `$ensureNumber[input, defaultNumber]` | Returns the input if it is a number, otherwise returns the default number. |
+| `$floor[num]`                         | Rounds a number down.                                                      |
+| `$math[expression]`                   | Evaluates a math expression.                                               |
+| `$max[num1, num2]`                    | Returns the highest number.                                                |
+| `$min[num1, num2]`                    | Returns the lowest number.                                                 |
+| `$ordinalIndicator[number]`           | Adds an ordinal suffix such as `st`, `nd`, or `rd`.                        |
+| `$padNumber[value, places]`           | Pads a number to a decimal place count.                                    |
+| `$randomNumber[min, max]`             | Gets a random number between the selected range.                           |
+| `$rollDice[diceConfig]`               | Rolls dice, such as `1d6` or `2d10+1d12`.                                  |
+| `$round[num]`                         | Rounds a number to the nearest whole number.                               |
+| `$round[num, places]`                 | Rounds a number to a specific number of decimal places.                    |
+|                                       |                                                                            |
+
+---
+
+## **Date and Time Variables**
+
+| Variable                       | Description                                              |
+|--------------------------------|----------------------------------------------------------|
+| `$date`                        | Gets the current date formatted as `MMM Do YYYY`.        |
+| `$date[format]`                | Gets the current date using a custom Moment.js format.   |
+| `$date[format, amount, unit]`  | Gets a date with time added or subtracted.               |
+| `$formatDuration[seconds]`     | Formats seconds into a readable duration.                |
+| `$time`                        | Gets the current time.                                   |
+| `$time[format]`                | Gets the current time using a custom Moment.js format.   |
+| `$unixTimestamp`               | Gets the current Unix timestamp.                         |
+| `$unixTimestamp[date]`         | Gets the Unix timestamp for a specific date.             |
+| `$unixTimestamp[date, format]` | Gets the Unix timestamp for a date with a custom format. |
+|                                |                                                          |
+
+---
+
+## **Advanced Variables**
+
+Logic variables are mostly used inside `$if[]`.
+
+For example: `$if[$user === Firebot, Hello Firebot!, Hello!]`
+
+| Variable                                | Description                                                            |
+|-----------------------------------------|------------------------------------------------------------------------|
+| `$if[condition, when_true, when_false]` | Returns one value if the condition is true and another if it is false. |
+| `$ALL[condition, condition]`            | Returns true if all conditions are true.                               |
+| `$AND[condition, condition]`            | Alias for `$ALL[]`.                                                    |
+| `$ANY[condition, condition]`            | Returns true if any condition is true.                                 |
+| `$OR[condition, condition]`             | Alias for `$ANY[]`.                                                    |
+| `$NALL[condition, condition]`           | Returns true if any condition is false.                                |
+| `$NAND[condition, condition]`           | Alias for `$NALL[]`.                                                   |
+| `$NANY[condition, condition]`           | Returns true if all conditions are false.                              |
+| `$NOR[condition, condition]`            | Alias for `$NANY[]`.                                                   |
+| `$NOT[condition]`                       | Returns the opposite of the condition.                                 |
+| `$true`                                 | Returns a literal true boolean value.                                  |
+| `$false`                                | Returns a literal false boolean value.                                 |
+| `$null`                                 | Returns a literal null value.                                          |
+|                                         |                                                                        |
+
+---
+
+## **Array Variables**
+
+| Variable                                                    | Description                                          |
+|-------------------------------------------------------------|------------------------------------------------------|
+| `$arrayAdd[array, new-item]`                                | Returns a new array with an item added to the end.   |
+| `$arrayAdd[array, new-item, true]`                          | Returns a new array with an item added to the start. |
+| `$arrayElement[array, index]`                               | Gets an item from an array by index.                 |
+| `$arrayElement[array, first]`                               | Gets the first item from an array.                   |
+| `$arrayElement[array, last]`                                | Gets the last item from an array.                    |
+| `$arrayFilter[array, matcher, propertyPath, removeMatches]` | Returns a filtered array.                            |
+| `$arrayFind[array, matcher]`                                | Finds a matching item or returns the text `null`.    |
+| `$arrayFindIndex[array, matcher]`                           | Finds a matching item and returns its index.         |
+| `$arrayFindWithNull[array, matcher]`                        | Finds a matching item or returns a literal null.     |
+| `$arrayFrom[value, value]`                                  | Creates a raw array from the listed values.          |
+| `$arrayFuzzySearch[array, search]`                          | Finds the closest matching item in an array.         |
+| `$arrayJoin[array, separator]`                              | Joins array items into text.                         |
+| `$arrayLength[array]`                                       | Gets the number of items in an array.                |
+| `$arrayRandomItem[array]`                                   | Gets a random item from an array.                    |
+| `$arrayRemove[array, index]`                                | Removes an item from an array by index.              |
+| `$arrayRemove[array, first]`                                | Removes the first item from an array.                |
+| `$arrayRemove[array, last]`                                 | Removes the last item from an array.                 |
+| `$arrayReverse[array]`                                      | Reverses an array.                                   |
+| `$arrayShuffle[array]`                                      | Shuffles an array.                                   |
+| `$arraySlice[array, start, end]`                            | Gets part of an array.                               |
+|                                                             |                                                      |
+
+---
+
+## **Object and JSON Variables**
+
+| Variable                                          | Description                                                   |
+|---------------------------------------------------|---------------------------------------------------------------|
+| `$convertFromJSON[json text]`                     | Converts JSON text into a raw object.                         |
+| `$convertToJSON[rawValue]`                        | Converts a raw value into JSON text.                          |
+| `$convertToJSON[rawValue, true]`                  | Converts a raw value into pretty-printed JSON text.           |
+| `$customVariable[name]`                           | Gets data saved in a custom variable.                         |
+| `$customVariable[name, property]`                 | Gets a nested property from a custom variable.                |
+| `$customVariable[name, null, defaultValue]`       | Gets a custom variable with a fallback value.                 |
+| `$customVariableKeys[name]`                       | Gets keys from an object saved in a custom variable.          |
+| `$effectOutput[name]`                             | Gets data output by a prior effect.                           |
+| `$effectOutput[name, property]`                   | Gets a nested property from an effect output.                 |
+| `$effectOutput[name, property, defaultValue]`     | Gets effect output data with a fallback value.                |
+| `$objectKeys[object]`                             | Gets the keys for an object.                                  |
+| `$objectWalkPath[object, path.to.value]`          | Gets a nested value from an object.                           |
+| `$quickStore[key]`                                | Gets a temporary stored value.                                |
+| `$quickStore[key, value]`                         | Stores a temporary value for the current variable evaluation. |
+| `$rawCustomVariable[name]`                        | Gets raw data saved in a custom variable.                     |
+| `$rawCustomVariable[name, property]`              | Gets a nested raw value from a custom variable.               |
+| `$rawCustomVariableKeys[name]`                    | Gets keys from a raw custom variable object.                  |
+| `$setObjectProperty[object, propertyPath, value]` | Adds, updates, or removes a property from an object.          |
+|                                                   |                                                               |
+
+<Note type="info">
+    You can learn more about custom variables here: [Custom Variables](/v5/guides/custom-variables).
+</Note>
+
+---
+
+## **File, API, and Media Variables**
+
+| Variable                                 | Description                                              |
+|------------------------------------------|----------------------------------------------------------|
+| `$audioDuration[filePathOrUrl]`          | Gets the duration of an audio file or URL in seconds.    |
+| `$fileExists[path]`                      | Returns true if a file exists.                           |
+| `$fileLineCount[path]`                   | Counts the number of lines in a text file.               |
+| `$fileName[path]`                        | Gets the file name without the extension.                |
+| `$filesInDirectory[path]`                | Gets files in a directory.                               |
+| `$filesInDirectory[path, regexp, flags]` | Gets files in a directory matching a regular expression. |
+| `$overlayResourcesPath`                  | Gets the full path to the overlay resources folder.      |
+| `$overlayResourcesPath[sub, dir, file]`  | Gets a path inside the overlay resources folder.         |
+| `$readApi[url]`                          | Calls a URL and returns the response as text.            |
+| `$readApi[url, object.path.here]`        | Gets a nested value from a JSON API response.            |
+| `$readFile[path]`                        | Reads the contents of a text file.                       |
+| `$readFile[path, line]`                  | Reads a specific line from a text file.                  |
+| `$readFile[path, first]`                 | Reads the first line from a text file.                   |
+| `$readFile[path, last]`                  | Reads the last line from a text file.                    |
+| `$readFile[path, random]`                | Reads a random line from a text file.                    |
+| `$readFile[path, array]`                 | Reads a text file as an array.                           |
+| `$readFile[path, bytes]`                 | Reads a file as a byte array.                            |
+| `$videoDuration[filePathOrUrl]`          | Gets the duration of a video file or URL in seconds.     |
+|                                          |                                                          |
+
+---
+
+## **Encoding Variables**
+
+| Variable                | Description               |
+|-------------------------|---------------------------|
+| `$atob[string]`         | Decodes a base64 string.  |
+| `$base64Decode[string]` | Decodes a base64 string.  |
+| `$base64Encode[string]` | Encodes text into base64. |
+| `$btoa[string]`         | Encodes text into base64. |
+|                         |                           |
+
+---
+
+## **Regular Expression Variables**
+
+| Variable                                   | Description                                                         |
+|--------------------------------------------|---------------------------------------------------------------------|
+| `$regexExec[string, expression]`           | Runs a regular expression and returns the result.                   |
+| `$regexExec[string, expression, flags]`    | Runs a regular expression with flags.                               |
+| `$regexMatches[string, expression]`        | Returns all regular expression matches.                             |
+| `$regexMatches[string, expression, flags]` | Returns all regular expression matches with flags.                  |
+| `$regexTest[string, expression]`           | Returns true if the text matches the regular expression.            |
+| `$regexTest[string, expression, flags]`    | Returns true if the text matches the regular expression with flags. |
+|                                            |                                                                     |
+
+---
+
+## **OBS Variables**
+
+| Variable                    | Description                                   |
+|-----------------------------|-----------------------------------------------|
+| `$obsColorValue`            | Converts a color into an OBS color value.     |
+| `$obsInputActive`           | Returns whether the OBS input is active.      |
+| `$obsInputAudioBalance`     | Gets the audio balance for the OBS input.     |
+| `$obsInputAudioSyncOffset`  | Gets the audio sync offset for the OBS input. |
+| `$obsInputAudioTracks`      | Gets the raw OBS audio tracks object.         |
+| `$obsInputKind`             | Gets the OBS internal input kind.             |
+| `$obsInputMonitorType`      | Gets the OBS audio monitor type.              |
+| `$obsInputMuted`            | Returns whether the OBS input is muted.       |
+| `$obsInputName`             | Gets the OBS input name.                      |
+| `$obsInputSettings`         | Gets the raw OBS input settings object.       |
+| `$obsInputShowing`          | Returns whether the OBS input is showing.     |
+| `$obsInputUuid`             | Gets the OBS input UUID.                      |
+| `$obsInputVolumeDb`         | Gets the OBS input volume in dB.              |
+| `$obsInputVolumeMultiplier` | Gets the OBS input volume multiplier.         |
+| `$obsIsConnected`           | Returns whether OBS is connected.             |
+| `$obsIsRecording`           | Returns whether OBS is recording.             |
+| `$obsIsStreaming`           | Returns whether OBS is streaming.             |
+| `$obsOldInputName`          | Gets the previous OBS input name.             |
+| `$obsSceneCollectionName`   | Gets the OBS scene collection name.           |
+| `$obsSceneName`             | Gets the OBS scene name.                      |
+|                             |                                               |
+
+---
+
+## **Overlay Variables**
+
+| Variable                                       | Description                                       |
+|------------------------------------------------|---------------------------------------------------|
+| `$overlayWidgetState[nameOrId]`                | Gets the state of an overlay widget.              |
+| `$overlayWidgetState[nameOrId, path.to.value]` | Gets a nested value from an overlay widget state. |
+|                                                |                                                   |
+
+---
+
+## **Effect Variables**
+
+Use `$runEffect[]` only when you know what the effect JSON should look like.
+
+| Variable                         | Description                                                   |
+|----------------------------------|---------------------------------------------------------------|
+| `$effectQueueLength[queueName]`  | Gets the number of effects in an effect queue.                |
+| `$evalJs[`` code ``]`            | Evaluates JavaScript in a sandboxed browser instance.         |
+| `$evalJs[`` code ``, parameter]` | Evaluates JavaScript with parameters.                         |
+| `$runEffect[effectJson]`         | Runs an effect from effect JSON.                              |
+|                                  |                                                               |
+
+<Note type="warning">
+    `$runEffect[]` is powerful, but easy to break. Use it only when you know what the effect JSON should look like.
+</Note>
+
+---
+
+## **Integrations Variables**
+
+| Variable                                                    | Description                                  |
+|-------------------------------------------------------------|----------------------------------------------|
+| `$extraLifeDonations`                                       | Gets Extra Life donation data.               |
+| `$extraLifeDonations[amount]`                               | Gets top donation data.                      |
+| `$extraLifeDonations[createdDateUTC, count, participantID]` | Gets recent donations.                       |
+| `$extraLifeIncentives`                                      | Gets Extra Life incentive data.              |
+| `$extraLifeIncentives[description]`                         | Gets an incentive by description.            |
+| `$extraLifeInfo`                                            | Gets Extra Life profile data.                |
+| `$extraLifeInfo[property]`                                  | Gets a specific Extra Life profile property. |
+| `$extraLifeMilestones`                                      | Gets Extra Life milestone data.              |
+| `$extraLifeMilestones[goal]`                                | Gets a milestone by goal amount.             |
+|                                                             |                                              |
+
+---
+
+## **Random Variables**
+
+| Variable                            | Description                           |
+|-------------------------------------|---------------------------------------|
+| `$randomAdvice`                     | Gets random advice.                   |
+| `$randomDadJoke`                    | Gets a random dad joke.               |
+| `$randomRedditImage[subredditName]` | Gets a random image from a subreddit. |
+| `$randomUUID`                       | Gets a random formatted UUID.         |
+|                                     |                                       |
+
+---
+
+## Variable Example: Random Reply
+
+You want a command that gives a random answer from a small list.
+
+1. Open **Commands** in Firebot.
+2. Create or edit the command you want to use, for example `!answer`.
+3. Add a `Chat` effect.
+4. Use `$arrayRandomItem[]` with `$arrayFrom[]` in the chat message.
+
+Example message: 
+
+* `$arrayRandomItem[$arrayFrom[Yes, No, Maybe, Ask again later]]`
+
+When the command runs, Firebot picks one item from the list and posts it in chat.
+
+## Variable Example: Countdown to a Date
+
+You want a command that shows how many days are left until an event.
+
+1. Open **Commands** in Firebot.
+2. Create or edit the command you want to use, for example `!countdown`.
+3. Add a `Chat` effect.
+4. Use `$unixTimestamp[]`, `$math[]`, and `$floor[]` to compare the event date with the current time.
+
+Example message:
+
+* `There are $floor[$math[($unixTimestamp[2026-10-31, YYYY-MM-DD] - $unixTimestamp) / 86400]] days until Halloween!`
+
+When the command runs, Firebot converts the event date and the current date into Unix timestamps, subtracts them, then divides by `86400` to turn the result into days.

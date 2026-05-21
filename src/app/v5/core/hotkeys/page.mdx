@@ -1,0 +1,119 @@
+﻿# Hotkeys
+
+Hotkeys let you trigger Firebot effects by pressing a key or key combination on your keyboard.
+
+You can access **Hotkeys** in the main navigation sidebar under **Triggers**.
+
+Hotkeys are useful when you want to manually trigger stream actions without typing a command in chat. For example, you can use a hotkey to play a sound, show an overlay alert, change a scene, run a preset effect list, or trigger any other effects you set up.
+
+---
+
+## **Creating a Hotkey**
+
+To create a new hotkey, click `New Hotkey` in the **Hotkeys** tab. This opens the hotkey editor.
+
+The hotkey editor lets you name the hotkey, record the keybind, and attach the effects Firebot should run when the hotkey is pressed.
+
+* **Name**
+This is the name shown for the hotkey in Firebot. Use a clear name so you know what the hotkey is for.
+* **Keybind**
+This is the key or key combination that will trigger the hotkey.
+* **Effects**
+These are the effects Firebot will run when the hotkey is pressed.
+
+Click `Record Keybind`, then press the key or key combination you want to use.
+
+Click `Stop` when you are finished recording the keybind.
+
+Click `Save` when you are finished.
+
+---
+
+## **Important Hotkey Guidelines**
+
+Firebot shows these guidelines when creating a hotkey:
+
+* Firebot cannot override hotkeys already reserved by other applications.
+* Firebot cannot detect conflicts with hotkeys from other applications.
+* Binding to a single letter will prevent typing that letter in other applications.
+* Hotkeys are temporarily disabled while the hotkey editor is open.
+
+<Note type="warning">
+    For most hotkeys, it is better to use a key combination like `Ctrl + Shift + K` instead of a single letter like `K`.
+</Note>
+
+---
+
+## **Virtual Buttons**
+
+Some keyboards do not have every possible key available.
+
+The **Advanced** section lets you add virtual buttons such as `F13`, `F14`, `F15`, and up to `F24`.
+
+These keys are useful because they are less likely to conflict with normal typing or common application shortcuts.
+
+To add one, expand **Advanced**, choose a virtual button from the dropdown, then add it to the hotkey.
+
+---
+
+## **Editing a Hotkey**
+
+Existing hotkeys are shown in the **Hotkeys** tab. Each row shows the hotkey name, keybind, tags, and active status.
+
+To manage a hotkey, click the three dot menu on the hotkey or right-click the hotkey row.
+
+* **Edit**
+Opens the hotkey editor so you can change the name, keybind, and effects.
+* **Enable Hotkey / Disable Hotkey**
+Enables or disables the hotkey.
+* **Delete**
+Deletes the hotkey.
+* **Effect Queues**
+Assigns the hotkey to an effect queue.
+* **Move to**
+Moves the hotkey up or down for organizing.
+
+You can also drag the handle on the right side of a hotkey row to reorganize hotkeys.
+
+<Note type="info">
+    You can learn more about effect queues here: [Effect Queues](/v5/core/effect-queues).
+</Note>
+
+---
+
+## **Effects**
+
+Hotkeys can run the same kind of effects as other Firebot triggers.
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Tags**
+
+Tags help organize hotkeys.
+
+The filter dropdown at the top of the **Hotkeys** tab can show all hotkeys or only hotkeys with a selected tag.
+
+Use `Edit tags` from the filter dropdown to manage the available tags.
+
+---
+
+## Hotkey Example: Post Twitch Message
+
+You want a hotkey that posts a Twitch chat message.
+
+1. Open **Hotkeys** in Firebot.
+2. Click `New Hotkey`.
+3. Set **Name** to `Post Twitch Message`.
+4. Click `Record Keybind`.
+5. Press the key combination you want to use.
+6. Add `Chat` to send a chat message.
+7. Set `Chat as` to `Streamer` or `Bot` if you have a Twitch bot account connected.
+8. Set `Chat message` to the message you want to post in Twitch chat.
+9. Click `Add` to add the chat effect to the hotkey.
+10. Click `Save`.
+
+When you press the hotkey, Firebot will run the effects attached to it.

@@ -1,0 +1,150 @@
+﻿# Counters
+
+Counters store a number that can be updated and reused in Firebot.
+
+You can access **Counters** in the main navigation sidebar under **Triggers**.
+
+Counters are useful when you want to track something over time. For example, you can track deaths in a game, how many times a command was used, how many wins a viewer has, or any other number you want Firebot to remember.
+
+---
+
+## **Creating a Counter**
+
+To create a new counter, click `New Counter` in the **Counters** tab. This opens the counter editor.
+
+The counter editor lets you name the counter, set its current value, set optional minimum and maximum values, and attach effects that run when the counter is updated.
+
+* **Name**
+This is the name shown for the counter in Firebot. Use a clear name so you know what the counter is tracking.
+* **Minimum**
+This is the lowest value the counter can use. Leave it unset if the counter does not need a minimum.
+* **Current Value**
+This is the current number stored in the counter.
+* **Maximum**
+This is the highest value the counter can use. Leave it unset if the counter does not need a maximum.
+* **Effects On Update**
+These effects run every time the counter is updated by the **Update Counter** effect.
+
+Click `Save` when you are finished.
+
+<Note type="info">
+    Minimum and maximum values are optional. Use them when the counter should not go below or above a certain number.
+</Note>
+
+---
+
+## **Using a Counter**
+
+Counters are usually changed with the **Update Counter** effect.
+
+The **Update Counter** effect lets you choose a counter and either increment it or set it to a new value.
+
+* **Increment**
+Changes the counter by the amount you enter. Use a positive number to increase the counter, or a negative number to decrease it.
+* **Set**
+Sets the counter to a new value.
+
+For example, a command can use **Update Counter** to increase a counter by `1` every time the command is used.
+
+---
+
+## **Counter Variables**
+
+Counters have variables that can be used in chat messages, effects, overlays, and other fields that support variables.
+
+| Variable                | Description                                                                        |
+|-------------------------|------------------------------------------------------------------------------------|
+| `$counter[name]`        | Displays the value of the given counter.                                           |
+| `$counterChange`        | Shows how much the counter increased or decreased.                                 |
+| `$counterMaximum`       | Shows the maximum value of the counter, or an empty string if there is no maximum. |
+| `$counterMinimum`       | Shows the minimum value of the counter, or an empty string if there is no minimum. |
+| `$counterName`          | Shows the name of the counter.                                                     |
+| `$counterNewValue`      | Shows the new value of the counter after it updates.                               |
+| `$counterPreviousValue` | Shows the previous value of the counter before it updated.                         |
+|                         |                                                                                    |
+
+Use `$counter[name]` when you want to get the current value of a specific counter.
+
+For example: `$counter[BlameChat]`
+
+This returns the current value of the `BlameChat` counter.
+
+<Note type="info">
+    Use `$counterNewValue` in **Effects On Update** when you want the value after the counter changes.
+</Note>
+
+---
+
+## **Counter Text File**
+
+Each counter has a text file that stores the current value.
+
+You can use this file in broadcasting software to show the counter value on stream.
+
+Open the counter editor and expand **How do I use this?** to view and copy the text file path for that counter.
+
+---
+
+## **Editing a Counter**
+
+Existing counters are shown in the **Counters** tab. Each row shows the counter name, current value, minimum value, maximum value, and tags.
+
+To manage a counter, click the three dot menu on the counter or right-click the counter row.
+
+* **Edit**
+Opens the counter editor so you can change the name, values, and effects.
+* **Duplicate**
+Creates a copy of the counter.
+* **Delete**
+Deletes the counter.
+* **Move to**
+Moves the counter up or down for organizing.
+
+You can also drag the handle on the right side of a counter row to reorganize counters.
+
+---
+
+## **Effects On Update**
+
+Counters can run effects when their value changes.
+
+These effects only run when the counter is updated by the **Update Counter** effect. This is useful when you want something to happen automatically after the counter changes.
+
+For example, you could send a chat message every time a counter updates, using `$counterNewValue` in the message.
+
+<Note type="info">
+    Effects On Update do not run just because `$counter[name]` is used. They run when the counter is changed by the **Update Counter** effect.
+</Note>
+
+---
+
+## **Tags**
+
+Tags help organize counters.
+
+The filter dropdown at the top of the **Counters** tab can show all counters or only counters with a selected tag.
+
+Use `Edit tags` from the filter dropdown to manage the available tags.
+
+---
+
+## Counter Example: Blame Chat Command
+
+You want a command that increases a counter and posts the new counter value in chat.
+
+1. Open **Counters** in Firebot.
+2. Click `New Counter`.
+3. Set **Name** to `BlameChat`.
+4. Add a `Chat` effect.
+5. Use `$counterNewValue` in the chat message to get the new counter value after the update.
+    * **Example:** `Chat has been blamed $counterNewValue times!`
+6. Click `Save`.
+7. Open **Commands**.
+8. Create or edit the command you want to use, for example `!blamechat`.
+9. Add an **Update Counter** effect.
+10. Select the `BlameChat` counter.
+11. Set **Mode** to `Increment`.
+12. Set **Increment Amount** to `1`.
+13. Click `Save`.
+
+When someone uses the command, Firebot updates the counter and posts the message with the new counter value in chat.

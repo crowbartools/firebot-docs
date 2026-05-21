@@ -1,0 +1,95 @@
+# Power-Ups
+
+Power-Ups are Twitch rewards that are redeemed with Bits in the same module as Channel Rewards.
+
+In Firebot, they work similarly to Channel Rewards because they can trigger Firebot effects when they are redeemed.
+
+The main difference is that Power-Ups are created and managed on Twitch. Firebot cannot create, rename, price, enable, or disable Power-Ups. Firebot can attach effects to them so something happens on stream when a viewer redeems one.
+
+You can also open them directly on Twitch here: `https://dashboard.twitch.tv/u/YOUR-CHANNEL/viewer-rewards/channel-points/rewards`
+
+You can access Power-Ups from **Power-ups & Rewards**, located in the main navigation sidebar under **Triggers**. Select the **Power-ups** tab to view them.
+
+<Note type="info">
+    Power-Ups are managed on Twitch. Firebot can only attach and run effects for them.
+</Note>
+
+---
+
+## **Managing Power-Ups**
+
+Click `Manage Power-ups` to open the Twitch dashboard page where Power-Ups are managed.
+
+The Power-Ups list in Firebot shows the Power-Up name, Bits cost, tags, and active status.
+
+The Power-Up limit is shown under the Power-Ups list.
+
+Use the filter dropdown at the top of the tab to show all Power-Ups or only Power-Ups with a selected tag.
+
+<Note type="info">
+    If you need to change the name, Bits cost, availability, or other Twitch-owned settings for a Power-Up, do that from the Twitch dashboard.
+</Note>
+
+---
+
+## **Editing Effects**
+
+To edit what Firebot does when a Power-Up is redeemed, click the three dot menu on the Power-Up or right-click the Power-Up, then select `Edit Effects`.
+
+Power-Ups can run the same kind of effects as other Firebot triggers.
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Moving Power-Ups**
+
+The three dot menu and right-click menu also include `Move to`.
+
+Use this to move the Power-Up entry up or down for organizing.
+
+---
+
+## **Tags**
+
+Tags help organize Power-Ups.
+
+The filter dropdown at the top of the **Power-ups** tab can show all Power-Ups or only Power-Ups with a selected tag.
+
+---
+
+## **Power-Up Variables**
+
+Power-Ups have variables that can be used in effects when a Power-Up is redeemed.
+
+| Variable                          | Description                                      |
+|-----------------------------------|--------------------------------------------------|
+| `$powerUpCost`                    | Gets the Bit cost of the current Power-Up.       |
+| `$powerUpDescription`             | Gets the description of the current Power-Up.    |
+| `$powerUpImageUrl`                | Gets the image URL of the current Power-Up.      |
+| `$powerUpCost[powerUpName]`       | Gets the Bit cost of a specific Power-Up.        |
+| `$powerUpDescription[powerUpName]`| Gets the description of a specific Power-Up.     |
+| `$powerUpImageUrl[powerUpName]`   | Gets the image URL of a specific Power-Up.       |
+|                                   |                                                  |
+
+<Note type="info">
+    When using a Power-Up name inside a variable, the name must match exactly.
+</Note>
+
+---
+
+## Power-Up Example: Alert Effect
+
+You want a Power-Up that shows an alert on stream.
+
+1. Create or manage the Power-Up on Twitch.
+2. Open **Power-ups & Rewards** in Firebot.
+3. Select the **Power-ups** tab.
+4. Click the three dot menu on the Power-Up, or right-click the Power-Up.
+5. Select `Edit Effects`.
+6. Add the alert effects you want to run.
+7. Click `Save`.
+
+When someone redeems the Power-Up with Bits, Firebot will run the effects attached to it.

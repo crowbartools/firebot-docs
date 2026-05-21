@@ -1,0 +1,203 @@
+﻿# Setups
+
+Setups are exportable Firebot setup files that can include selected Firebot components.
+
+Use Setups when you want to share, move, back up, or reuse a group of Firebot items without manually recreating them.
+
+You can access Setups from the top menu by opening **File** > **Firebot Setups**.
+
+Available setup actions include:
+
+* **Create Firebot Setup**
+* **Import Firebot Setup**
+* **Remove Firebot Setup**
+
+<Note type="info">
+    Setups are separate from your normal Firebot backup files. A Setup is meant for sharing or installing selected components, while a backup is meant for restoring your full Firebot data.
+</Note>
+
+---
+
+## **Creating a Setup**
+
+To create a Setup, open **File** > **Firebot Setups** > **Create Firebot Setup**.
+
+This opens the **Create New Setup** window.
+
+### Setup Details
+
+| Option          | What it does                                                                 |
+|-----------------|------------------------------------------------------------------------------|
+| **Name**        | Sets the name of the Setup.                                                  |
+| **Description** | Adds a description for the Setup. This field supports Markdown.              |
+| **Version**     | Sets the Setup version number. Use this when updating and sharing revisions. |
+|                 |                                                                              |
+
+Use a clear name and description so users know what the Setup adds before they import it.
+
+---
+
+## **Setup Components**
+
+Components are the Firebot items included in the Setup.
+
+Each component section has a `+ Add` button. Click it to open the selector for that component type, then choose the items you want to include.
+
+Available component types include:
+
+| Component Type             | What it includes                 |
+|----------------------------|----------------------------------|
+| **Commands**               | Selected Firebot commands.       |
+| **Counters**               | Selected counters.               |
+| **Currencies**             | Selected channel currencies.     |
+| **Effect Queues**          | Selected effect queues.          |
+| **Events**                 | Selected events.                 |
+| **Event Sets**             | Selected event sets.             |
+| **Hotkeys**                | Selected hotkeys.                |
+| **Overlay Widgets**        | Selected overlay widgets.        |
+| **Preset Effect Lists**    | Selected preset effect lists.    |
+| **Timers**                 | Selected timers.                 |
+| **Scheduled Effect Lists** | Selected scheduled effect lists. |
+| **Variable Macros**        | Selected variable macros.        |
+| **Viewer Roles**           | Selected viewer roles.           |
+| **Viewer Rank Ladders**    | Selected viewer rank ladders.    |
+| **Quick Actions**          | Selected quick actions.          |
+| **Global Values**          | Selected global values.          |
+|                            |                                  |
+
+<Note type="info">
+    Include every component the Setup needs. For example, if a command uses a counter, currency, effect queue, variable macro, or overlay widget, include those related items too.
+</Note>
+
+---
+
+## **Setup Options**
+
+Setup options control how the Setup behaves when another user imports it.
+
+| Option                                | What it does                                                                                                                                             |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Require User To Select A Currency** | Makes the user choose one of their currencies during import. Firebot then replaces currency references in included effects, variables, and restrictions. |
+|                                       |                                                                                                                                                          |
+
+Use **Require User To Select A Currency** when the Setup uses a currency but should work with the importer's own currency instead of the one from your Firebot data.
+
+<Note type="info">
+    This is useful for chat games, shop items, rewards, or anything else that needs to work with the user's own currency.
+</Note>
+
+---
+
+## **Import Questions**
+
+Import Questions let you ask the user for values while they import the Setup.
+
+Use these when part of the Setup should be customized by the person importing it, such as a username, amount, command name, text label, URL, or default value.
+
+Click the `+` button under **Import Questions** to add a question.
+
+### Import Question Fields
+
+| Option             | What it does                                                 |
+|--------------------|--------------------------------------------------------------|
+| **Question**       | The question shown to the user during import.                |
+| **Replace Token**  | The token Firebot replaces with the user's answer.           |
+| **Tooltip Text**   | Optional extra text shown as a tooltip for the question.     |
+| **Answer Type**    | Controls what kind of answer the user can enter.             |
+| **Default Answer** | Sets the default answer shown in the answer field. Optional. |
+|                    |                                                              |
+
+### Answer Types
+
+| Answer Type        | What it does                                      |
+|--------------------|---------------------------------------------------|
+| **Text**           | Lets the user enter text.                         |
+| **Number**         | Lets the user enter a number.                     |
+| **Preset Options** | Lets the user choose from preset options you add. |
+|                    |                                                   |
+
+When using **Preset Options**, add the allowed answers under **Preset Options**, then choose a default answer if needed.
+
+### Replace Tokens
+
+The **Replace Token** is the text Firebot searches for inside the included Setup components.
+
+When the Setup is imported, Firebot replaces each matching token with the user's answer.
+
+Example token: `%WagerAmount%`
+
+Example question: `What should the default bet amount be?`
+
+If the user enters `100`, Firebot replaces `%WagerAmount%` with `100` during import.
+
+<Note type="info">
+    Use uncommon token names so Firebot does not replace normal text by accident.
+</Note>
+
+---
+
+## **Media Files**
+
+Setups do not include media files referenced by effects.
+
+<Note type="warning">
+    Media files such as images, videos, sounds, and custom scripts referenced in effects will not be included with the Setup.
+</Note>
+
+If your Setup uses media files, the user importing the Setup must have those files available separately, and scripts installed before importing the Setup.
+
+---
+
+## **Loading a Previous Setup**
+
+Click `Load Previous` to load a Setup you created before.
+
+Use this when you are updating an existing Setup and do not want to select all components again.
+
+After loading a previous Setup, you can change the name, description, version, components, options, or import questions before creating the new file.
+
+---
+
+## **Importing a Setup**
+
+To import a Setup, open **File** > **Firebot Setups** > **Import Firebot Setup**.
+
+Click `Choose File`, then select the Setup file you want to import.
+
+Firebot will read the Setup file and import the included components.
+
+<Note type="info">
+    If the Setup has import questions, Firebot will ask for those answers during the import process.
+</Note>
+
+---
+
+## **Removing a Setup**
+
+To remove a Setup, open **File** > **Firebot Setups** > **Remove Firebot Setup**.
+
+Click `Choose File`, then select the Setup file you want to remove.
+
+After selecting the Setup file, Firebot finds matching components such as commands, events, and other included items, then removes them.
+
+<Note type="warning">
+    Removing a Setup deletes matching Firebot components from your current Firebot data. Only use this when you want to remove the items installed by that Setup.
+</Note>
+
+---
+
+## Setup Example: Share a Chat Game
+
+You want to create a Setup for a chat game that uses a command, currency, counter, and effects.
+
+1. Open **File** > **Firebot Setups** > **Create Firebot Setup**.
+2. Enter a **Name**.
+3. Enter a **Description**.
+4. Set the **Version**.
+5. Add the command used by the game.
+6. Add any counters, currencies, effect queues, events, or variable macros the command needs.
+7. Enable **Require User To Select A Currency** if the game should use the importer's own currency.
+8. Add import questions for values the user should choose during import.
+9. Click `Create Setup`.
+
+When someone imports the Setup, Firebot adds the selected components and applies any import answers before installing them.

@@ -1,0 +1,207 @@
+# Channel Rewards
+
+Channel Rewards are Twitch channel point rewards that can trigger Firebot effects when they are redeemed.
+
+Firebot can create and manage custom Channel Rewards. This lets you keep the Twitch reward setup and the Firebot effects in the same place.
+
+Some Twitch-owned details still need to be changed on Twitch, such as reward icons.
+
+You can find your Channel Point Rewards on Twitch here: `https://dashboard.twitch.tv/u/YOUR-CHANNEL/viewer-rewards/channel-points/rewards`
+
+You can access Channel Rewards from **Power-ups & Rewards**, located in the main navigation sidebar under **Triggers**. Select the **Channel Rewards** tab to view them.
+
+<Note type="info">
+    Firebot can create and edit custom Channel Rewards, but reward icons still need to be changed on Twitch.
+</Note>
+
+---
+
+## **Creating a Channel Reward**
+
+To create a new reward, click `New Channel Reward` in the **Channel Rewards** tab. This opens the reward editor.
+
+The reward editor lets you set the Twitch reward details, add restrictions, and attach the effects Firebot should run when the reward is redeemed.
+
+* **Reward Name**
+This is the name shown for the reward on Twitch. Use a clear name so viewers know what they are redeeming.
+* **Description**
+This is the short description shown with the reward. Use this to explain what the reward does or what the viewer should enter.
+* **Require Viewer to Enter Text**
+This requires the viewer to enter text when redeeming the reward. This is useful for rewards that need a message, target, choice, or other input.
+* **Cost**
+This is the channel point cost of the reward.
+* **Background Color**
+This controls the reward color shown on Twitch.
+* **Skip Twitch Reward Requests Queue**
+This automatically approves future redemptions for this reward. These redemptions are approved by Twitch immediately and cannot be refunded from Firebot.
+* **Redemption Cooldown**
+This sets how long viewers must wait before the reward can be redeemed again.
+* **Limit Redemptions Per Stream**
+This limits the total number of redemptions during a stream.
+* **Limit Redemptions Per User Per Stream**
+This limits how many times each viewer can redeem the reward during a stream.
+* **Reward Icon**
+This is the icon shown for the reward. Reward icons can only be changed on Twitch, but Firebot will show the icon you have set there for easy reference.
+
+<Note type="info">
+    Twitch does not show `Seconds` for reward cooldowns in the dashboard, but Firebot lets you set it. Twitch only shows `Minutes`, `Hours`, and `Days`, but the cooldown still works with the `Seconds` set in Firebot.
+</Note>
+
+Click `Save` when you are finished.
+
+---
+
+## **Editing a Channel Reward**
+
+Existing rewards are shown in the **Channel Rewards** tab. Each row shows the reward name, cost, pause status, tags, and active status.
+
+You can also drag the handle to the right of the active status to reorganize rewards.
+
+To manage a reward, click the three dot menu on the reward or right-click the reward row.
+
+* **Edit**
+Opens the reward editor so you can change the reward settings, restrictions, and effects.
+* **Enable Channel Reward / Disable Channel Reward**
+Enables or disables the reward on Twitch. Disabling hides the reward from viewers.
+* **Pause Channel Reward / Unpause Channel Reward**
+Pauses or unpauses the reward. Pausing makes the reward temporarily unavailable without completely disabling or hiding it.
+* **Duplicate**
+Creates a copy of the reward.
+* **Delete**
+Deletes the reward.
+* **Effect Queues**
+Assigns the reward to an effect queue.
+* **Move to**
+Moves the reward up or down for organizing.
+
+<Note type="info">
+    You can learn more about effect queues here: [Effect Queues](/v5/core/effect-queues).
+</Note>
+
+---
+
+## **Testing a Channel Reward**
+
+You can click the play button on a reward to test the effects attached to it without waiting for a real redemption.
+
+You can also click `Test Effects` in the reward editor to test the effects before saving.
+
+Use `Simulate` when you need to test a more specific redemption. This is useful when you want to test restrictions, viewer input, or other redemption details that the play button does not cover.
+
+<Note type="info">
+    You can learn more about simulating events here: [Simulate](/v5/core/events#simulating-events).
+</Note>
+
+---
+
+## **Restrictions**
+
+Restrictions decide whether Firebot should run the effects for a Channel Reward after it is redeemed.
+
+The reward only runs its effects when the selected restrictions pass.
+
+You can add restrictions from the **Restrictions** section in the reward editor by clicking the plus button.
+
+Available restrictions include:
+
+* **Active Chat Users**
+Restricts the reward to active chat users.
+* **Channel Category/Game**
+Restricts the reward to a specific Twitch category or game.
+* **Channel Currency**
+Restricts the reward based on Firebot channel currency amounts.
+* **Channel Viewer Count**
+Restricts the reward based on the current viewer count.
+* **Chat Messages**
+Restricts the reward based on how many chat messages a viewer has sent.
+* **Custom Variable**
+Restricts the reward based on a custom variable set with the **Custom Variable** effect.
+* **Follow Check**
+Restricts the reward based on whether the viewer follows one or more channels.
+* **Only When Live**
+Only allows the reward effects to run while the channel is live.
+* **Permissions**
+Restricts the reward based on viewer roles or username.
+* **Time / Day**
+Restricts the reward to a specific local time or day.
+* **View Time**
+Restricts the reward based on how long the viewer has watched the channel.
+
+Restrictions are useful when a reward should only run during certain streams, for certain viewers, or under certain channel conditions.
+
+---
+
+## **Effects**
+
+Channel Rewards can run the same kind of effects as other Firebot triggers.
+
+<Note type="info">
+    You can learn more about effects here: [Effects](/v5/core/effects).
+</Note>
+
+---
+
+## **Tags**
+
+Tags help organize rewards.
+
+The filter dropdown at the top of the **Channel Rewards** tab can show all rewards or only rewards with a selected tag.
+
+Use `Edit tags` from the filter dropdown to manage the available tags.
+
+---
+
+## **Reward Limit**
+
+The reward limit is shown under the **Channel Rewards** list.
+
+Twitch limits how many custom Channel Rewards can exist on a channel, so Firebot shows the current count there.
+
+---
+
+## **Request Queue**
+
+The **Request Queue** tab shows pending Channel Reward redemptions that need review.
+
+This works like Twitch's request queue.
+
+From the queue, you can approve or reject pending redemptions. This is useful for rewards that need manual review before they are completed.
+
+<Note type="warning">
+    If **Skip Twitch Reward Requests Queue** is enabled on a reward, future redemptions for that reward are approved immediately and will not wait in the queue.
+</Note>
+
+---
+
+## **Channel Reward Variables**
+
+Channel Rewards have variables that can be used in effects when a Channel Reward is redeemed.
+
+| Variable                          | Description                                                   |
+|-----------------------------------|---------------------------------------------------------------|
+| `$rewardCost`                     | Gets the channel point cost of the current Channel Reward.    |
+| `$rewardDescription`              | Gets the description of the current Channel Reward.           |
+| `$rewardImageUrl`                 | Gets the image URL of the current Channel Reward.             |
+| `$rewardCost[rewardName]`         | Gets the channel point cost of a specific Channel Reward.     |
+| `$rewardDescription[rewardName]`  | Gets the description of a specific Channel Reward.            |
+|                                   |                                                               |
+
+<Note type="info">
+    When using a Channel Reward name inside a variable, the name must match exactly.
+</Note>
+
+---
+
+## Channel Reward Example: Sound Reward
+
+You want a Channel Reward that plays a sound on stream.
+
+1. Open **Power-ups & Rewards** in Firebot.
+2. Select the **Channel Rewards** tab.
+3. Click `New Channel Reward`.
+4. Set **Reward Name** to `Play Sound`.
+5. Set **Cost** to `500`.
+6. Add a **Play Sound** effect.
+7. Click `Save`.
+
+When someone redeems the Channel Reward with channel points, Firebot will run the effects attached to it.
