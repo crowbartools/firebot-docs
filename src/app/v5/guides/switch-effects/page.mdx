@@ -1,0 +1,110 @@
+**Switch Statement Effects**
+
+The Switch Statement effect is a streamlined alternative to using multiple nested Conditional Effects. While a Conditional Effect is like an "If/Else" statement, the Switch Statement allows you to evaluate a single value and choose from many different paths (or "cases") in one organized list.
+
+You can find it by searching for "switch" in the "Select New Effect" box. In order to use it in a command, you will need to switch from simple mode to advanced mode.
+
+### **How it Works**
+
+The Switch Statement consists of a **Switch Value** and a list of **Cases**. Firebot takes the Switch Value, compares it against each case from top to bottom, and runs the effects for the first matching case it finds.
+
+---
+
+### **The Switch Statement Menu**
+
+#### **1. Switch Value**
+At the top of the effect, you define the value you want to evaluate. This is usually a variable like `$chatMessages[$username]` or `$$myCustomVariable`. Firebot will check this value against all the cases you define below.
+
+#### **2. Cases**
+Here you define the different scenarios you want to handle. You can add as many as you like using the "Add Case" button. Each case has:
+- **Label**: Use this to name your case (e.g., "High Level" or "Admin Check").
+- **Case Type**:
+    - **Compare number or text**: Performs a direct comparison between your Switch Value and the case Value.
+    - **Number Range**: Checks if your Switch Value falls between a **Minimum** and **Maximum** number.
+- **Fallthrough**: See the dedicated section below.
+- **Effects List**: The list of effects that will run if this case matches (and does not fall through).
+
+#### **3. Default**
+At the bottom is the Default case. The effects in this list will only run if **none** of the cases above matched the Switch Value.
+
+#### **4. Options**
+- **Apply effect outputs to parent list**: If enabled, any variables or outputs created by effects inside this Switch Statement will be available to other effects in your main command list.
+
+---
+
+### **Understanding Fallthrough**
+
+The **Fallthrough** option allows you to group multiple different values together so they all trigger the same set of effects, without having to duplicate those effects.
+
+**Think of Fallthrough ON as saying:** "This value should be treated the same as the next non-fallthrough case."
+
+When a case matches and has Fallthrough enabled:
+1. Firebot will **not** run any effects for that case.
+2. Firebot will continue checking subsequent cases.
+3. If those subsequent cases also have Fallthrough ON, they are skipped.
+4. As soon as Firebot finds a case with Fallthrough OFF, it runs **that** case's effects and stops.
+
+#### **When to Use Fallthrough vs. Number Range**
+
+For strictly numerical ranges (like 1-3, 4-6), **Number Range** is often the better choice. Fallthrough becomes more useful when your values aren't purely numerical or aren't in a neat range.
+
+**Example: Grouping Days of the Week**
+
+Switch Value: `$date[ddd]` (which might be "Mon", "Tue", "Wed", etc.)
+
+- **Case "Sat"**: Fallthrough **ON**
+- **Case "Sun"**: Fallthrough **OFF** → Effect: Chat "It's the weekend! Relax and enjoy the stream."
+- **Case "Mon"**: Fallthrough **ON**
+- **Case "Tue"**: Fallthrough **ON**
+- **Case "Wed"**: Fallthrough **ON**
+- **Case "Thu"**: Fallthrough **ON**
+- **Case "Fri"**: Fallthrough **OFF** → Effect: Chat "It's a weekday. Thanks for stopping by!"
+
+Here, "Sat" falls through to "Sun" to share the weekend message, and all weekdays fall through to "Fri" to share the weekday message.
+
+---
+
+### **How To Use: Basic Example (Arguments Check)**
+
+Let's create a command `!check` that tells you how many arguments you sent.
+
+1. Create a command `!check` in **Advanced Mode**.
+2. Add a **Switch Statement** effect.
+3. In **Switch Value**, enter: `$argCount`.
+4. **Case 1**:
+    - Type: **Compare**
+    - Value: `0`
+    - Effect: Chat "You didn't send any arguments!"
+5. **Case 2**:
+    - Type: **Compare**
+    - Value: `1`
+    - Effect: Chat "You sent exactly one argument."
+6. **Default**:
+    - Effect: Chat "You sent more than one argument!"
+
+---
+
+### **How To Use: Complex Example (Day-Based Greetings with Fallthrough)**
+
+You can use the **Fallthrough** feature to group days that should share the same response.
+
+In **Switch Value**: `$date[ddd]`
+
+- **Case 1 (Saturday)**:
+    - Type: **Compare**, Value: `Sat`, **Fallthrough: ON**
+- **Case 2 (Sunday)**:
+    - Type: **Compare**, Value: `Sun`, **Fallthrough: OFF**
+    - Effect: Chat "Happy weekend, $username! Enjoy the chill vibes."
+- **Case 3 (Friday)**:
+    - Type: **Compare**, Value: `Fri`, **Fallthrough: OFF**
+    - Effect: Chat "It's Friday! Almost weekend, $username!"
+- **Default**:
+    - Effect: Chat "Hey $username, welcome to the stream!"
+
+If it's Saturday, Case 1 matches, but because Fallthrough is ON, Firebot moves to Case 2 (Sunday) and runs its effects. This way, both Saturday and Sunday get the same weekend message.
+
+---
+
+### **UI Tips**
+- **Reordering**: When a case is collapsed you can drag the case header to reorder it.
+- **Duplicating**: Use the clone icon to quickly copy a complex case.

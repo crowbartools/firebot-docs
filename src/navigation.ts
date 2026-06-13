@@ -32,6 +32,7 @@ export const nav: Array<NavGroup> = [
         links: [
             { title: 'Effect Queues', href: '/v5/guides/effect-queues' },
             { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
+            { title: 'Switch Statement Effects', href: '/v5/guides/switch-effects' },
             { title: 'Time Variables', href: '/v5/guides/time-variable' },
             { title: 'Custom Variables', href: '/v5/guides/custom-variables' },
             { title: 'Evaluate JavaScript', href: '/v5/guides/evaluate-javascript' },
