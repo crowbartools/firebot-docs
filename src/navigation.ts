@@ -30,6 +30,7 @@ export const nav: Array<NavGroup> = [
     {
         title: 'Guides',
         links: [
+            { title: 'Arrays and Objects', href: '/v5/guides/arrays-and-objects' },
             { title: 'Effect Queues', href: '/v5/guides/effect-queues' },
             { title: 'Conditional Effects', href: '/v5/guides/conditional-effects' },
             { title: 'Switch Statement Effects', href: '/v5/guides/switch-effects' },
