@@ -1,0 +1,404 @@
+# **Arrays and JSON Objects**
+
+Arrays and JSON objects are two different ways to store data in a structured format used in coding. They are both useful for organizing and accessing data, but they have different characteristics and use cases. Firebot has built-in support for both arrays and JSON objects, allowing you to store and manipulate data in a structured way. You can use arrays and JSON objects to store information like user preferences, game scores, or any other data that you want to keep track of in your Firebot effects. If you want to track data in a more complex way using arrays and JSON objects can allow you to access and manipulate the data more easily than using plain variables and sentences.
+
+## **Arrays**
+
+Arrays are a way to store multiple values in a single variable. They can hold any type of data, including numbers, strings, and even other arrays or objects. An array is surrounded by square brackets, and each element in the array is separated by a comma. Arrays can sometimes include things like an integer (i.e. a number like 2) but anytime you include text you should wrap the text in quote marks: `["this","is","an","array"]`. You find items in an array by their index, which is a number that represents the position of the item in the array. The first item in an array has an index of 0, the second item has an index of 1, and so on. For example, if you have an array like this: `["apple", "banana", "cherry"]`, you can access the first item ("apple") using the index 0. You can access the second item ("banana") using the index 1. Because Firebot uses a custom variable system built on expressionish by SReject accessing indexed items can have one of two formats depending on how you're accessing it. I'll get into that more later in the guide, but you can access a specific index in an array saved to a custom variable like this: `$$myArray[0]` which if we used the previous array would give you "apple". Object walk paths, which are a way to access specific properties of objects and arrays can also be used, but they use dot notation which is where you use a period to separate the different levels of an object or array. If you don't already know what that is I'll be giving a specific example later in the guide to explain it more clearly.
+
+## **JSON Objects**
+
+JSON objects are a way to store data in a structured format. Sometimes a simple list of items isn't sufficient, and you need a more complex data structure, JSON objects allow that. They place data in a key-value structure that looks like this: `{"key1":"value1","key2":"value2"}`. They are surrounded by curly braces, and each key-value pair is separated by a comma. Each key is a string (wrapped in quote marks) and is followed by a colon and its corresponding value. JSON objects can hold any type of data, including numbers, strings, arrays, and even other objects. For example: `{"name":"John","age":30,"isStudent":false}`. To access the data in a JSON object, you use the key associated with the value you want to retrieve. For example, if you have a JSON object like this: `{"name":"John","age":30,"isStudent":false}`, you can access the value of the "name" key by using the key "name". In Firebot, you can access the value of a key in a JSON object saved to a custom variable like this: `$$myObject[name]` which would give you "John". You can also use object walk paths to access specific properties of objects and arrays.
+
+## **Complex Data Structures**
+
+You can also create complex data structures by combining arrays and JSON objects. For example, you can create an array of JSON objects like this: `[{"name":"John","age":30},{"name":"Jane","age":25}]`. In this example, you have an array that contains two JSON objects, each with its own set of key-value pairs. You can access the first object in the array using the index 0, and then access the "name" key of that object like this: `$$myArray[0,name]` which would give you "John". You can also use object walk paths to access specific properties of objects and arrays.
+
+Both arrays and JSON objects can contain other objects and arrays, and you can layer this as many times as you want, allowing you to create very complex data structures. It's worth noting that you should try to avoid complexity if at all possible because it can make it less intuitive and harder to access. However sometimes a slightly more complex data structure will allow you to avoid more complex effect logic like loops and conditionals and allow you to manage fairly extensive data manipulation directly inside a text entry field.
+
+## **Firebot Variables**
+
+Firebot has an extensive list of built in variables that you can use to manipulate arrays and objects, so I'll add them to the bottom of the guide, but you can find them all very easily by clicking on the `$vars` button in the Firebot interface. This will open a window that lists all of the available variables, along with their descriptions and examples of how to use them. You can also search for specific variables using the search bar at the top of the window. The **complete** list of Firebot variables can be found at [https://docs.firebot.app/v5/core/variables](https://docs.firebot.app/v5/core/variables).
+
+A quick cheat sheet of some of the most useful is:
+
+**Arrays**
+- `$arrayAdd["[1,2,3]", 4]` Returns a new array with the added element.
+- `$arrayElement[array, index]` Returns the element at the given index of the input array.
+- `$arrayFind["[1,2,3]", 1]` Finds 1 in the array.
+- `$arrayFindIndex["[\"a\",\"b\",\"c\"]", b]` Returns 1, the index of "b".
+- `$arrayJoin[array, separator]` Returns a string with each array item joined together with the given separator, e.g. `$arrayJoin["[1,2,3]", ", "]` Returns "1, 2, 3".
+- `$arrayLength[array]` Returns the length of the input array.
+- `$arrayRandomItem[array]` Returns a random item from the given array.
+- `$arrayRemove[array, index]` Returns a new array with the element at the given index removed.
+- `$arrayReverse[array]` Returns a new reversed array.
+- `$arrayShuffle[array]` Returns a new shuffled array.
+- `$arraySlice[array, start, end]` Returns a slice of an array (see JavaScript Array.slice() for info on start/end behavior).
+- `$splitText[text, separator]` Splits text with the given separator and returns an array. Useful for Custom Variables.
+
+**Objects**
+- `$objectKeys[object]` Gets an array of the keys for a given object.
+- `$objectWalkPath[subject | JSON text, path.to.value]` Returns the value from an object at the given dot-notated path.
+- `$setObjectProperty[object, propertyPath, value]` Adds or updates a property's value in the given JSON object. For nested properties, you can use dot notation (e.g. some.property). Set value to null to remove property.
+
+**Data Access**
+- `$customVariable[variableName]` Returns the value of a custom variable (can use `$$variableName` shorthand).
+- `$readFile[path\to\file.txt]` Read contents of a text file.
+- `$userMetadata[username, metadataKey]` Returns the value of a metadata entry for the specified user.
+
+## **Accessing Data**
+
+To access data stored in an array or object in a text entry field you would normally use the variables mentioned above. But you would rarely write the data directly into the text field. Often you would have an array stored as an entry in a text file, a custom variable ([custom variable guide](https://docs.firebot.app/v5/guides/custom-variables)), or a metadata entry ([metadata guide](https://docs.firebot.app/v5/guides/metadata)).
+
+### **Text Files**
+
+To access data saved to a text file in a text entry field you would use the `$readFile[path\to\file.txt]` variable. I'll add a list of the variants at the end of the guide. You can access individual lines in a file by using different variants of the variable, but generally you can use a text file as long term storage of data. If you save the data as an array or object you can then use the read file variable and the array/object variables to read the specific data you want. For example, if we save `["apple", "banana", "cherry"]` to a file (using the `Write To File` effect) we can then read the file and access the items in the array like this: `$arrayElement[$readFile[path\to\file.txt], 1]` which would give us "banana". Similarly if we have saved an object like this: `{"fruit":"apple", "color":"red"}` to a file we can then read the file and access the items in the object like this: `$objectWalkPath[$readFile[path\to\file.txt], fruit]` which would give us "apple".
+
+One thing that can trip people up is that while arrays are indexed to `0` files line numbers are indexed to `1`. So if you want to access the first line in a file you would use `$readFile[path\to\file.txt, 1]` and if you want to access the second line in a file you would use `$readFile[path\to\file.txt, 2]`.
+
+### **Custom Variables**
+
+To access data you have saved to a custom variable ([custom variable guide](https://docs.firebot.app/v5/guides/custom-variables)) there are two methods. If we save `["apple", "banana", "cherry"]` to a custom variable called `myArray` using the `Custom Variable` effect we can then access the items in the array like this: `$$myArray[1]` which would give us "banana", or like this: `$customVariable[myArray, 1]`. The first method uses the `$$` shorthand for accessing custom variables, but they work the same way. Again you use the same method for simple objects, but substitute the index for the key name.
+
+### **Metadata**
+
+To access data you have saved to a metadata entry ([metadata guide](https://docs.firebot.app/v5/guides/metadata)) we'll save the now canonical `["apple", "banana", "cherry"]` to a metadata entry called `myArray` using the `Set User Metadata` effect we can then access the items in the array with the `$userMetadata[username, metadataKey]` variable. A common trick instead of using a text file is to save a metadata entry to the streamer so that you don't have to manage text files. So if we use a Set User Metadata effect to save `["apple", "banana", "cherry"]` to the `$streamer` with the metadata key `myArray` we can then access the items in the array like this: `$arrayElement[$userMetadata[$streamer, myArray], 1]` which would give us "banana". Again you use the same method for simple objects, but substitute the index for the key name.
+
+### **Accessing Complex Data Structures**
+
+We'll use an example of a complex data structure saved to a custom variable called `myArray` using the `Custom Variable` effect. The data structure is an array of objects like this: `[{"name":"John","age":30},{"name":"Jane","age":25}]`. To access the first object in the array, we can use the index 0 like this: `$$myArray[0]` which would give us `{"name":"John","age":30}`. To access the "name" key of that object, we can use the key name like this: `$$myArray[0,name]` which would give us "John". We can also use object walk paths to access specific properties of objects and arrays.
+
+To access data saved to something that doesn't have built in object support, for example an effect output that you might get from an HTTP request from an API you would use the `$objectWalkPath[subject | JSON text, path.to.value]` variable. This variable uses **Dot notation** to navigate the data structure, it is not formatted the same way as the other methods to access data because it uses the JavaScript object parsing syntax. In this case you separate each level of the path with a dot, not a comma like we used before. So if we were querying a database from an API and we got a response like our previous complex example `[{"name":"John","age":30},{"name":"Jane","age":25}]` we would access the data like this: `$objectWalkPath[response, 0.name]` which would give us "John". You can also use object walk paths to access arrays and objects saved to text files, custom variables and metadata. So if you can't remember all of this then just remember how to use the `$objectWalkPath` variable, and it will work in all of the different contexts.
+
+One common mistake when accessing API data is that the response is often an array of objects, or even an array containing a *single* object that looks like this: `[{"name":"John","age":30}]`, and you need to use the index to access the specific object you want. So if you want to access the "name" key of the first object in the array, you would use the index 0 like this: `$objectWalkPath[$effectOutput[httpResponse], 0.name]`. People often see the curly braces and think "Object" so try to use the key directly without noticing the square brackets meaning you need to access the array first. If you try to use just the key you will get an error because the key doesn't exist at the top level of the array. You need to access the specific object in the array first, and then access the key within that object.
+
+## **List of Firebot Array Variables**
+The complete list of Firebot variables can be found at [https://docs.firebot.app/v5/core/variables](https://docs.firebot.app/v5/core/variables)
+
+### **Array Variables**
+
+Throughout these examples, `rawArray` is a placeholder for an actual array value (such as `$arrayFrom[1, 2, 3]`), rather than a string containing JSON such as `"[1,2,3]"`.
+
+```
+$argArray
+Returns an array of command arguments
+
+$arrayAdd[array, new-item, at-start]
+Returns a new array with the added element
+
+Other examples
+$arrayAdd["[1,2,3]", 4]
+Returns a new array with 4 added to the end of the array. (1,2,3,4)
+
+$arrayAdd["[1,2,3]", 4, true]
+Returns a new array with 4 added to the start of the array. (4,1,2,3)
+
+$arrayAdd[rawArray, 4]
+Returns a new array with 4 added to the end of the raw array
+
+$arrayAdd[rawArray, 4, true]
+Returns a new array with 4 added to the start of the raw array
+
+$arrayElement[array, index]
+Returns the element at the given index of the input array.
+
+Other examples
+$arrayElement["[1,2,3]", 0]
+Returns the element at the 0 index (1)
+
+$arrayElement["[1,2,3]", first]
+Returns the element at the first index (1)
+
+$arrayElement["[1,2,3]", last]
+Returns the element at the last index (3)
+
+$arrayElement[rawArray, 0]
+Returns the element at the 0 index
+
+$arrayElement[rawArray, first]
+Returns the element at the first index
+
+$arrayElement[rawArray, last]
+Returns the element at the last index
+
+$arrayFilter[array, matcher, propertyPath, removeMatches]
+Returns a new filtered array.
+
+Other examples
+$arrayFilter["[1,2,3]", 1, null, false]
+Filter out anything that doesn't equal 1 (new array: [1])
+
+$arrayFilter["[1,2,3]", 1, null, true]
+Filter out anything that equals 1 (new array: [2,3])
+
+$arrayFilter["[{\"username\": \"ebiggz\"},{\"username\": \"MageEnclave\"}]", ebiggz, username, true]
+Filter out anything that has a username property which equals "ebiggz" (new array: [{"username": "MageEnclave"}])
+
+$arrayFilter[rawArray, 1, null, false]
+Filter out anything that doesn't equal 1
+
+$arrayFilter[rawArray, 1, null, true]
+Filter out anything that equals 1
+
+$arrayFilter[rawArray, value, key, true]
+Filter out any item in the array that has a key property which equals "value"
+
+$arrayFind[array, matcher, propertyPath?, exact?]
+Finds a matching element in the array or returns the text 'null'
+
+Other examples
+$arrayFind["[1,2,3]", 1]
+Finds 1 in the array
+
+$arrayFind["[{\"username\": \"ebiggz\"},{\"username\": \"MageEnclave\"}]", ebiggz, username]
+Finds object with username of "ebiggz"
+
+$arrayFind["[0,1,2,"1"]", 1, null, true]
+Returns the text '1'
+
+$arrayFind[rawArray, value]
+Searches each item in the array for "value" and returns the first matched item
+
+$arrayFind[rawArray, value, key]
+Searches each item in the array for an item that has a "key" property that equals "value"
+
+$arrayFindIndex[array, matcher, propertyPath?, exact?]
+Finds a matching element in the array and returns its index, or null if the element is absent
+
+Other examples
+$arrayFindIndex["[\"a\",\"b\",\"c\"]", b]
+Returns 1, the index of "b"
+
+$arrayFindIndex["[{\"username\": \"alastor\"},{\"username\": \"ebiggz\"}]", alastor, username]
+Returns 0, the index of the object where "username"="alastor"
+
+$arrayFindIndex["[0,1,2,"1"]", "1", null, $true]
+Returns 3, the index of the text "1"
+
+$arrayFindIndex[rawArray, b]
+Returns 1, the index of "b"
+
+$arrayFindIndex[rawArray, value, key]
+Searches the array for an item with a key with the value of "value"
+
+$arrayFindWithNull[array, matcher, propertyPath?, exact?]
+Finds a matching element in the array or returns a literal null
+
+Other examples
+$arrayFindWithNull["[1,2,3]", 1]
+Finds 1 in the array
+
+$arrayFindWithNull["[{\"username\": \"ebiggz\"},{\"username\": \"MageEnclave\"}]", ebiggz, username]
+Finds object with username of "ebiggz"
+
+$arrayFindWithNull["[0,1,2,"1"]", 1, null, true]
+Returns the text '1'
+
+$arrayFindWithNull[rawArray, value]
+Searches each item in the array for "value" and returns the first matched item
+
+$arrayFindWithNull[rawArray, value, key]
+Searches each item in the array for an item that has a "key" property that equals "value"
+
+$arrayFrom[value, value, ...]
+Returns a raw array containing the listed values
+
+Other examples
+$arrayFrom[1, 2, 3]
+Returns [1, 2, 3].
+
+$arrayFrom["a", "b", "c"]
+Returns ["a", "b", "c"].
+
+$arrayFuzzySearch[array, search, propertyPaths?, defaultValue?, threshold?, ignoreDiacritics?]
+Finds the first element in an array that is closest to the given search. You can optionally include a threshold between 0.0 and 1.0 to filter results where 0.0 is strict and 1.0 is loose, and ignore diacritics on characters (ie é, à, ç, ñ)
+
+Other examples
+$arrayFuzzySearch["[\"apple\", \"banana\", \"cherry\"]", apfl]
+Returns the text "apple"
+
+$arrayFuzzySearch["[{\"username\": \"ebiggz\"},{\"username\": \"Oceanity\"}]", eggz, username]
+Finds object with username of "ebiggz"
+
+$arrayFuzzySearch["[{\"username\": \"ebiggz\",\"id\": 1234567},{\"username\": \"Oceanity\",\"id\": 9876543}]", 2455678, "[\"username\",\"id\"]"]
+Searches objects using multiple properties for a match
+
+$arrayFuzzySearch["[\"apple\", \"banana\", \"cherry\"]", apfl, nothing, null, 0.2]
+Returns the default text "nothing" as the search results are all outside the threshold
+
+$arrayFuzzySearch["[\"piñata\"]", pinata, null, nothing, 0.0, true]
+Returns the text "piñata" with threshold set to find only exact matches because diacritics are ignored
+
+$arrayJoin[array, separator]
+Returns a string with each array item joined together with the given separator
+
+Other examples
+$arrayJoin["[1,2,3]", ", "]
+Returns "1, 2, 3".
+
+$arrayJoin["["apple","banana","cherry"]", " - "]
+Returns "apple - banana - cherry".
+
+$arrayLength[array]
+Returns the length of the input array.
+
+Other examples
+$arrayLength["[1,2,3]"]
+Returns 3.
+
+$arrayLength[rawArray]
+Returns the length of the raw array.
+
+$arrayRandomItem[array]
+Returns a random item from the given array
+
+Other examples
+$arrayRandomItem["[1,2,3]"]
+Returns a random item from the array [1,2,3].
+
+$arrayRandomItem[rawArray]
+Returns a random item from the raw array.
+
+$arrayRemove[array, index]
+Returns a new array with the element at the given index removed
+
+Other examples
+$arrayRemove["[1,2,3]", 0]
+Removes the element at the 0 index (2,3)
+
+$arrayRemove["[1,2,3]", first]
+Removes the element at the first index (2,3)
+
+$arrayRemove["[1,2,3]", last]
+Removes the element at the last index (1,2)
+
+$arrayRemove[rawArray, 0]
+Removes the element at the 0 index
+
+$arrayRemove[rawArray, first]
+Removes the element at the first index
+
+$arrayRemove[rawArray, last]
+Removes the element at the last index
+
+$arrayReverse[array]
+Returns a new reversed array
+
+Other examples
+$arrayReverse["[1,2,3]"]
+Returns [3,2,1].
+
+$arrayReverse[rawArray]
+Returns the reversed raw array.
+
+$arrayShuffle[array]
+Returns a new shuffled array
+
+Other examples
+$arrayShuffle["[1,2,3]"]
+Returns a shuffled version of [1,2,3], e.g., [2,1,3].
+
+$arrayShuffle[rawArray]
+Returns a shuffled version of the raw array.
+
+$arraySlice[array, start, end]
+Returns a slice of an array (see JavaScript Array.slice() for info on start/end behavior)
+
+$filesInDirectory[path\to\dir\]
+Returns an array of full filepaths in the given directory. Does not include subdirectories
+
+$filesInDirectory[path\to\dir\, regexp, flags]
+Returns only the files in the directory that match the regular-expression filter
+
+$splitText[text, separator]
+Splits text with the given separator and returns an array.
+
+$subNames
+Returns an array of current subscribers. Subscriber properties: username, displayname, tier, isGift
+
+$usernameArray
+Returns an array of all usernames saved in the user db
+
+$viewerNamesInRank[rankLadderName, rankName]
+Returns a comma-separated list of viewer display names in the specified rank
+
+$viewersInRankArray[rankLadderName, rankName]
+Returns an array of viewer objects in the specified rank. Viewer object properties: _id, username, displayName
+
+$vipArray
+Returns an array of all VIPs
+```
+
+### **Object Variables**
+
+```
+$objectKeys[object]
+Gets an array of the keys for a given object.
+
+$objectWalkPath[subject | JSON text, path.to.value]
+Returns the value from an object at the given dot-notated path
+
+$quoteAsObject
+Get a random quote in the form of a JSON Object.
+
+Other examples
+$quoteAsObject[#]
+Get a specific quote id.
+
+$quoteAsObject[#, property]
+Get only a specific property for a specific quote. Valid properties are id, createdAt, creator, originator, text and game.
+
+$quoteAsObject[null, property]
+Get only a specific property for a random quote. Valid properties are id, createdAt, creator, originator, text and game.
+
+$setObjectProperty[object, propertyPath, value]
+Adds or updates a property's value in the given JSON object. For nested properties, you can use dot notation (e.g. some.property). Set value to null to remove property.
+
+Other examples
+$setObjectProperty[{"name": "John"}, age, 25]
+Adds/updates the age property to 25. Result: {"name": "John", "age": 25}
+
+$setObjectProperty[{"user": {"name": "John"}}, user.age, 25]
+Adds/updates a nested property using dot notation. Result: {"user": {"name": "John", "age": 25}}
+
+$setObjectProperty[{"name": "John", "age": 25}, age, null]
+Removes the age property. Result: {"name": "John"}
+```
+
+### **Read File Variable**
+
+```
+$readFile[path\to\file.txt]
+Read contents of a text file.
+
+Other examples
+$readFile[path\to\file.txt, 1]
+Read a specific line number from the file.
+
+$readFile[path\to\file.txt, first]
+Read the first line from the file.
+
+$readFile[path\to\file.txt, first, true]
+Removes leading, trailing, and empty lines before grabbing the first line
+
+$readFile[path\to\file.txt, last]
+Read the last line from the file.
+
+$readFile[path\to\file.txt, last, true]
+Removes leading, trailing, and empty lines before grabbing the last line
+
+$readFile[path\to\file.txt, random]
+Read a random line from the file.
+
+$readFile[path\to\file.txt, random, true]
+Removes leading, trailing, and empty lines before grabbing a random line
+
+$readFile[path\to\file.txt, array]
+Read contents of a text file as an array.
+
+$readFile[path\to\file.txt, array, true]
+Removes leading, trailing, and empty lines before grabbing the array.
+
+$readFile[path\to\file.ogg, bytes]
+Reads the content of a file and returns a byte array.
+```
